@@ -10,6 +10,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        jcenter { url = uri("https://jcenter.bintray.com/") }
     }
 }
 rootProject.name = "WIA2007_Trash2Treasure"
