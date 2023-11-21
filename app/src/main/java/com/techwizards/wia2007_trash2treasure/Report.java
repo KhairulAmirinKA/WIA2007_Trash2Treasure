@@ -2,11 +2,18 @@ package com.techwizards.wia2007_trash2treasure;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -15,12 +22,12 @@ import android.view.ViewGroup;
  */
 public class Report extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private RecyclerView recyclerView;
+    private ReportAdapter reportAdapter;
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -28,15 +35,6 @@ public class Report extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Report.
-     */
-    // TODO: Rename and change types and number of parameters
     public static Report newInstance(String param1, String param2) {
         Report fragment = new Report();
         Bundle args = new Bundle();
@@ -59,6 +57,52 @@ public class Report extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_report, container, false);
+        View view = inflater.inflate(R.layout.fragment_report, container, false);
+
+        recyclerView = view.findViewById(R.id.recyclerView_report_item);
+        reportAdapter = new ReportAdapter(generateReportItems());
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(reportAdapter);
+
+        return view;
+    }
+
+    private List<ReportItem> generateReportItems() {
+        List<ReportItem> reportItemList = new ArrayList<>();
+
+        reportItemList.add(new ReportItem(
+                "Improper Disposal at Public Park",
+                "Littering",
+                "Taman Negara Park, Kuala Lumpur",
+                "John Doe",
+                "Pending",
+                "2023-11-19",
+                "10:45 AM"
+        ));
+
+        reportItemList.add(new ReportItem(
+                "Illegal Dumping in Residential Area",
+                "Illegal Dumping",
+                "Jalan Residential, Penang",
+                "Jane Smith",
+                "In Progress",
+                "2023-11-19 02:15 PM",
+                "02:15 PM"
+        ));
+
+        reportItemList.add(new ReportItem(
+                "Overflowing Bin at Food Court",
+                "Overflowing Bin",
+                "Petaling Jaya Food Court, Selangor",
+                "Ahmad Ibrahim",
+                "Completed",
+                "2023-11-19 03:30 PM",
+                "03:30 PM"
+        ));
+
+        return reportItemList;
     }
 }
+

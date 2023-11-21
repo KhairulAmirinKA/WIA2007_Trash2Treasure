@@ -27,6 +27,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/darkGreen"
+            app:itemIconTint="@color/clickable_button_color"
+            app:itemTextColor="@color/clickable_button_color"
+            app:itemActiveIndicatorStyle="@null"
             app:menu="@menu/menu_bottom" />
 
     </LinearLayout>

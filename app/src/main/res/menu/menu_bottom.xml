@@ -19,7 +19,7 @@
         android:title="Volunteer" />
     <item
         android:id="@id/DestReport"
-        android:icon="@android:drawable/stat_sys_warning"
+        android:icon="@android:drawable/ic_menu_set_as"
         app:showAsAction="never"
         android:title="Report" />
     <item
