@@ -13,10 +13,12 @@ import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.config.Configuration;
+import org.osmdroid.views.overlay.Marker;
 
 public class Map extends Fragment {
 
     private MapView mapView;
+    private Marker userMarker;
 
     public Map() {
         // Required empty public constructor
@@ -50,6 +52,17 @@ public class Map extends Fragment {
         if (mapView != null) {
             mapView.getController().setCenter(new GeoPoint(latitude, longitude));
             mapView.getController().setZoom(17.0);
+
+            if (userMarker != null) {
+                mapView.getOverlays().remove(userMarker);
+            }
+
+            userMarker = new Marker(mapView);
+            userMarker.setPosition(new GeoPoint(latitude, longitude));
+            userMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER);
+            mapView.getOverlays().add(userMarker);
+
+            mapView.invalidate();
         }
     }
 }
