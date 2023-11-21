@@ -10,47 +10,31 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Report#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class Report extends Fragment {
 
     private RecyclerView recyclerView;
     private ReportAdapter reportAdapter;
-
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    private String mParam1;
-    private String mParam2;
+    private RadioGroup radioGroup;
 
     public Report() {
         // Required empty public constructor
     }
 
-    public static Report newInstance(String param1, String param2) {
+    public static Report newInstance() {
         Report fragment = new Report();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -66,6 +50,19 @@ public class Report extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(reportAdapter);
 
+        radioGroup = view.findViewById(R.id.RGReportTracker);
+        ((RadioButton) radioGroup.getChildAt(0)).setChecked(true);
+
+        radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            if (checkedId == R.id.RBReportAll) {
+                filterReportList(Filter.ALL);
+            } else if (checkedId == R.id.RBReporPending) {
+                filterReportList(Filter.PENDING);
+            } else if (checkedId == R.id.RBReportCompleted) {
+                filterReportList(Filter.COMPLETED);
+            }
+        });
+
         return view;
     }
 
@@ -78,7 +75,7 @@ public class Report extends Fragment {
                 "Taman Negara Park, Kuala Lumpur",
                 "John Doe",
                 "Pending",
-                "2023-11-19",
+                "19-11-2023",
                 "10:45 AM"
         ));
 
@@ -88,7 +85,7 @@ public class Report extends Fragment {
                 "Jalan Residential, Penang",
                 "Jane Smith",
                 "In Progress",
-                "2023-11-19 02:15 PM",
+                "19-11-2023",
                 "02:15 PM"
         ));
 
@@ -98,11 +95,39 @@ public class Report extends Fragment {
                 "Petaling Jaya Food Court, Selangor",
                 "Ahmad Ibrahim",
                 "Completed",
-                "2023-11-19 03:30 PM",
+                "19-11-2023",
                 "03:30 PM"
         ));
 
         return reportItemList;
+    }
+
+    private void filterReportList(Filter filter) {
+        List<ReportItem> filteredList = new ArrayList<>();
+
+        for (ReportItem reportItem : generateReportItems()) {
+            switch (filter) {
+                case ALL:
+                    filteredList.add(reportItem);
+                    break;
+                case PENDING:
+                    if (reportItem.getStatus().equals("Pending") || reportItem.getStatus().equals("In Progress")) {
+                        filteredList.add(reportItem);
+                    }
+                    break;
+                case COMPLETED:
+                    if (reportItem.getStatus().equals("Completed")) {
+                        filteredList.add(reportItem);
+                    }
+                    break;
+            }
+        }
+
+        reportAdapter.updateList(filteredList);
+    }
+
+    private enum Filter {
+        ALL, PENDING, COMPLETED
     }
 }
 

@@ -63,4 +63,10 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ViewHolder
             textReportTime = itemView.findViewById(R.id.textReportTime);
         }
     }
+
+    public void updateList(List<ReportItem> newList) {
+        reportList.clear();
+        reportList.addAll(newList);
+        notifyDataSetChanged();
+    }
 }

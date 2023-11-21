@@ -47,11 +47,13 @@
             android:textAlignment="center"/>
 
         <RadioGroup
+            android:id="@+id/RGReportTracker"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:orientation="horizontal" >
             <RadioButton
+                android:id="@+id/RBReportAll"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -63,6 +65,7 @@
                 android:textStyle="bold"
                 android:textAlignment="center"/>
             <RadioButton
+                android:id="@+id/RBReporPending"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -74,6 +77,7 @@
                 android:textStyle="bold"
                 android:textAlignment="center"/>
             <RadioButton
+                android:id="@+id/RBReportCompleted"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
