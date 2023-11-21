@@ -10,6 +10,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        mavenLocal()
         jcenter { url = uri("https://jcenter.bintray.com/") }
     }
 }

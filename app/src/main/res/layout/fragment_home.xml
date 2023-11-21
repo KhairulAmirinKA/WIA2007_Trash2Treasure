@@ -76,7 +76,9 @@
             android:textSize="28sp"
             android:textStyle="bold" />
 
-        <com.google.android.gms.maps.MapView
+        <fragment
+            android:id="@+id/MapHomeTruckTracker"
+            android:name="com.techwizards.wia2007_trash2treasure.Map"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"

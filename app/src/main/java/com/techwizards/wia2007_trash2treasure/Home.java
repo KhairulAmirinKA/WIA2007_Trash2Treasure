@@ -10,6 +10,7 @@ import android.os.Bundle;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.tasks.OnSuccessListener;
 
 import java.io.IOException;
@@ -33,6 +35,8 @@ public class Home extends Fragment {
 
     private FusedLocationProviderClient fusedLocationProviderClient;
     private TextView locationTextView;
+
+    private Map mapFragment;
 
     public Home() {
         // Required empty public constructor
@@ -53,6 +57,12 @@ public class Home extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        mapFragment = new Map();
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.replace(R.id.MapHomeTruckTracker, mapFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
 
         locationTextView = view.findViewById(R.id.TVHomeLocation);
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity());
@@ -82,6 +92,7 @@ public class Home extends Fragment {
                         double latitude = location.getLatitude();
                         double longitude = location.getLongitude();
 
+                        mapFragment.updateMapLocation(latitude, longitude);
                         Geocoder geocoder = new Geocoder(requireContext(), Locale.getDefault());
 
                         try {
@@ -124,5 +135,9 @@ public class Home extends Fragment {
                 locationTextView.setText("Location permission denied");
             }
         }
+    }
+
+    private void centerMap(double latitude, double longitude) {
+
     }
 }
