@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@id/DestHome"
+        app:showAsAction="never"
+        android:title="Home" />
+    <group>
+        <item
+            android:id="@id/DestCommunity"
+            app:showAsAction="never"
+            android:title="Community" />
+        <item
+            android:id="@id/DestVolunteer"
+            app:showAsAction="never"
+            android:title="Volunteer" />
+        <item
+            android:id="@id/DestReport"
+            app:showAsAction="never"
+            android:title="Report" />
+    </group>
+    <item
+        android:id="@id/DestProfile"
+        app:showAsAction="never"
+        android:title="Profile" />
+</menu>

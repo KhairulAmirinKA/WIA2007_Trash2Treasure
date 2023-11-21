@@ -13,5 +13,5 @@ dependencyResolutionManagement {
         jcenter { url = uri("https://jcenter.bintray.com/") }
     }
 }
-rootProject.name = "WIA2007_Trash2Treasure"
+rootProject.name = "Trash2Treasure"
 include ':app'

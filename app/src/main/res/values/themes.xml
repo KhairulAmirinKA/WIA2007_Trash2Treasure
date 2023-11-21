@@ -2,7 +2,12 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.WIA2007_Trash2Treasure" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/cream</item>
+        <item name="colorSecondary">@color/darkGreen</item>
+        <item name="colorOnPrimary">@color/green</item>
+        <item name="colorAccent">@color/orange</item>
+
+        <item name="android:windowBackground">@color/cream</item>
     </style>
 
     <style name="Theme.WIA2007_Trash2Treasure" parent="Base.Theme.WIA2007_Trash2Treasure" />
