@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/gradient_background"
     tools:context=".Report">
 
@@ -46,49 +47,57 @@
             android:textStyle="bold"
             android:textAlignment="center"/>
 
-        <RadioGroup
-            android:id="@+id/RGReportTracker"
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:orientation="horizontal" >
-            <RadioButton
-                android:id="@+id/RBReportAll"
-                android:layout_width="wrap_content"
+            app:cardCornerRadius="20dp">
+            <RadioGroup
+                android:id="@+id/RGReportTracker"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:button="@null"
-                android:background="@drawable/picker"
-                android:text=" All "
-                android:textColor="@color/white"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                android:textAlignment="center"/>
-            <RadioButton
-                android:id="@+id/RBReporPending"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:button="@null"
-                android:background="@drawable/picker"
-                android:text=" Pending "
-                android:textColor="@color/white"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                android:textAlignment="center"/>
-            <RadioButton
-                android:id="@+id/RBReportCompleted"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:button="@null"
-                android:background="@drawable/picker"
-                android:text=" Completed "
-                android:textColor="@color/white"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                android:textAlignment="center"/>
-        </RadioGroup>
+                android:orientation="horizontal" >
+                <RadioButton
+                    android:id="@+id/RBReportAll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="5dp"
+                    android:button="@null"
+                    android:background="@drawable/picker"
+                    android:text=" All "
+                    android:textColor="@color/white"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:textAlignment="center"/>
+                <RadioButton
+                    android:id="@+id/RBReporPending"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="5dp"
+                    android:button="@null"
+                    android:background="@drawable/picker"
+                    android:text=" Pending "
+                    android:textColor="@color/white"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:textAlignment="center"/>
+                <RadioButton
+                    android:id="@+id/RBReportCompleted"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="5dp"
+                    android:button="@null"
+                    android:background="@drawable/picker"
+                    android:text=" Completed "
+                    android:textColor="@color/white"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:textAlignment="center"/>
+            </RadioGroup>
+        </androidx.cardview.widget.CardView>
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
