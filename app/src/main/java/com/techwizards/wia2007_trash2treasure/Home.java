@@ -71,35 +71,58 @@ public class Home extends Fragment {
     }
 
     private void getLocation() {
-        fusedLocationProviderClient.getLastLocation().addOnSuccessListener(requireActivity(), new OnSuccessListener<Location>() {
-            @Override
-            public void onSuccess(Location location) {
-                if (location != null) {
-                    double latitude = location.getLatitude();
-                    double longitude = location.getLongitude();
+        if (ContextCompat.checkSelfPermission(requireContext(), android.Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            requestLocationPermission();
+        } else {
+            fusedLocationProviderClient.getLastLocation().addOnSuccessListener(requireActivity(), new OnSuccessListener<Location>() {
+                @Override
+                public void onSuccess(Location location) {
+                    if (location != null) {
+                        double latitude = location.getLatitude();
+                        double longitude = location.getLongitude();
 
-                    Geocoder geocoder = new Geocoder(requireContext(), Locale.getDefault());
+                        Geocoder geocoder = new Geocoder(requireContext(), Locale.getDefault());
 
-                    try {
-                        List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
+                        try {
+                            List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
 
-                        if (addresses != null && addresses.size() > 0) {
-                            String state = addresses.get(0).getAdminArea();
-                            String country = addresses.get(0).getCountryName();
+                            if (addresses != null && addresses.size() > 0) {
+                                String state = addresses.get(0).getAdminArea();
+                                String country = addresses.get(0).getCountryName();
 
-                            String locationText = state + ", " + country;
-                            locationTextView.setText(locationText);
-                        } else {
-                            locationTextView.setText("Malaysia");
+                                String locationText = state + ", " + country;
+                                locationTextView.setText(locationText);
+                            } else {
+                                locationTextView.setText("Malaysia");
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            locationTextView.setText("Location unavailable");
                         }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        locationTextView.setText("Location unavailable");
+                    } else {
+                        locationTextView.setText("Location not available");
                     }
-                } else {
-                    locationTextView.setText("Location not available");
                 }
+            });
+        }
+    }
+    private void requestLocationPermission() {
+        ActivityCompat.requestPermissions(
+                requireActivity(),
+                new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
+                1
+        );
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if (requestCode == 1) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                getLocation();
+            } else {
+                locationTextView.setText("Location permission denied");
             }
-        });
+        }
     }
 }
