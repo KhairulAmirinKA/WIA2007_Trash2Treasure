@@ -65,7 +65,7 @@ public class Volunteer extends Fragment {
         List<VolunteerItem> volunteerItems = new ArrayList<>();
 
         volunteerItems.add(new VolunteerItem(
-                "recycling_drive_image.jpg",
+                "https://apicms.thestar.com.my/uploads/images/2023/02/25/1955922.jpg",
                 "Community Recycling Drive",
                 "Help organize and participate in a community recycling drive to collect and process recyclable materials.",
                 20,
@@ -76,7 +76,7 @@ public class Volunteer extends Fragment {
         ));
 
         volunteerItems.add(new VolunteerItem(
-                "waste_sorting_workshop_image.jpg",
+                "https://cdn.cseindia.org/large/2021-08-09/0.75503400_1628496890_solid-wastebanners.jpg",
                 "Waste Sorting Workshop",
                 "Educate the community on proper waste sorting techniques. Assist in organizing and conducting the workshop.",
                 15,
@@ -87,7 +87,7 @@ public class Volunteer extends Fragment {
         ));
 
         volunteerItems.add(new VolunteerItem(
-                "river_cleanup_image.jpg",
+                "https://cleanmalaysia.com/wp-content/uploads/2016/02/p2_mprk_dz_0102_p2a_dz_6.jpg",
                 "River Cleanup Campaign",
                 "Join the efforts to clean up a local riverbank by collecting and properly disposing of waste materials to promote a cleaner environment.",
                 25,
@@ -98,7 +98,7 @@ public class Volunteer extends Fragment {
         ));
 
         volunteerItems.add(new VolunteerItem(
-                "e_waste_collection_image.jpg",
+                "https://apicms.thestar.com.my/uploads/images/2021/02/07/1036152.jpg",
                 "E-Waste Collection Event",
                 "Contribute to the proper disposal of electronic waste by assisting in collecting and organizing e-waste items for recycling.",
                 18,
@@ -109,7 +109,7 @@ public class Volunteer extends Fragment {
         ));
 
         volunteerItems.add(new VolunteerItem(
-                "composting_workshop_image.jpg",
+                "https://apicms.thestar.com.my/uploads/images/2022/10/04/1762165.jpg",
                 "Composting Awareness Workshop",
                 "Promote sustainable practices by participating in a composting workshop. Learn and teach composting techniques to reduce organic waste.",
                 12,
