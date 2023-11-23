@@ -6,6 +6,15 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background">
 
+    <Button
+        android:id="@+id/BtnOTPVerify"
+        android:layout_width="271dp"
+        android:layout_height="42dp"
+        android:text="Verify"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="408dp" />
+
     <TextView
         android:id="@+id/TVOTPTitle"
         android:layout_width="wrap_content"
@@ -17,4 +26,70 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="76dp" />
+
+    <TextView
+        android:id="@+id/TVYourOTPHasBeenSent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your OTP has been sent to"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="183dp" />
+
+    <TextView
+        android:id="@+id/TVDidntReceiveCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Didn't receive code?"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/TVOTPPhoneNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="+60123456789"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="214dp" />
+
+    <LinearLayout
+        android:layout_width="194dp"
+        android:layout_height="30dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="306dp">
+
+        <TextView
+            android:id="@+id/TVOTPResendCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Resend code in"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/TVOTPTimer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="xx"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/TVOTPSeconds"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="seconds"
+            android:textAlignment="center" />
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
