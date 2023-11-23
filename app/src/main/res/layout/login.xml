@@ -13,11 +13,118 @@
         android:layout_marginTop="80dp"
         android:text="Login"
         android:textAlignment="center"
+        android:textColor="@color/black"
         android:textSize="40sp"
         android:textStyle="bold"
-        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <CheckBox
+        android:id="@+id/CBLoginRememberMe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Remember me"
+        tools:layout_editor_absoluteX="69dp"
+        tools:layout_editor_absoluteY="266dp" />
+
+    <EditText
+        android:id="@+id/ETLoginPassword"
+        android:layout_width="271dp"
+        android:layout_height="42dp"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="212dp" />
+
+    <EditText
+        android:id="@+id/ETLoginMobileNumber"
+        android:layout_width="271dp"
+        android:layout_height="42dp"
+        android:ems="10"
+        android:hint="Mobile number"
+        android:inputType="phone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="161dp" />
+
+    <TextView
+        android:id="@+id/TVLoginForgetPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Forget password"
+        tools:layout_editor_absoluteX="234dp"
+        tools:layout_editor_absoluteY="266dp" />
+
+    <Button
+        android:id="@+id/BtnLogin"
+        android:layout_width="271dp"
+        android:layout_height="42dp"
+        android:text="Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="319dp" />
+
+    <TextView
+        android:id="@+id/TVOr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" ___________________ or ___________________"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="361dp" />
+
+    <TextView
+        android:id="@+id/TVLoginWith"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login with:"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="407dp" />
+
+    <ImageButton
+        android:id="@+id/IBtnSignInWithGoogle"
+        android:layout_width="272dp"
+        android:layout_height="56dp"
+        android:padding="10dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/sign_in_with_google"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="449dp" />
+
+    <ImageButton
+        android:id="@+id/IBtnSignInWithFacebook"
+        android:layout_width="272dp"
+        android:layout_height="56dp"
+        android:padding="10dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/sign_in_with_facebook"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="505dp" />
+
+    <TextView
+        android:id="@+id/TVDoNotHaveAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Don't have an account?"
+        tools:layout_editor_absoluteX="71dp"
+        tools:layout_editor_absoluteY="576dp" />
+
+    <TextView
+        android:id="@+id/TVLoginSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign up"
+        tools:layout_editor_absoluteX="295dp"
+        tools:layout_editor_absoluteY="576dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
