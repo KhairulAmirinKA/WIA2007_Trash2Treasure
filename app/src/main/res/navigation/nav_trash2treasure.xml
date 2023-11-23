@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_trash2treasure"
+    app:startDestination="@id/DestHome">
+
+    <fragment
+        android:id="@+id/DestHome"
+        android:name="com.techwizards.wia2007_trash2treasure.Home"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/DestCommunity"
+        android:name="com.techwizards.wia2007_trash2treasure.Community"
+        android:label="fragment_community"
+        tools:layout="@layout/fragment_community" />
+    <fragment
+        android:id="@+id/DestVolunteer"
+        android:name="com.techwizards.wia2007_trash2treasure.Volunteer"
+        android:label="fragment_volunteer"
+        tools:layout="@layout/fragment_volunteer" />
+    <fragment
+        android:id="@+id/DestReport"
+        android:name="com.techwizards.wia2007_trash2treasure.Report"
+        android:label="fragment_report"
+        tools:layout="@layout/fragment_report" >
+        <action
+            android:id="@+id/NewReport"
+            app:destination="@id/reportMake" />
+    </fragment>
+    <fragment
+        android:id="@+id/DestProfile"
+        android:name="com.techwizards.wia2007_trash2treasure.Profile"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/reportMake"
+        android:name="com.techwizards.wia2007_trash2treasure.ReportMake"
+        android:label="fragment_report_make"
+        tools:layout="@layout/fragment_report_make" />
+</navigation>

@@ -3,62 +3,125 @@ package com.techwizards.wia2007_trash2treasure;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Report#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+import java.util.List;
+
 public class Report extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private RecyclerView recyclerView;
+    private ReportAdapter reportAdapter;
+    private RadioGroup radioGroup;
 
     public Report() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Report.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static Report newInstance(String param1, String param2) {
-        Report fragment = new Report();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_report, container, false);
+        View view = inflater.inflate(R.layout.fragment_report, container, false);
+
+        recyclerView = view.findViewById(R.id.recyclerView_report_item);
+        reportAdapter = new ReportAdapter(generateReportItems());
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(reportAdapter);
+
+        radioGroup = view.findViewById(R.id.RGReportTracker);
+
+        radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            if (checkedId == R.id.RBReportAll) {
+                filterReportList(Filter.ALL);
+            } else if (checkedId == R.id.RBReporPending) {
+                filterReportList(Filter.PENDING);
+            } else if (checkedId == R.id.RBReportCompleted) {
+                filterReportList(Filter.COMPLETED);
+            }
+        });
+
+        ((RadioButton) radioGroup.getChildAt(0)).setChecked(true);
+
+        return view;
+    }
+
+    private List<ReportItem> generateReportItems() {
+        List<ReportItem> reportItemList = new ArrayList<>();
+
+        reportItemList.add(new ReportItem(
+                "Improper Disposal at Public Park",
+                "Littering",
+                "Taman Negara Park, Kuala Lumpur",
+                "John Doe",
+                "Pending",
+                "19-11-2023",
+                "10:45 AM"
+        ));
+
+        reportItemList.add(new ReportItem(
+                "Illegal Dumping in Residential Area",
+                "Illegal Dumping",
+                "Jalan Residential, Penang",
+                "Jane Smith",
+                "In Progress",
+                "19-11-2023",
+                "02:15 PM"
+        ));
+
+        reportItemList.add(new ReportItem(
+                "Overflowing Bin at Food Court",
+                "Overflowing Bin",
+                "Petaling Jaya Food Court, Selangor",
+                "Ahmad Ibrahim",
+                "Completed",
+                "19-11-2023",
+                "03:30 PM"
+        ));
+
+        return reportItemList;
+    }
+
+    private void filterReportList(Filter filter) {
+        List<ReportItem> filteredList = new ArrayList<>();
+
+        for (ReportItem reportItem : generateReportItems()) {
+            switch (filter) {
+                case ALL:
+                    filteredList.add(reportItem);
+                    break;
+                case PENDING:
+                    if (reportItem.getStatus().equals("Pending") || reportItem.getStatus().equals("In Progress")) {
+                        filteredList.add(reportItem);
+                    }
+                    break;
+                case COMPLETED:
+                    if (reportItem.getStatus().equals("Completed")) {
+                        filteredList.add(reportItem);
+                    }
+                    break;
+            }
+        }
+
+        reportAdapter.updateList(filteredList);
+    }
+
+    private enum Filter {
+        ALL, PENDING, COMPLETED
     }
 }
+
