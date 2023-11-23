@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="180dp"
     android:background="@drawable/box_with_shadow"
+    android:backgroundTint="@color/white"
     android:layout_gravity="center"
     android:gravity="center"
     android:padding="10dp"
