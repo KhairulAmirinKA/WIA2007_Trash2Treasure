@@ -24,10 +24,19 @@
         android:id="@+id/DestReport"
         android:name="com.techwizards.wia2007_trash2treasure.Report"
         android:label="fragment_report"
-        tools:layout="@layout/fragment_report" />
+        tools:layout="@layout/fragment_report" >
+        <action
+            android:id="@+id/NewReport"
+            app:destination="@id/reportMake" />
+    </fragment>
     <fragment
         android:id="@+id/DestProfile"
         android:name="com.techwizards.wia2007_trash2treasure.Profile"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/reportMake"
+        android:name="com.techwizards.wia2007_trash2treasure.ReportMake"
+        android:label="fragment_report_make"
+        tools:layout="@layout/fragment_report_make" />
 </navigation>

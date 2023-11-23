@@ -4,7 +4,6 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
-import android.location.Location;
 import android.os.Bundle;
 
 import androidx.core.app.ActivityCompat;
@@ -19,18 +18,11 @@ import android.widget.TextView;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.tasks.OnSuccessListener;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Home#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class Home extends Fragment {
 
     private FusedLocationProviderClient fusedLocationProviderClient;
@@ -40,11 +32,6 @@ public class Home extends Fragment {
 
     public Home() {
         // Required empty public constructor
-    }
-
-    public static Home newInstance(String param1, String param2) {
-        Home fragment = new Home();
-        return fragment;
     }
 
     @Override
@@ -85,35 +72,32 @@ public class Home extends Fragment {
                 != PackageManager.PERMISSION_GRANTED) {
             requestLocationPermission();
         } else {
-            fusedLocationProviderClient.getLastLocation().addOnSuccessListener(requireActivity(), new OnSuccessListener<Location>() {
-                @Override
-                public void onSuccess(Location location) {
-                    if (location != null) {
-                        double latitude = location.getLatitude();
-                        double longitude = location.getLongitude();
+            fusedLocationProviderClient.getLastLocation().addOnSuccessListener(requireActivity(), location -> {
+                if (location != null) {
+                    double latitude = location.getLatitude();
+                    double longitude = location.getLongitude();
 
-                        mapFragment.updateMapLocation(latitude, longitude);
-                        Geocoder geocoder = new Geocoder(requireContext(), Locale.getDefault());
+                    mapFragment.updateMapLocation(latitude, longitude);
+                    Geocoder geocoder = new Geocoder(requireContext(), Locale.getDefault());
 
-                        try {
-                            List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
+                    try {
+                        List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
 
-                            if (addresses != null && addresses.size() > 0) {
-                                String state = addresses.get(0).getAdminArea();
-                                String country = addresses.get(0).getCountryName();
+                        if (addresses != null && addresses.size() > 0) {
+                            String state = addresses.get(0).getAdminArea();
+                            String country = addresses.get(0).getCountryName();
 
-                                String locationText = state + ", " + country;
-                                locationTextView.setText(locationText);
-                            } else {
-                                locationTextView.setText("Malaysia");
-                            }
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                            locationTextView.setText("Location unavailable");
+                            String locationText = state + ", " + country;
+                            locationTextView.setText(locationText);
+                        } else {
+                            locationTextView.setText("Malaysia");
                         }
-                    } else {
-                        locationTextView.setText("Location not available");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        locationTextView.setText("Location unavailable");
                     }
+                } else {
+                    locationTextView.setText("Location not available");
                 }
             });
         }
@@ -124,20 +108,5 @@ public class Home extends Fragment {
                 new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
                 1
         );
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        if (requestCode == 1) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                getLocation();
-            } else {
-                locationTextView.setText("Location permission denied");
-            }
-        }
-    }
-
-    private void centerMap(double latitude, double longitude) {
-
     }
 }
