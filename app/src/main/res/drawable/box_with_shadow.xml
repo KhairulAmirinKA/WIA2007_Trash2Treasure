@@ -14,7 +14,7 @@
     </item>
     <item android:bottom="2dp" android:right="2dp">
         <shape>
-            <solid android:color="@color/white"/>
+            <solid android:color="@null"/>
             <corners android:radius="10dp"/>
         </shape>
     </item>

@@ -28,7 +28,7 @@ public class Home extends Fragment {
     private FusedLocationProviderClient fusedLocationProviderClient;
     private TextView locationTextView;
 
-    private Map mapFragment;
+    private Maps mapFragment;
 
     public Home() {
         // Required empty public constructor
@@ -45,7 +45,7 @@ public class Home extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        mapFragment = new Map();
+        mapFragment = new Maps();
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.replace(R.id.MapHomeTruckTracker, mapFragment);
         transaction.addToBackStack(null);

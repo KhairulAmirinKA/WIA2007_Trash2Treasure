@@ -78,7 +78,7 @@
 
         <fragment
             android:id="@+id/MapHomeTruckTracker"
-            android:name="com.techwizards.wia2007_trash2treasure.Map"
+            android:name="com.techwizards.wia2007_trash2treasure.Maps"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -90,6 +90,7 @@
             android:layout_height="60dp"
             android:layout_marginBottom="20dp"
             android:background="@drawable/box_with_shadow"
+            android:backgroundTint="@color/white"
             android:text="Household Waste Pickup Schedule"
             android:textAllCaps="false"
             android:textSize="18sp"
@@ -100,6 +101,7 @@
             android:layout_height="60dp"
             android:layout_marginBottom="20dp"
             android:background="@drawable/box_with_shadow"
+            android:backgroundTint="@color/white"
             android:text="Recycled Item Pickup"
             android:textAllCaps="false"
             android:textSize="18sp"
@@ -109,6 +111,7 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="@drawable/box_with_shadow"
+            android:backgroundTint="@color/white"
             android:text="Nearby Recycling Bin"
             android:textAllCaps="false"
             android:textSize="18sp"

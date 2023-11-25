@@ -8,23 +8,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import org.osmdroid.library.BuildConfig;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.config.Configuration;
 import org.osmdroid.views.overlay.Marker;
 
-public class Map extends Fragment {
+public class Maps extends Fragment {
 
     private MapView mapView;
     private Marker userMarker;
 
-    public Map() {
+    public Maps() {
         // Required empty public constructor
     }
-    public static Map newInstance(String param1, String param2) {
-        Map fragment = new Map();
+    public static Maps newInstance(String param1, String param2) {
+        Maps fragment = new Maps();
         return fragment;
     }
 
