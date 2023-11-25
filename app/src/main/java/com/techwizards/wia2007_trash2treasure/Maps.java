@@ -40,7 +40,7 @@ public class Maps extends Fragment {
 
         Configuration.getInstance().setUserAgentValue("com.techwizards.wia2007_trash2treasure");
 
-        mapView = view.findViewById(R.id.MVTruckTracker);
+        mapView = (MapView) view.findViewById(R.id.MVTruckTracker);
         mapView.setTileSource(TileSourceFactory.MAPNIK);
         mapView.getController().setZoom(12.0);
 

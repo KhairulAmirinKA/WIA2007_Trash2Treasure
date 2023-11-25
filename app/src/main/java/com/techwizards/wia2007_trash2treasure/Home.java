@@ -1,6 +1,5 @@
 package com.techwizards.wia2007_trash2treasure;
 
-import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -11,6 +10,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,28 +43,25 @@ public class Home extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        try {
+            View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        mapFragment = new Maps();
-        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        transaction.replace(R.id.MapHomeTruckTracker, mapFragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
+            mapFragment = new Maps();
+            FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+            transaction.replace(R.id.MapHomeTruckTracker, mapFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
 
-        locationTextView = view.findViewById(R.id.TVHomeLocation);
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity());
+            locationTextView = view.findViewById(R.id.TVHomeLocation);
+            fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity());
 
-        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(
-                    requireActivity(),
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    1
-            );
-        } else {
             getLocation();
-        }
 
-        return view;
+            return view;
+        } catch (Exception e) {
+            Log.e(getTag(), "onCreateView", e);
+            throw e;
+        }
     }
 
     private void getLocation() {

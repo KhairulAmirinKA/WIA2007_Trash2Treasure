@@ -76,8 +76,9 @@
             android:textSize="28sp"
             android:textStyle="bold" />
 
-        <fragment
+        <androidx.fragment.app.FragmentContainerView
             android:id="@+id/MapHomeTruckTracker"
+            class="com.techwizards.wia2007_trash2treasure.Maps"
             android:name="com.techwizards.wia2007_trash2treasure.Maps"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
