@@ -48,4 +48,29 @@
         android:name="com.techwizards.wia2007_trash2treasure.Award"
         android:label="fragment_award"
         tools:layout="@layout/fragment_award" />
+    <fragment
+        android:id="@+id/DestLogin"
+        android:name="com.techwizards.wia2007_trash2treasure.Login"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/LoginToRegister"
+            app:destination="@id/DestRegister" />
+        <action
+            android:id="@+id/LoginToMain"
+            app:destination="@id/DestMain" />
+    </fragment>
+    <fragment
+        android:id="@+id/DestRegister"
+        android:name="com.techwizards.wia2007_trash2treasure.Register"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/RegisterToLogin"
+            app:destination="@id/DestLogin" />
+    </fragment>
+    <activity
+        android:id="@+id/DestMain"
+        android:name="com.techwizards.wia2007_trash2treasure.MainActivity"
+        android:label="MainActivity" />
 </navigation>
