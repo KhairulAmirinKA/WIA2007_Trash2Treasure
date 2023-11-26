@@ -1,31 +1,54 @@
 package com.techwizards.wia2007_trash2treasure;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
-public class Login extends Fragment {
-
-    public Login() {}
-
-    public static Login newInstance(String param1, String param2) {
-        Login fragment = new Login();
-        return fragment;
-    }
+public class Login extends AppCompatActivity {
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+
+        Button login = findViewById(R.id.BtnLogin);
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (performLogin()) {
+                    Intent intent = new Intent(Login.this, MainActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
+
+        TextView loginToSignUp = findViewById(R.id.BtnLoginSignUp);
+        loginToSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent registerIntent = new Intent(Login.this, Register.class);
+                startActivity(registerIntent);
+            }
+        });
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_login, container, false);
+    private boolean performLogin() {
+        EditText ETEmail = findViewById(R.id.ETLoginEmail);
+        EditText ETPassword = findViewById(R.id.ETLoginPassword);
+
+        if (ETEmail.getText().toString().equals("admin@email.com")) {
+            if (ETPassword.getText().toString().equals("admin123")) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
     }
 }

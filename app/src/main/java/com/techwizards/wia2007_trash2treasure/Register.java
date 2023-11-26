@@ -1,30 +1,35 @@
 package com.techwizards.wia2007_trash2treasure;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
-public class Register extends Fragment {
-    public Register() {}
-
-    public static Register newInstance() {
-        Register fragment = new Register();
-        return fragment;
-    }
+public class Register extends AppCompatActivity {
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    }
+        setContentView(R.layout.activity_register);
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_register, container, false);
+        Button next = findViewById(R.id.BtnRegisterNext);
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.FragmentRegisterMain, new RegisterDetail())
+                        .commit();
+            }
+        });
+
+        TextView registerToLogin = findViewById(R.id.BtnRegisterLogin);
+        registerToLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 }

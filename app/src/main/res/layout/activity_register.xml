@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/gradient_background"
     tools:context=".Register">
 
     <LinearLayout
+        android:id="@+id/FragmentRegisterMain"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
+        android:gravity="top"
         android:layout_gravity="center"
         android:orientation="vertical"
         android:padding="40dp">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
             android:layout_marginBottom="40dp"
             android:text="Sign Up"
             android:textColor="@color/black"
@@ -124,12 +126,12 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center"
                 android:layout_gravity="center"
-                android:padding="10dp"
-                android:orientation="horizontal">
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="10dp">
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Log In with Google"
@@ -144,10 +146,10 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <com.facebook.login.widget.LoginButton
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone"/>
+        <!--        <com.facebook.login.widget.LoginButton-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            android:visibility="gone"/>-->
         <androidx.cardview.widget.CardView
             android:id="@+id/BtnRegisterFacebook"
             android:layout_width="match_parent"
@@ -165,7 +167,7 @@
                 android:padding="10dp"
                 android:orientation="horizontal">
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Log In with Facebook"
@@ -202,4 +204,5 @@
                 android:textSize="16sp"/>
         </LinearLayout>
     </LinearLayout>
-</FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

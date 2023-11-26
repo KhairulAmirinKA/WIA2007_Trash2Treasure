@@ -8,11 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.Switch;
-import android.widget.TextView;
-
-import com.squareup.picasso.Picasso;
 
 public class Profile extends Fragment {
     private ProfileAdapter profileAdapter;
@@ -39,6 +34,14 @@ public class Profile extends Fragment {
         profileAdapter = new ProfileAdapter(view);
         userProfile = ProfileItem.testData();
         profileAdapter.populateViews(userProfile);
+
+        Button logOut = view.findViewById(R.id.BtnProfileLogOut);
+        logOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         return view;
     }
