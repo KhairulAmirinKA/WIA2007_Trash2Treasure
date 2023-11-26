@@ -1,5 +1,8 @@
 package com.techwizards.wia2007_trash2treasure;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -50,11 +53,21 @@ public class Profile extends Fragment {
         logOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                changeLogState();
+                Intent intent = new Intent(getActivity(), Login.class);
+                startActivity(intent);
                 getActivity().finish();
             }
         });
 
         return view;
+    }
+
+    private void changeLogState() {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("isLoggedIn", false);
+        editor.apply();
     }
 }
 
