@@ -22,8 +22,7 @@
 
         <activity
             android:name=".TruckTracker"
-            android:exported="false"
-            android:label="@string/title_activity_truck_tracker" />
+            android:exported="false" />
         <activity
             android:name=".SplashScreen"
             android:exported="true"
