@@ -3,6 +3,7 @@ package com.techwizards.wia2007_trash2treasure;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -15,16 +16,42 @@ public class DataManager {
     private static final String KEY_CURRENT_USER = "current_user";
     private static final String KEY_PROFILE_ITEMS = "profile_items";
 
+    private final FirebaseService firebaseService = new FirebaseService();
+
     private static DataManager instance;
     public CurrentUser currentUser;
     public List<ProfileItem> profileItems = new ArrayList<>();
 
     public void fetchProfile() {
         profileItems.add(ProfileItem.testData());
+        firebaseService.fetchUserProfiles(task -> {
+            if (task.isSuccessful()) {
+                for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                    ProfileItem profileItem = documentSnapshot.toObject(ProfileItem.class);
+                    profileItems.add(profileItem);
+                }
+                System.out.println("FirebaseService: Fetch User Success!");
+            } else {
+                Exception exception = task.getException();
+                if (exception != null) {
+                    exception.printStackTrace();
+                }
+            }
+        });
     }
 
     public void addProfile(ProfileItem newProfile) {
         profileItems.add(newProfile);
+        firebaseService.saveUserProfile(newProfile, task -> {
+            if (task.isSuccessful()) {
+                System.out.println("FirebaseService: Save New User Success!");
+            } else {
+                Exception exception = task.getException();
+                if (exception != null) {
+                    exception.printStackTrace();
+                }
+            }
+        });
     }
 
     public static synchronized DataManager getInstance() {
@@ -62,9 +89,23 @@ public class DataManager {
         String currentUserJson = gson.toJson(currentUser);
         editor.putString(KEY_CURRENT_USER, currentUserJson);
 
+        for (ProfileItem item : profileItems) {
+            firebaseService.saveUserProfile(item, task -> {
+                if (task.isSuccessful()) {
+                    System.out.println("FirebaseService: Save New User Success!");
+                } else {
+                    Exception exception = task.getException();
+                    if (exception != null) {
+                        exception.printStackTrace();
+                    }
+                }
+            });
+        }
+
         String profileItemsJson = gson.toJson(profileItems);
         editor.putString(KEY_PROFILE_ITEMS, profileItemsJson);
 
         editor.apply();
     }
 }
+
