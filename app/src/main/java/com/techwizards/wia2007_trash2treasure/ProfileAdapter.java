@@ -46,6 +46,6 @@ public class ProfileAdapter {
         profileAddress.setText(userProfile.getAddress());
         profileGender.setText(userProfile.getGender());
         profileDOB.setText(userProfile.getDateOfBirth());
-        //toggleNotification.setChecked(userProfile.isAllowNoti());
+        toggleNotification.setChecked(userProfile.isAllowNoti());
     }
 }

@@ -86,7 +86,7 @@ public class ProfileItem {
 
     public static ProfileItem testData() {
         return new ProfileItem(
-                "https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-538.jpg",
+                "https://icon-library.com/images/admin-user-icon/admin-user-icon-4.jpg",
                 "Test Admin",
                 "admin@email.com",
                 "admin123",

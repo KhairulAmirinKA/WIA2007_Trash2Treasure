@@ -25,8 +25,11 @@ import java.util.Locale;
 
 public class Home extends Fragment {
 
+    DataManager dataManager = DataManager.getInstance();
+
     private FusedLocationProviderClient fusedLocationProviderClient;
     private TextView locationTextView;
+    private TextView TVUserName;
 
     private Maps mapFragment;
 
@@ -45,6 +48,15 @@ public class Home extends Fragment {
         // Inflate the layout for this fragment
         try {
             View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+            TVUserName = view.findViewById(R.id.TVHomeHi);
+            String textName = "";
+            if (dataManager != null){
+                textName = "Hi " + dataManager.currentUser.getCurrentUser().getName() + "!";
+            } else {
+                textName = "Hi!";
+            }
+            TVUserName.setText(textName);
 
             mapFragment = new Maps();
             FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
