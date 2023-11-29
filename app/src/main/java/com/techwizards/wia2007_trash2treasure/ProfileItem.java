@@ -14,6 +14,7 @@ public class ProfileItem {
     String name;
     String email;
     String password;
+    String unhashPassword;
     String phone;
     String address;
     String gender;
@@ -23,18 +24,12 @@ public class ProfileItem {
 
     public ProfileItem() {}
 
-    public ProfileItem getInstance() {
-        if (instance == null) {
-            instance = new ProfileItem(imagePath, name, email, hashPassword(), phone, address, gender, dateOfBirth, allowNoti);
-        }
-        return instance;
-    }
-
     public ProfileItem(String imagePath, String name, String email, String password, String phone, String address, String gender, String dateOfBirth, boolean allowNoti) {
         this.imagePath = imagePath;
         this.name = name;
         this.email = email;
-        this.password = password;
+        this.password = hashPassword(password);
+        this.unhashPassword = passwordMask(password);
         this.phone = phone;
         this.address = address;
         this.gender = gender;
@@ -52,6 +47,10 @@ public class ProfileItem {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public String getPhone() {
@@ -74,7 +73,11 @@ public class ProfileItem {
         return allowNoti;
     }
 
-    public String passwordMask() {
+    public String getUnhashPassword() {
+        return unhashPassword;
+    }
+
+    public String passwordMask(String password) {
         String mask = "";
         if (password != null) for (int i = 0; i < password.length(); i++) mask += "*";
         return mask;
@@ -82,13 +85,13 @@ public class ProfileItem {
 
     public Map<String, Object> toMap() {
         Gson gson = new Gson();
-        String json = gson.toJson(getInstance());
+        String json = gson.toJson(this);
 
         Type type = new TypeToken<HashMap<String, Object>>() {}.getType();
         return gson.fromJson(json, type);
     }
 
-    public String hashPassword() {
+    public String hashPassword(String passwordHash) {
         MessageDigest messageDigest = null;
         try {
             messageDigest = MessageDigest.getInstance("SHA-512");
@@ -96,7 +99,7 @@ public class ProfileItem {
             throw new RuntimeException(e);
         }
         messageDigest.reset();
-        messageDigest.update(password.getBytes());
+        messageDigest.update(passwordHash.getBytes());
         byte[] mdArray = messageDigest.digest();
         StringBuilder stringBuilder = new StringBuilder(mdArray.length * 2);
         for (byte b : mdArray) {

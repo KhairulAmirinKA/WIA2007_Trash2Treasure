@@ -41,7 +41,7 @@ public class ProfileAdapter {
         Picasso.get().load(userProfile.getImagePath()).error(R.drawable.ic_launcher_foreground).into(profileImage);
         profileName.setText(userProfile.getName());
         profileEmail.setText(userProfile.getEmail());
-        profilePassword.setText(userProfile.passwordMask());
+        profilePassword.setText(userProfile.getUnhashPassword());
         profilePhone.setText(userProfile.getPhone());
         profileAddress.setText(userProfile.getAddress());
         profileGender.setText(userProfile.getGender());

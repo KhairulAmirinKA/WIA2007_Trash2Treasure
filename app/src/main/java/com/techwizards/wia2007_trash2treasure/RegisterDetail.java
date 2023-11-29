@@ -92,7 +92,7 @@ public class RegisterDetail extends Fragment {
                 String name = ETProfileName.getText().toString();
                 String phone = ETProfilePhone.getText().toString();
 
-                String phoneFormat = phone.contains("+60") ? phone : "+60" + phone;
+                String phoneFormat = phone.contains("+6") ? phone : "+6" + phone;
 
                 bundle.putString("name", name);
                 bundle.putString("phone", phoneFormat);
@@ -191,7 +191,7 @@ public class RegisterDetail extends Fragment {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                newProfile = new ProfileItem("https://cdn-icons-png.flaticon.com/512/3135/3135715.png", bundle.getString("name"), bundle.getString("email"), bundle.getString("password"), bundle.getString("phone"), "", "", "", false);
+                newProfile = new ProfileItem("https://cdn-icons-png.flaticon.com/512/3135/3135715.png", bundle.getString("name"), bundle.getString("email"), bundle.getString("password"), bundle.getString("phone"), "Malaysia", "Undefined", "20/10/2000", false);
                 DataManager.getInstance().addProfile(newProfile);
                 DataManager.getInstance().save(getContext());
                 getActivity().finish();

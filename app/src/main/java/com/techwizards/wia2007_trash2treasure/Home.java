@@ -52,7 +52,7 @@ public class Home extends Fragment {
             TVUserName = view.findViewById(R.id.TVHomeHi);
             String textName = "";
             if (dataManager != null){
-                textName = "Hi " + dataManager.currentUser.getCurrentUser().getName() + "!";
+                textName = "Hi " + dataManager.currentUser.getCurrentUser().getName().split(" ")[0] + "!";
             } else {
                 textName = "Hi!";
             }

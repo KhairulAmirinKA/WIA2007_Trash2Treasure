@@ -59,7 +59,11 @@ public class Login extends AppCompatActivity {
             if (ETEmail.getText().toString().equals(profileItem.email)) {
                 emailFound = true;
 
-                if (ETPassword.getText().toString().equals(profileItem.password)) {
+                String enteredPasswordHash = profileItem.hashPassword(ETPassword.getText().toString());
+
+                System.out.println("Entered Hash: " + enteredPasswordHash);
+                System.out.println("Firebase Hash: " + profileItem.password);
+                if (enteredPasswordHash.equals(profileItem.password)) {
                     passwordCorrect = true;
                     status = true;
 
