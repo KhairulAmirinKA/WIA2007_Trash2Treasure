@@ -209,7 +209,9 @@ public class RegisterDetail extends Fragment {
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    if (s.length() == 1 && finalI < otpEText.length - 1) {
+                    if (count == 0 && before == 1 && finalI > 0) {
+                        otpEText[finalI - 1].requestFocus();
+                    } else if (s.length() == 1 && finalI < otpEText.length - 1) {
                         otpEText[finalI + 1].requestFocus();
                     }
                 }
