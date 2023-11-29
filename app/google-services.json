@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "615997997593",
+    "project_id": "trash2treasure-82d39",
+    "storage_bucket": "trash2treasure-82d39.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:615997997593:android:67e43c44ad53b521b86088",
+        "android_client_info": {
+          "package_name": "com.techwizards.wia2007_trash2treasure"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_p4dynburis7Yzs7FDYVXKMs2_9WiUw0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

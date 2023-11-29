@@ -9,8 +9,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.Set;
 
 public class Login extends AppCompatActivity {
+
+    DataManager dataManager = DataManager.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +28,7 @@ public class Login extends AppCompatActivity {
             public void onClick(View v) {
                 if (performLogin()) {
                     saveLoginState();
+                    dataManager.save(getApplicationContext());
                     Intent intent = new Intent(Login.this, MainActivity.class);
                     startActivity(intent);
                     finish();
@@ -44,15 +50,38 @@ public class Login extends AppCompatActivity {
         EditText ETEmail = findViewById(R.id.ETLoginEmail);
         EditText ETPassword = findViewById(R.id.ETLoginPassword);
 
-        if (ETEmail.getText().toString().equals("admin@email.com")) {
-            if (ETPassword.getText().toString().equals("admin123")) {
-                return true;
-            } else {
-                return false;
+        boolean status = false;
+
+        boolean emailFound = false;
+        boolean passwordCorrect = false;
+
+        for (ProfileItem profileItem : dataManager.profileItems){
+            if (ETEmail.getText().toString().equals(profileItem.email)) {
+                emailFound = true;
+
+                String enteredPasswordHash = profileItem.hashPassword(ETPassword.getText().toString());
+
+                System.out.println("Entered Hash: " + enteredPasswordHash);
+                System.out.println("Firebase Hash: " + profileItem.password);
+                if (enteredPasswordHash.equals(profileItem.password)) {
+                    passwordCorrect = true;
+                    status = true;
+
+                    ProfileItem loggedInUser = profileItem;
+                    CurrentUser currentUser = new CurrentUser();
+                    currentUser.setCurrentUser(loggedInUser);
+                    dataManager.currentUser = currentUser;
+                }
             }
-        } else {
-            return false;
         }
+
+        if (!emailFound) {
+            Toast.makeText(this, "Email not Registered!", Toast.LENGTH_SHORT).show();
+        } else if (!passwordCorrect) {
+            Toast.makeText(this, "Wrong Password!", Toast.LENGTH_SHORT).show();
+        }
+
+        return status;
     }
 
     private void saveLoginState() {

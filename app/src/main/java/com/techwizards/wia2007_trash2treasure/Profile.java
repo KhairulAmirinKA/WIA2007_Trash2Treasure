@@ -16,6 +16,8 @@ import android.widget.Button;
 import net.steamcrafted.materialiconlib.MaterialIconView;
 
 public class Profile extends Fragment {
+
+    DataManager dataManager = DataManager.getInstance();
     private ProfileAdapter profileAdapter;
     private ProfileItem userProfile;
     public Profile() {
@@ -38,7 +40,7 @@ public class Profile extends Fragment {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
         profileAdapter = new ProfileAdapter(view);
-        userProfile = ProfileItem.testData();
+        userProfile = dataManager.currentUser.getCurrentUser();
         profileAdapter.populateViews(userProfile);
 
         MaterialIconView reward = view.findViewById(R.id.BtnProfileReward);
@@ -68,6 +70,7 @@ public class Profile extends Fragment {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean("isLoggedIn", false);
         editor.apply();
+        dataManager.save(getContext());
     }
 }
 
