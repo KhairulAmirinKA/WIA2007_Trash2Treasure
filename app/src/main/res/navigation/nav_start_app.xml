@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_start_app"
+    app:startDestination="@id/DestLogin">
+
+    <activity
+        android:id="@+id/DestLogin"
+        android:name="com.techwizards.wia2007_trash2treasure.Login"
+        android:label="fragment_login"
+        tools:layout="@layout/activity_login" >
+        <action
+            android:id="@+id/LoginToRegister"
+            app:destination="@id/DestRegister" />
+        <action
+            android:id="@+id/LoginToMain"
+            app:destination="@id/nav_trash2treasure" />
+    </activity>
+    <activity
+        android:id="@+id/DestRegister"
+        android:name="com.techwizards.wia2007_trash2treasure.Register"
+        android:label="fragment_register"
+        tools:layout="@layout/activity_register" >
+        <action
+            android:id="@+id/RegisterToLogin"
+            app:destination="@id/DestLogin" />
+    </activity>
+    <include app:graph="@navigation/nav_trash2treasure" />
+</navigation>

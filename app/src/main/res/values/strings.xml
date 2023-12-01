@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">Trash2Treasure</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_truck_tracker">Truck Tracker</string>
+    <string-array name="volunteer_categories">
+        <item>All</item>
+        <item>Wildlife</item>
+        <item>Marine</item>
+        <item>Local Area</item>
+        <item>Recreational Area</item>
+        <item>Educational</item>
+    </string-array>
 </resources>

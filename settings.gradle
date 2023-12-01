@@ -11,7 +11,8 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         mavenLocal()
-        jcenter { url = uri("https://jcenter.bintray.com/") }
+        maven { url "https://jitpack.io" }
+        mavenCentral { url = uri("https://jcenter.bintray.com/") }
     }
 }
 rootProject.name = "Trash2Treasure"

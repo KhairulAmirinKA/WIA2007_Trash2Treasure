@@ -9,8 +9,9 @@ public class VolunteerItem {
     String volunteerEndDate;
     String volunteerTime;
     int volunteerParticipantCount;
+    String volunterCategories;
 
-    public VolunteerItem(String imagePath, String volunteerTitle, String volunteerDesc, int volunteerPoints, String volunteerStartDate, String volunteerEndDate, String volunteerTime, int volunteerParticipantCount) {
+    public VolunteerItem(String imagePath, String volunteerTitle, String volunteerDesc, int volunteerPoints, String volunteerStartDate, String volunteerEndDate, String volunteerTime, int volunteerParticipantCount, String volunterCategories) {
         ImagePath = imagePath;
         this.volunteerTitle = volunteerTitle;
         this.volunteerDesc = volunteerDesc;
@@ -19,6 +20,7 @@ public class VolunteerItem {
         this.volunteerEndDate = volunteerEndDate;
         this.volunteerTime = volunteerTime;
         this.volunteerParticipantCount = volunteerParticipantCount;
+        this.volunterCategories = volunterCategories;
     }
 
     public String getImagePath() {
@@ -35,6 +37,10 @@ public class VolunteerItem {
 
     public int getVolunteerParticipantCount() {
         return volunteerParticipantCount;
+    }
+
+    public String getVolunterCategories() {
+        return volunterCategories;
     }
 }
 

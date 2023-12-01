@@ -1,5 +1,11 @@
 package com.techwizards.wia2007_trash2treasure;
 
+import com.google.common.reflect.TypeToken;
+import com.google.gson.Gson;
+
+import java.lang.reflect.Type;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,25 +14,30 @@ public class ProfileItem {
     String name;
     String email;
     String password;
+    String unhashPassword;
     String phone;
     String address;
     String gender;
     String dateOfBirth;
     boolean allowNoti;
 
-    public ProfileItem() {
-    }
+    int points;
+    private ProfileItem instance;
 
-    public ProfileItem(String imagePath, String name, String email, String password, String phone, String address, String gender, String dateOfBirth, boolean allowNoti) {
+    public ProfileItem() {}
+
+    public ProfileItem(String imagePath, String name, String email, String password, String phone, String address, String gender, String dateOfBirth, boolean allowNoti, int points) {
         this.imagePath = imagePath;
         this.name = name;
         this.email = email;
-        this.password = password;
+        this.password = hashPassword(password);
+        this.unhashPassword = passwordMask(password);
         this.phone = phone;
         this.address = address;
         this.gender = gender;
         this.dateOfBirth = dateOfBirth;
         this.allowNoti = allowNoti;
+        this.points = points;
     }
 
     public String getImagePath() {
@@ -65,28 +76,53 @@ public class ProfileItem {
         return allowNoti;
     }
 
-    public String passwordMask() {
+    public int getPoints() {
+        return points;
+    }
+
+    public String getUnhashPassword() {
+        return unhashPassword;
+    }
+
+    public String passwordMask(String password) {
         String mask = "";
         if (password != null) for (int i = 0; i < password.length(); i++) mask += "*";
         return mask;
     }
 
     public Map<String, Object> toMap() {
-        Map<String, Object> map = new HashMap<>();
-        map.put("name", name);
-        map.put("email", email);
-        map.put("password", password);
-        map.put("phone", phone);
-        map.put("address", address);
-        map.put("gender", gender);
-        map.put("dateOfBirth", dateOfBirth);
-        map.put("allowNotifications", allowNoti);
-        return map;
+        Gson gson = new Gson();
+        String json = gson.toJson(this);
+
+        Type type = new TypeToken<HashMap<String, Object>>() {}.getType();
+        return gson.fromJson(json, type);
+    }
+
+    public String hashPassword(String passwordHash) {
+        MessageDigest messageDigest = null;
+        try {
+            messageDigest = MessageDigest.getInstance("SHA-512");
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
+        messageDigest.reset();
+        messageDigest.update(passwordHash.getBytes());
+        byte[] mdArray = messageDigest.digest();
+        StringBuilder stringBuilder = new StringBuilder(mdArray.length * 2);
+        for (byte b : mdArray) {
+            int v = b & 0xff;
+            if (v < 16) {
+                stringBuilder.append('0');
+            }
+            stringBuilder.append(Integer.toHexString(v));
+        }
+
+        return stringBuilder.toString();
     }
 
     public static ProfileItem testData() {
         return new ProfileItem(
-                "https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-538.jpg",
+                "https://icon-library.com/images/admin-user-icon/admin-user-icon-4.jpg",
                 "Test Admin",
                 "admin@email.com",
                 "admin123",
@@ -94,7 +130,8 @@ public class ProfileItem {
                 "UM, KL, Malaysia",
                 "Male",
                 "01/12/2000",
-                true
+                true,
+                1590
         );
     }
 }

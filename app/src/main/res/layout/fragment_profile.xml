@@ -30,6 +30,7 @@
                 android:textColor="@color/black"
                 android:textStyle="bold"/>
             <net.steamcrafted.materialiconlib.MaterialIconView
+                android:id="@+id/BtnProfileReward"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:clickable="true"
