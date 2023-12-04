@@ -191,7 +191,7 @@ public class RegisterDetail extends Fragment {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                newProfile = new ProfileItem("https://cdn-icons-png.flaticon.com/512/3135/3135715.png", bundle.getString("name"), bundle.getString("email"), bundle.getString("password"), bundle.getString("phone"), "Malaysia", "Undefined", "20/10/2000", false);
+                newProfile = new ProfileItem("https://cdn-icons-png.flaticon.com/512/3135/3135715.png", bundle.getString("name"), bundle.getString("email"), bundle.getString("password"), bundle.getString("phone"), "Malaysia", "Undefined", "20/10/2000", false, 100);
                 DataManager.getInstance().addProfile(newProfile);
                 DataManager.getInstance().save(getContext());
                 getActivity().finish();
@@ -209,7 +209,9 @@ public class RegisterDetail extends Fragment {
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    if (s.length() == 1 && finalI < otpEText.length - 1) {
+                    if (count == 0 && before == 1 && finalI > 0) {
+                        otpEText[finalI - 1].requestFocus();
+                    } else if (s.length() == 1 && finalI < otpEText.length - 1) {
                         otpEText[finalI + 1].requestFocus();
                     }
                 }

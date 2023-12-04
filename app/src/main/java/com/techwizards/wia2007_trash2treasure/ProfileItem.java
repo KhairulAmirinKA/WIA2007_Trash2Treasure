@@ -20,11 +20,13 @@ public class ProfileItem {
     String gender;
     String dateOfBirth;
     boolean allowNoti;
+
+    int points;
     private ProfileItem instance;
 
     public ProfileItem() {}
 
-    public ProfileItem(String imagePath, String name, String email, String password, String phone, String address, String gender, String dateOfBirth, boolean allowNoti) {
+    public ProfileItem(String imagePath, String name, String email, String password, String phone, String address, String gender, String dateOfBirth, boolean allowNoti, int points) {
         this.imagePath = imagePath;
         this.name = name;
         this.email = email;
@@ -35,6 +37,7 @@ public class ProfileItem {
         this.gender = gender;
         this.dateOfBirth = dateOfBirth;
         this.allowNoti = allowNoti;
+        this.points = points;
     }
 
     public String getImagePath() {
@@ -71,6 +74,10 @@ public class ProfileItem {
 
     public boolean isAllowNoti() {
         return allowNoti;
+    }
+
+    public int getPoints() {
+        return points;
     }
 
     public String getUnhashPassword() {
@@ -123,7 +130,8 @@ public class ProfileItem {
                 "UM, KL, Malaysia",
                 "Male",
                 "01/12/2000",
-                true
+                true,
+                1590
         );
     }
 }
