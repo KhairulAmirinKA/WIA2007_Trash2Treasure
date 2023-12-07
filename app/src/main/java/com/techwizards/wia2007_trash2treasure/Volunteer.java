@@ -48,6 +48,8 @@ public class Volunteer extends Fragment {
         adapter.setDropDownViewResource(R.layout.volunteer_categories_item_row_view);
         categories.setAdapter(adapter);
 
+        categories.setSelection(0);
+
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView_volunteer_item);
         volunteerAdapter = new VolunteerAdapter(generateVolunteerList());
 
@@ -72,7 +74,6 @@ public class Volunteer extends Fragment {
                 updateRadioButtonListener(radioGroup);
             }
         });
-        categories.setSelected(true);
 
         return view;
     }
