@@ -28,9 +28,7 @@ public class Volunteer extends Fragment {
     private Spinner categories;
     TextView TVNoProjects;
 
-    public Volunteer() {
-        // Required empty public constructor
-    }
+    public Volunteer() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,6 +48,8 @@ public class Volunteer extends Fragment {
         adapter.setDropDownViewResource(R.layout.volunteer_categories_item_row_view);
         categories.setAdapter(adapter);
 
+        categories.setSelection(0);
+
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView_volunteer_item);
         volunteerAdapter = new VolunteerAdapter(generateVolunteerList());
 
@@ -64,26 +64,32 @@ public class Volunteer extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 updateAdapterData();
 
-                radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
-                    if (checkedId == R.id.RBVTrending) {
-                        filterVolunteerList(Filter.TRENDING);
-                    } else if (checkedId == R.id.RBVUpcoming) {
-                        filterVolunteerList(Filter.UPCOMING);
-                    } else if (checkedId == R.id.RBVOngoing) {
-                        filterVolunteerList(Filter.ONGOING);
-                    }
-                });
-
-                ((RadioButton) radioGroup.getChildAt(0)).setChecked(true);
+                updateRadioButtonListener(radioGroup);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 updateAdapterData();
+
+                updateRadioButtonListener(radioGroup);
             }
         });
 
         return view;
+    }
+
+    private void updateRadioButtonListener(RadioGroup radioGroup) {
+        radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            if (checkedId == R.id.RBVTrending) {
+                filterVolunteerList(Filter.TRENDING);
+            } else if (checkedId == R.id.RBVUpcoming) {
+                filterVolunteerList(Filter.UPCOMING);
+            } else if (checkedId == R.id.RBVOngoing) {
+                filterVolunteerList(Filter.ONGOING);
+            }
+        });
+
+        ((RadioButton) radioGroup.getChildAt(0)).setChecked(true);
     }
 
     private List<VolunteerItem> generateVolunteerList() {
@@ -153,6 +159,7 @@ public class Volunteer extends Fragment {
     }
 
     private void filterVolunteerList(Filter filter) {
+        TVNoProjects.setVisibility(View.GONE);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         List<VolunteerItem> filteredList = new ArrayList<>();
         Date today;
