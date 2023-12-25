@@ -11,8 +11,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.Set;
-
 public class Login extends AppCompatActivity {
 
     DataManager dataManager = DataManager.getInstance();
