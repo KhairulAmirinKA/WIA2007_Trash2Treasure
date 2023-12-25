@@ -83,7 +83,17 @@ public class Register extends AppCompatActivity {
                         getSupportFragmentManager().beginTransaction()
                                 .replace(R.id.FragmentRegisterMain, registerDetail)
                                 .commit();
+
+                        Toast.makeText(Register.this, "Success. will go to next stage", Toast.LENGTH_SHORT).show();
+                    } //checks password security
+
+                    else {
+                        Toast.makeText(Register.this, "Password length should be at least 8 characters", Toast.LENGTH_SHORT).show();
                     }
+
+                } //if email pattern is correct
+                else {
+                    Toast.makeText(Register.this, "Wrong email patterns", Toast.LENGTH_SHORT).show();
                 }
             }
         });
