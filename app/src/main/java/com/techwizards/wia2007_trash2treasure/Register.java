@@ -56,18 +56,30 @@ public class Register extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //checks email pattern
                 if (Patterns.EMAIL_ADDRESS.matcher(ETProfileEmail.getText().toString()).matches()){
-                    if (ETProfilePassword.getText().toString().equals(ETProfileRePassword.getText().toString()) && ETProfilePassword.getText().length() >= 8) {
+
+                    //typed password sama dgn retyped password.
+                    if (ETProfilePassword.getText().toString().equals(ETProfileRePassword.getText().toString())
+                            && ETProfilePassword.getText().length() >= 8) { //checks length of password
+
+                        //get email from editText
                         String email = ETProfileEmail.getText().toString();
+
+                        //get password from editText
                         String password = ETProfilePassword.getText().toString();
 
+                        //Bundles this data into a Bundle object to pass it to another fragment or activity for further processing
                         Bundle bundle = new Bundle();
                         bundle.putString("email", email);
                         bundle.putString("password", password);
 
+                        //data from bundle will be passed to RegisterDetail
                         RegisterDetail registerDetail = new RegisterDetail();
                         registerDetail.setArguments(bundle);
 
+                        //tukar fragment dlm app.
                         getSupportFragmentManager().beginTransaction()
                                 .replace(R.id.FragmentRegisterMain, registerDetail)
                                 .commit();
@@ -76,6 +88,7 @@ public class Register extends AppCompatActivity {
             }
         });
 
+        //login
         TextView registerToLogin = findViewById(R.id.BtnRegisterLogin);
         registerToLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,21 +124,16 @@ public class Register extends AppCompatActivity {
 
 
 
-
-
-
-
-
     } //oncreate
 
+    //google firebase
     private void signInUsingGoogle() {
 
         Intent intent = googleSignInClient.getSignInIntent();
 
         startActivityForResult(intent, RC_SIGN_IN);
 
-
-    }
+    } //signin using google
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
