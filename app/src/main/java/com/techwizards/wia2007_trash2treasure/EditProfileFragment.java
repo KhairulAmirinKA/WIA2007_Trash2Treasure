@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -15,6 +16,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -91,9 +97,71 @@ public class EditProfileFragment extends Fragment {
             }
         });
 
+        //save btn
+        Button BtnSaveNewProfile = view.findViewById(R.id.BtnSaveNewProfile);
+        BtnSaveNewProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //save new profile
+                saveNewProfle(view);
+            }
+        });
+
 
         return view;
     }
+
+    //when user clicks Save btn
+    private void saveNewProfle(View view) {
+
+        EditText ETEditProfileName = getView().findViewById(R.id.ETEditProfileName);
+        EditText ETEditProfileEmail = getView().findViewById(R.id.ETEditProfileEmail);
+        EditText ETEditProfilePassword = getView().findViewById(R.id.ETEditProfilePassword);
+        EditText ETEditPhone = getView().findViewById(R.id.ETEditPhone);
+        EditText ETEditAddress = getView().findViewById(R.id.ETEditAddress);
+        EditText ETEditDob = getView().findViewById(R.id.ETEditDob);
+
+        String newImagePath= "https://icon-library.com/images/admin-user-icon/admin-user-icon-4.jpg";
+        String newName= ETEditProfileName.getText().toString();
+        String newEmail = ETEditProfileEmail.getText().toString();
+        //String newPassword= ETEditProfilePassword.getText().toString();
+        String newPhone= ETEditPhone.getText().toString();
+        String newAddress = ETEditAddress.getText().toString();
+        String newGender= "Male";
+        String newDob= ETEditDob.getText().toString();
+        boolean newAllowNoti=true;
+       // int newPoint= 900;
+
+        //testing
+        Toast.makeText(getActivity().getApplicationContext(),
+                newName+ newEmail+ newAddress+ newPhone+ newDob, Toast.LENGTH_SHORT).show();
+
+        //generate new profile
+        ProfileItem updatedProfile = new ProfileItem(newImagePath, newName, newEmail,
+                newPhone, newAddress, newGender, newDob, newAllowNoti);
+
+        FirebaseService firebaseService = FirebaseService.getInstance();
+
+        //save new profile
+        firebaseService.saveUserProfile(updatedProfile, new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+
+                if (task.isSuccessful()){
+                    Toast.makeText(getActivity().getApplicationContext(), "success", Toast.LENGTH_SHORT).show();
+
+                    //go to profile page
+                    Navigation.findNavController(view).navigate(R.id.DestProfile);
+
+                }
+                else {
+                    Toast.makeText(getActivity().getApplicationContext(), "Gagal", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+    } //save
+
 
     //when users click cancel editing, dialog box will appear
     private void showConfirmationDialog(View view){
