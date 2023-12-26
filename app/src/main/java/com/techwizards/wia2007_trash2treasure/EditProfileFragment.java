@@ -20,7 +20,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -143,22 +146,43 @@ public class EditProfileFragment extends Fragment {
         FirebaseService firebaseService = FirebaseService.getInstance();
 
         //save new profile
-        firebaseService.saveUserProfile(updatedProfile, new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
+//        firebaseService.saveUserProfile(updatedProfile, new OnCompleteListener<Void>() {
+//            @Override
+//            public void onComplete(@NonNull Task<Void> task) {
+//
+//                if (task.isSuccessful()){
+//                    Toast.makeText(getActivity().getApplicationContext(), "success", Toast.LENGTH_SHORT).show();
+//
+//                    //go to profile page
+//                    Navigation.findNavController(view).navigate(R.id.DestProfile);
+//
+//                }
+//                else {
+//                    Toast.makeText(getActivity().getApplicationContext(), "Gagal", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });
 
-                if (task.isSuccessful()){
-                    Toast.makeText(getActivity().getApplicationContext(), "success", Toast.LENGTH_SHORT).show();
+        //update profile
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        db.collection("user_profiles")
+                .document( updatedProfile.getEmail() )
+                .set(updatedProfile)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(getActivity().getApplicationContext(), "success", Toast.LENGTH_SHORT).show();
 
                     //go to profile page
                     Navigation.findNavController(view).navigate(R.id.DestProfile);
+                    }
+                });
 
-                }
-                else {
-                    Toast.makeText(getActivity().getApplicationContext(), "Gagal", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+
+
+
+
 
     } //save
 

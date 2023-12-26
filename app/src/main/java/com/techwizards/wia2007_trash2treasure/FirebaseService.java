@@ -1,6 +1,11 @@
 package com.techwizards.wia2007_trash2treasure;
 
+import android.app.Activity;
+import android.content.Context;
+import android.widget.Toast;
+
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -35,4 +40,6 @@ public class FirebaseService {
     public void fetchUserProfiles(OnCompleteListener<QuerySnapshot> onCompleteListener) {
         profileCollection.get().addOnCompleteListener(onCompleteListener);
     }
+
+
 }
