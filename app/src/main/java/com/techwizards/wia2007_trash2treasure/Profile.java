@@ -43,6 +43,7 @@ public class Profile extends Fragment {
         userProfile = dataManager.currentUser.getCurrentUser();
         profileAdapter.populateViews(userProfile);
 
+        //click reward icon besides the Profile TextView
         MaterialIconView reward = view.findViewById(R.id.BtnProfileReward);
         reward.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,7 +78,7 @@ public class Profile extends Fragment {
 
 
         return view;
-    }
+    } //oncreate view
 
     private void changeLogState() {
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);

@@ -1,10 +1,16 @@
 package com.techwizards.wia2007_trash2treasure;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +22,12 @@ import android.widget.Button;
  * create an instance of this fragment.
  */
 public class EditProfileFragment extends Fragment {
+
+    DataManager dataManager = DataManager.getInstance();
+
+    private ProfileAdapter_ForEdit profileAdapterForEdit;
+    private ProfileItem userProfile;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -63,18 +75,59 @@ public class EditProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         View view=  inflater.inflate(R.layout.fragment_edit_profile, container, false);
 
+        //fetch data
+        profileAdapterForEdit = new ProfileAdapter_ForEdit(view);
+        userProfile = dataManager.currentUser.getCurrentUser();
+        profileAdapterForEdit.populateViews_ForEdit(userProfile);
+
         //cancel btn
         Button BtnCancelEditProfile = view.findViewById(R.id.BtnCancelEditProfile);
         BtnCancelEditProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                //go back to Profile page
-                Navigation.findNavController(view).navigate(R.id.DestProfile);
+                //yes or no to cancel the editing
+                showConfirmationDialog(view);
             }
         });
 
 
         return view;
+    }
+
+    //when users click cancel editing, dialog box will appear
+    private void showConfirmationDialog(View view){
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext() );
+
+        builder.setTitle("Cancel Editing");
+
+        builder.setMessage("Are you sure you want to cancel editing? Any unsaved changes will be lost.");
+
+        //yes btn
+        String positiveText= "Yes";
+        SpannableString spannableString = new SpannableString(positiveText);
+
+        //yes btn to become red
+        spannableString.setSpan(new ForegroundColorSpan(Color.RED), 0, positiveText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        builder.setPositiveButton(spannableString, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                //go back to profile page
+                Navigation.findNavController(view).navigate(R.id.DestProfile);
+            }
+        });
+
+        //no btn
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }

@@ -2,6 +2,7 @@ package com.techwizards.wia2007_trash2treasure;
 
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -35,6 +36,7 @@ public class ProfileAdapter {
         toggleNotification = rootView.findViewById(R.id.ToggleProfileNotification);
         editProfileButton = rootView.findViewById(R.id.BtnProfileEdit);
         logOutButton = rootView.findViewById(R.id.BtnProfileLogOut);
+
     }
 
     public void populateViews(ProfileItem userProfile) {
@@ -48,4 +50,6 @@ public class ProfileAdapter {
         profileDOB.setText(userProfile.getDateOfBirth());
         toggleNotification.setChecked(userProfile.isAllowNoti());
     }
+
+
 }
