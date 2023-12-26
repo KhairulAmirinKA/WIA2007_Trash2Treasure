@@ -51,6 +51,7 @@ public class Profile extends Fragment {
             }
         });
 
+        //click the logout
         Button logOut = view.findViewById(R.id.BtnProfileLogOut);
         logOut.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +62,19 @@ public class Profile extends Fragment {
                 getActivity().finish();
             }
         });
+
+        //edit profile
+        Button BtnProfileEdit= view.findViewById(R.id.BtnProfileEdit);
+        BtnProfileEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //it will go to edit profile fragment
+                Navigation.findNavController(view).navigate(R.id.DestEditProfile);
+            }
+        });
+
+
 
         return view;
     }

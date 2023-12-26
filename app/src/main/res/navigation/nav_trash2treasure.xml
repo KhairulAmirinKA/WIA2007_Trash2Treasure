@@ -37,6 +37,9 @@
         <action
             android:id="@+id/DestAward"
             app:destination="@id/DestAward" />
+        <action
+            android:id="@+id/DestEditProfile"
+            app:destination="@id/DestEditProfile" />
     </fragment>
     <fragment
         android:id="@+id/DestReportMake"
@@ -48,4 +51,9 @@
         android:name="com.techwizards.wia2007_trash2treasure.Award"
         android:label="fragment_award"
         tools:layout="@layout/fragment_award" />
+    <fragment
+        android:id="@+id/DestEditProfile"
+        android:name="com.techwizards.wia2007_trash2treasure.EditProfileFragment"
+        android:label="fragment_edit_profile"
+        tools:layout="@layout/fragment_edit_profile" />
 </navigation>

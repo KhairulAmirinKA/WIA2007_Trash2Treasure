@@ -92,6 +92,8 @@ public class RegisterDetail extends Fragment {
                 String name = ETProfileName.getText().toString();
                 String phone = ETProfilePhone.getText().toString();
 
+                //add +60 in front of the phone. because it is Malaysian
+                //for OTP verification
                 String phoneFormat = phone.contains("+6") ? phone : "+6" + phone;
 
                 bundle.putString("name", name);
@@ -130,6 +132,7 @@ public class RegisterDetail extends Fragment {
                         }
                 );
 
+                //timer
                 startCountdownTimer();
 
                 TextView TVPhone = view.findViewById(R.id.TVRegisterDetailPhone);
@@ -138,6 +141,7 @@ public class RegisterDetail extends Fragment {
             }
         });
 
+        //when users click the resendButton
         resendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -80,6 +80,7 @@ public class Register extends AppCompatActivity {
                         registerDetail.setArguments(bundle);
 
                         //tukar fragment dlm app.
+                        //app will go to RegisterDetail.java
                         getSupportFragmentManager().beginTransaction()
                                 .replace(R.id.FragmentRegisterMain, registerDetail)
                                 .commit();
