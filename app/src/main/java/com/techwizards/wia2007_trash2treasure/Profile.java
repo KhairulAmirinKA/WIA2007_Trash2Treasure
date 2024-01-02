@@ -64,6 +64,8 @@ public class Profile extends Fragment {
             }
         });
 
+
+
         //edit profile
         Button BtnProfileEdit= view.findViewById(R.id.BtnProfileEdit);
         BtnProfileEdit.setOnClickListener(new View.OnClickListener() {

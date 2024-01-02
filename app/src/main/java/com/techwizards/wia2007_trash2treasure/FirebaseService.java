@@ -40,6 +40,4 @@ public class FirebaseService {
     public void fetchUserProfiles(OnCompleteListener<QuerySnapshot> onCompleteListener) {
         profileCollection.get().addOnCompleteListener(onCompleteListener);
     }
-
-
 }

@@ -60,7 +60,7 @@ public class Register extends AppCompatActivity {
                 //checks email pattern
                 if (Patterns.EMAIL_ADDRESS.matcher(ETProfileEmail.getText().toString()).matches()){
 
-                    //typed password sama dgn retyped password.
+                    //typed password same with retyped password.
                     if (ETProfilePassword.getText().toString().equals(ETProfileRePassword.getText().toString())
                             && ETProfilePassword.getText().length() >= 8) { //checks length of password
 
@@ -79,7 +79,7 @@ public class Register extends AppCompatActivity {
                         RegisterDetail registerDetail = new RegisterDetail();
                         registerDetail.setArguments(bundle);
 
-                        //tukar fragment dlm app.
+                        //change fragment in app.
                         //app will go to RegisterDetail.java
                         getSupportFragmentManager().beginTransaction()
                                 .replace(R.id.FragmentRegisterMain, registerDetail)
@@ -135,7 +135,7 @@ public class Register extends AppCompatActivity {
 
 
 
-    } //oncreate
+    } //onCreate
 
     //google firebase
     private void signInUsingGoogle() {
@@ -144,7 +144,7 @@ public class Register extends AppCompatActivity {
 
         startActivityForResult(intent, RC_SIGN_IN);
 
-    } //signin using google
+    } //sign in using google
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -201,7 +201,4 @@ public class Register extends AppCompatActivity {
                     }
                 });
     } //firebaseAuth
-
-
-
 }

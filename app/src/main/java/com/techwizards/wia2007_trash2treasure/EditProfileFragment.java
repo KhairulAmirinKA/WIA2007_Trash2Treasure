@@ -5,7 +5,7 @@ import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -17,13 +17,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,45 +34,16 @@ public class EditProfileFragment extends Fragment {
     private ProfileAdapter_ForEdit profileAdapterForEdit;
     private ProfileItem userProfile;
 
+    public EditProfileFragment() {}
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public EditProfileFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment EditProfileFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static EditProfileFragment newInstance(String param1, String param2) {
+    public static EditProfileFragment newInstance() {
         EditProfileFragment fragment = new EditProfileFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -104,46 +72,58 @@ public class EditProfileFragment extends Fragment {
         Button BtnSaveNewProfile = view.findViewById(R.id.BtnSaveNewProfile);
         BtnSaveNewProfile.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 //save new profile
-                saveNewProfle(view);
+                saveNewProfile(view);
+                Navigation.findNavController(view).popBackStack();
             }
         });
-
 
         return view;
     }
 
     //when user clicks Save btn
-    private void saveNewProfle(View view) {
+    private void saveNewProfile(View view) {
 
-        EditText ETEditProfileName = getView().findViewById(R.id.ETEditProfileName);
-        EditText ETEditProfileEmail = getView().findViewById(R.id.ETEditProfileEmail);
-        EditText ETEditProfilePassword = getView().findViewById(R.id.ETEditProfilePassword);
-        EditText ETEditPhone = getView().findViewById(R.id.ETEditPhone);
-        EditText ETEditAddress = getView().findViewById(R.id.ETEditAddress);
-        EditText ETEditDob = getView().findViewById(R.id.ETEditDob);
+        EditText ETEditProfileName = view.findViewById(R.id.ETEditProfileName);
+        EditText ETEditProfileEmail = view.findViewById(R.id.ETEditProfileEmail);
+        EditText ETEditProfilePassword = view.findViewById(R.id.ETEditProfilePassword);
+        EditText ETEditPhone = view.findViewById(R.id.ETEditPhone);
+        EditText ETEditAddress = view.findViewById(R.id.ETEditAddress);
+        RadioGroup RGGender = view.findViewById(R.id.RGEditGender);
+        EditText ETEditDob = view.findViewById(R.id.ETEditDob);
+        SwitchCompat SCEditAllowNoti = view.findViewById(R.id.ToggleEditProfileNotification);
 
         String newImagePath= "https://icon-library.com/images/admin-user-icon/admin-user-icon-4.jpg";
-        String newName= ETEditProfileName.getText().toString();
+        String newName = ETEditProfileName.getText().toString();
         String newEmail = ETEditProfileEmail.getText().toString();
-        //String newPassword= ETEditProfilePassword.getText().toString();
+        String newPassword= ETEditProfilePassword.getText().toString();
         String newPhone= ETEditPhone.getText().toString();
         String newAddress = ETEditAddress.getText().toString();
-        String newGender= "Male";
-        String newDob= ETEditDob.getText().toString();
-        boolean newAllowNoti=true;
-       // int newPoint= 900;
 
-        //testing
-        Toast.makeText(getActivity().getApplicationContext(),
-                newName+ newEmail+ newAddress+ newPhone+ newDob, Toast.LENGTH_SHORT).show();
+        int buttonId = RGGender.getCheckedRadioButtonId();
+        String newGender = "";
+
+        if (buttonId == R.id.RBEditMale) {
+            newGender = "Male";
+        } else if (buttonId == R.id.RBEditFemale) {
+            newGender = "Female";
+        }
+
+        String newDob= ETEditDob.getText().toString();
+        boolean newAllowNoti = SCEditAllowNoti.isChecked();
+        int newPoint = dataManager.currentUser.getCurrentUser().getPoints();
 
         //generate new profile
-        ProfileItem updatedProfile = new ProfileItem(newImagePath, newName, newEmail,
-                newPhone, newAddress, newGender, newDob, newAllowNoti);
+        ProfileItem updatedProfile = new ProfileItem(newImagePath, newName, newEmail,newPassword, newPhone, newAddress, newGender, newDob, newAllowNoti, newPoint);
 
-        FirebaseService firebaseService = FirebaseService.getInstance();
+        dataManager.updateProfile(updatedProfile);
+        dataManager.save(getContext());
+        //testing
+        Toast.makeText(getContext(),
+                "Update Success", Toast.LENGTH_SHORT).show();
+
+//        FirebaseService firebaseService = FirebaseService.getInstance();
 
         //save new profile
 //        firebaseService.saveUserProfile(updatedProfile, new OnCompleteListener<Void>() {
@@ -164,26 +144,20 @@ public class EditProfileFragment extends Fragment {
 //        });
 
         //update profile
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        db.collection("user_profiles")
-                .document( updatedProfile.getEmail() )
-                .set(updatedProfile)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        Toast.makeText(getActivity().getApplicationContext(), "success", Toast.LENGTH_SHORT).show();
-
-                    //go to profile page
-                    Navigation.findNavController(view).navigate(R.id.DestProfile);
-                    }
-                });
-
-
-
-
-
-
+//        FirebaseFirestore db = FirebaseFirestore.getInstance();
+//
+//        db.collection("user_profiles")
+//                .document( updatedProfile.getEmail() )
+//                .set(updatedProfile)
+//                .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                    @Override
+//                    public void onSuccess(Void unused) {
+//                        Toast.makeText(getActivity().getApplicationContext(), "success", Toast.LENGTH_SHORT).show();
+//
+//                    //go to profile page
+//                    Navigation.findNavController(view).navigate(R.id.DestProfile);
+//                    }
+//                });
     } //save
 
 

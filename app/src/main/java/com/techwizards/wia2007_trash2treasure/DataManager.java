@@ -34,7 +34,6 @@ public class DataManager {
 
                     //add to list
                     profileItems.add(profileItem);
-                    System.out.println(profileItem.getPassword());
                 }
                 System.out.println("FirebaseService: Fetch User Success!");
             } else {
@@ -63,7 +62,32 @@ public class DataManager {
         });
     }
 
-    //singleton
+    //update current user profile
+    public void updateProfile(ProfileItem updatedProfile) {
+        int index = -1;
+        for (int i = 0; i < profileItems.size(); i++) {
+            if (profileItems.get(i).getEmail().equals(updatedProfile.getEmail())) {
+                index = i;
+                break;
+            }
+        }
+
+        if (index != -1) {
+            profileItems.set(index, updatedProfile);
+
+            firebaseService.saveUserProfile(updatedProfile, task -> {
+                if (task.isSuccessful()) {
+                    System.out.println("FirebaseService: Update User Success!");
+                } else {
+                    Exception exception = task.getException();
+                    if (exception != null) {
+                        exception.printStackTrace();
+                    }
+                }
+            });
+        }
+    }
+
     public static synchronized DataManager getInstance() {
         if (instance == null) {
             instance = new DataManager();

@@ -41,16 +41,16 @@ public class ProfileItem {
     }
 
     //profile item for editing purpose. exclude password and points
-    public ProfileItem(String imagePath, String name, String email, String phone, String address, String gender, String dateOfBirth, boolean allowNoti) {
-        this.imagePath = imagePath;
-        this.name = name;
-        this.email = email;
-        this.phone = phone;
-        this.address = address;
-        this.gender = gender;
-        this.dateOfBirth = dateOfBirth;
-        this.allowNoti = allowNoti;
-    }
+//    public ProfileItem(String imagePath, String name, String email, String phone, String address, String gender, String dateOfBirth, boolean allowNoti) {
+//        this.imagePath = imagePath;
+//        this.name = name;
+//        this.email = email;
+//        this.phone = phone;
+//        this.address = address;
+//        this.gender = gender;
+//        this.dateOfBirth = dateOfBirth;
+//        this.allowNoti = allowNoti;
+//    }
 
     public String getImagePath() {
         return imagePath;
