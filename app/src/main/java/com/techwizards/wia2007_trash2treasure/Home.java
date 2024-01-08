@@ -5,10 +5,12 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +20,8 @@ import android.widget.TextView;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+
+import net.steamcrafted.materialiconlib.MaterialIconView;
 
 import java.io.IOException;
 import java.util.List;
@@ -57,6 +61,14 @@ public class Home extends Fragment {
                 textName = "Hi!";
             }
             TVUserName.setText(textName);
+
+            CardView btnNotification = view.findViewById(R.id.BtnHomeNotification);
+            btnNotification.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Navigation.findNavController(view).navigate(R.id.DestNotifications);
+                }
+            });
 
             mapFragment = new Maps();
             FragmentTransaction transaction = getChildFragmentManager().beginTransaction();

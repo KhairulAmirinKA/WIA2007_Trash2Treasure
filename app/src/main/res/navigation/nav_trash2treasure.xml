@@ -9,7 +9,11 @@
         android:id="@+id/DestHome"
         android:name="com.techwizards.wia2007_trash2treasure.Home"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/DestNotifications"
+            app:destination="@id/notifications" />
+    </fragment>
     <fragment
         android:id="@+id/DestCommunity"
         android:name="com.techwizards.wia2007_trash2treasure.Community"
@@ -56,4 +60,9 @@
         android:name="com.techwizards.wia2007_trash2treasure.EditProfileFragment"
         android:label="fragment_edit_profile"
         tools:layout="@layout/fragment_edit_profile" />
+    <fragment
+        android:id="@+id/notifications"
+        android:name="com.techwizards.wia2007_trash2treasure.Notifications"
+        android:label="fragment_notifications"
+        tools:layout="@layout/fragment_notifications" />
 </navigation>
