@@ -6,19 +6,43 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import net.steamcrafted.materialiconlib.MaterialDrawableBuilder;
+import net.steamcrafted.materialiconlib.MaterialIconView;
+
 public class Login extends AppCompatActivity {
 
+    EditText ETEmail, ETPassword;
     DataManager dataManager = DataManager.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        ETEmail = findViewById(R.id.ETLoginEmail);
+        ETPassword = findViewById(R.id.ETLoginPassword);
+        MaterialIconView showPassword = findViewById(R.id.BtnShowPassword);
+
+        if (!ETPassword.getText().toString().isEmpty()) {
+            showPassword.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (showPassword.isPressed()) {
+                        showPassword.setIcon(MaterialDrawableBuilder.IconValue.EYE_OFF);
+                        ETPassword.setInputType(EditorInfo.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                    } else {
+                        showPassword.setIcon(MaterialDrawableBuilder.IconValue.EYE);
+                        ETPassword.setInputType(EditorInfo.TYPE_TEXT_VARIATION_PASSWORD);
+                    }
+                }
+            });
+        }
 
         Button login = findViewById(R.id.BtnLogin);
         login.setOnClickListener(new View.OnClickListener() {
@@ -45,9 +69,6 @@ public class Login extends AppCompatActivity {
     }
 
     private boolean performLogin() {
-        EditText ETEmail = findViewById(R.id.ETLoginEmail);
-        EditText ETPassword = findViewById(R.id.ETLoginPassword);
-
         boolean status = false;
 
         boolean emailFound = false;
