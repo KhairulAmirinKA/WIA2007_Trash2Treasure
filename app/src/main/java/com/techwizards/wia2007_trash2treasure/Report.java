@@ -3,12 +3,14 @@ package com.techwizards.wia2007_trash2treasure;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -57,6 +59,14 @@ public class Report extends Fragment {
 
         ((RadioButton) radioGroup.getChildAt(0)).setChecked(true);
 
+        //create new report
+        Button BtnNewReport = view.findViewById(R.id.BtnNewReport);
+        BtnNewReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.DestReportMake);
+            }
+        });
         return view;
     }
 
