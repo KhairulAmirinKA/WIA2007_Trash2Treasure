@@ -20,28 +20,56 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Local Authority (PBT)"
-            android:textSize="20sp" />
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+
+        <Spinner
+            android:id="@+id/SpinnerReportLocalAuthority"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Type of Complaint"
-            android:textSize="20sp" />
+            android:layout_marginTop="16dp"
+            android:text="Type of Report"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/textView5"
+        <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sub complaint"
-            android:textSize="20sp" />
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:height="48dp"
+                android:text="Complaint" />
+
+            <RadioButton
+                android:id="@+id/radioButton2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:height="48dp"
+                android:text="Suggestion" />
+        </RadioGroup>
 
         <TextView
             android:id="@+id/textView6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Complaint Description"
-            android:textSize="20sp" />
+            android:layout_marginTop="16dp"
+            android:text="Report Description"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/ETReport_Description"
@@ -63,7 +91,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Complaint Location"
-            android:textSize="24sp" />
+            android:textColor="#000000"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentContainerView"
@@ -75,7 +105,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Address"
-            android:textSize="24sp" />
+            android:textColor="#000000"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/ETReport_Address"
@@ -93,8 +125,9 @@
 
         <Button
             android:id="@+id/BtnReportSubmit"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:backgroundTint="#E91E63"
             android:text="Submit Report"
             android:textColor="#FFFFFF" />
