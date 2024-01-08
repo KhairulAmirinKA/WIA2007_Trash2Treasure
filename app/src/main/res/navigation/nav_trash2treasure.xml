@@ -13,6 +13,9 @@
         <action
             android:id="@+id/DestNotifications"
             app:destination="@id/notifications" />
+        <action
+            android:id="@+id/action_DestHome_to_fragmentNearbyRecyclingBin"
+            app:destination="@id/DestNearbyRecyclingBin" />
     </fragment>
     <fragment
         android:id="@+id/DestCommunity"
@@ -65,4 +68,9 @@
         android:name="com.techwizards.wia2007_trash2treasure.Notifications"
         android:label="fragment_notifications"
         tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/DestNearbyRecyclingBin"
+        android:name="com.techwizards.wia2007_trash2treasure.FragmentNearbyRecyclingBin"
+        android:label="fragment_nearby_recycling_bin"
+        tools:layout="@layout/fragment_nearby_recycling_bin" />
 </navigation>
