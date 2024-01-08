@@ -9,11 +9,13 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -49,6 +51,9 @@ public class Home extends Fragment {
         try {
             View view = inflater.inflate(R.layout.fragment_home, container, false);
 
+            //click the nearby bin
+            handleNearbyRecyclingBin(view);
+
             TVUserName = view.findViewById(R.id.TVHomeHi);
             String textName = "";
             if (dataManager != null){
@@ -69,11 +74,27 @@ public class Home extends Fragment {
 
             getLocation();
 
+
+
             return view;
         } catch (Exception e) {
             Log.e(getTag(), "onCreateView", e);
             throw e;
         }
+
+
+    }
+
+    //click the nearby bin
+    private static void handleNearbyRecyclingBin(View view) {
+        Button BtnHomeNearbyBin = view.findViewById(R.id.BtnHomeNearbyBin);
+
+        BtnHomeNearbyBin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.DestNearbyRecyclingBin);
+            }
+        });
     }
 
     private void getLocation() {
