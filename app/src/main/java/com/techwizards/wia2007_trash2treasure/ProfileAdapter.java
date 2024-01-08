@@ -2,12 +2,10 @@ package com.techwizards.wia2007_trash2treasure;
 
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.widget.SwitchCompat;
-import androidx.cardview.widget.CardView;
 
 import com.squareup.picasso.Picasso;
 
@@ -43,13 +41,11 @@ public class ProfileAdapter {
         Picasso.get().load(userProfile.getImagePath()).error(R.drawable.ic_launcher_foreground).into(profileImage);
         profileName.setText(userProfile.getName());
         profileEmail.setText(userProfile.getEmail());
-        profilePassword.setText(userProfile.getUnhashPassword());
+        profilePassword.setText(userProfile.maskedPassword());
         profilePhone.setText(userProfile.getPhone());
         profileAddress.setText(userProfile.getAddress());
         profileGender.setText(userProfile.getGender());
         profileDOB.setText(userProfile.getDateOfBirth());
         toggleNotification.setChecked(userProfile.isAllowNoti());
     }
-
-
 }

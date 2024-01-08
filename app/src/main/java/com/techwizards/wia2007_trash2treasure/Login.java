@@ -60,8 +60,8 @@ public class Login extends AppCompatActivity {
                 String enteredPasswordHash = profileItem.hashPassword(ETPassword.getText().toString());
 
                 System.out.println("Entered Hash: " + enteredPasswordHash);
-                System.out.println("Firebase Hash: " + profileItem.password);
-                if (enteredPasswordHash.equals(profileItem.password)) {
+                System.out.println("Firebase Hash: " + profileItem.getPasswords().get("hashed"));
+                if (enteredPasswordHash.equals(profileItem.getPasswords().get("hashed"))) {
                     passwordCorrect = true;
                     status = true;
 

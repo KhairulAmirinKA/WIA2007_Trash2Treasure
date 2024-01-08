@@ -42,6 +42,8 @@ public class RegisterDetail extends Fragment {
 
     ProfileItem newProfile;
 
+    DataManager dataManager = DataManager.getInstance();
+
     public RegisterDetail() {
         // Required empty public constructor
     }
@@ -196,8 +198,8 @@ public class RegisterDetail extends Fragment {
             @Override
             public void onClick(View v) {
                 newProfile = new ProfileItem("https://cdn-icons-png.flaticon.com/512/3135/3135715.png", bundle.getString("name"), bundle.getString("email"), bundle.getString("password"), bundle.getString("phone"), "Malaysia", "Undefined", "20/10/2000", false, 100);
-                DataManager.getInstance().addProfile(newProfile);
-                DataManager.getInstance().save(getContext());
+                dataManager.addProfile(newProfile);
+                dataManager.save(getContext());
                 getActivity().finish();
             }
         });

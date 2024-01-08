@@ -84,6 +84,7 @@ public class EditProfileFragment extends Fragment {
 
     //when user clicks Save btn
     private void saveNewProfile(View view) {
+        ProfileItem currentProfile = dataManager.currentUser.getCurrentUser();
 
         EditText ETEditProfileName = view.findViewById(R.id.ETEditProfileName);
         EditText ETEditProfileEmail = view.findViewById(R.id.ETEditProfileEmail);
@@ -112,10 +113,10 @@ public class EditProfileFragment extends Fragment {
 
         String newDob= ETEditDob.getText().toString();
         boolean newAllowNoti = SCEditAllowNoti.isChecked();
-        int newPoint = dataManager.currentUser.getCurrentUser().getPoints();
+        int newPoint = currentProfile.getPoints();
 
         //generate new profile
-        ProfileItem updatedProfile = new ProfileItem(newImagePath, newName, newEmail,newPassword, newPhone, newAddress, newGender, newDob, newAllowNoti, newPoint);
+        ProfileItem updatedProfile = new ProfileItem(newImagePath, newName, newEmail, newPassword.equals(currentProfile.getPasswords().get("plain")) ? currentProfile.getPasswords().get("plain") : newPassword, newPhone, newAddress, newGender, newDob, newAllowNoti, newPoint);
 
         dataManager.updateProfile(updatedProfile);
         dataManager.save(getContext());

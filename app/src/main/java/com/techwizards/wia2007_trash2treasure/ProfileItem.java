@@ -13,8 +13,7 @@ public class ProfileItem {
     String imagePath;
     String name;
     String email;
-    String password;
-    String unhashPassword;
+    Map<String, String> passwords = new HashMap<>();
     String phone;
     String address;
     String gender;
@@ -22,7 +21,6 @@ public class ProfileItem {
     boolean allowNoti;
 
     int points;
-    private ProfileItem instance;
 
     public ProfileItem() {}
 
@@ -30,8 +28,8 @@ public class ProfileItem {
         this.imagePath = imagePath;
         this.name = name;
         this.email = email;
-        this.password = hashPassword(password);
-        this.unhashPassword = passwordMask(password);
+        this.passwords.put("plain", password);
+        this.passwords.put("hashed", hashPassword(password));
         this.phone = phone;
         this.address = address;
         this.gender = gender;
@@ -39,18 +37,6 @@ public class ProfileItem {
         this.allowNoti = allowNoti;
         this.points = points;
     }
-
-    //profile item for editing purpose. exclude password and points
-//    public ProfileItem(String imagePath, String name, String email, String phone, String address, String gender, String dateOfBirth, boolean allowNoti) {
-//        this.imagePath = imagePath;
-//        this.name = name;
-//        this.email = email;
-//        this.phone = phone;
-//        this.address = address;
-//        this.gender = gender;
-//        this.dateOfBirth = dateOfBirth;
-//        this.allowNoti = allowNoti;
-//    }
 
     public String getImagePath() {
         return imagePath;
@@ -64,8 +50,8 @@ public class ProfileItem {
         return email;
     }
 
-    public String getPassword() {
-        return password;
+    public Map<String, String> getPasswords() {
+        return passwords;
     }
 
     public String getPhone() {
@@ -92,8 +78,8 @@ public class ProfileItem {
         return points;
     }
 
-    public String getUnhashPassword() {
-        return unhashPassword;
+    public String maskedPassword() {
+        return passwordMask(this.passwords.get("plain"));
     }
 
     public String passwordMask(String password) {
@@ -105,7 +91,7 @@ public class ProfileItem {
     public Map<String, Object> toMap() {
         Gson gson = new Gson();
         String json = gson.toJson(this);
-
+        System.out.println(json);
         Type type = new TypeToken<HashMap<String, Object>>() {}.getType();
         return gson.fromJson(json, type);
     }

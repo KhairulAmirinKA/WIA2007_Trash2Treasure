@@ -42,7 +42,7 @@ public class ProfileAdapter_ForEdit {
         Picasso.get().load(userProfile.getImagePath()).error(R.drawable.ic_launcher_foreground).into(IVEditProfileImage);
         ETEditProfileName.setText(userProfile.getName());
         ETEditProfileEmail.setText(userProfile.getEmail());
-        ETEditProfilePassword.setText(userProfile.getUnhashPassword());
+        ETEditProfilePassword.setText(userProfile.maskedPassword());
         ETEditPhone.setText(userProfile.getPhone());
         ETEditAddress.setText(userProfile.getAddress());
 
