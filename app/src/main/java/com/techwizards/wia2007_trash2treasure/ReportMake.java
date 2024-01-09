@@ -1,11 +1,17 @@
 package com.techwizards.wia2007_trash2treasure;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.Navigation;
 
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,7 +48,9 @@ public class ReportMake extends Fragment {
         btnDismiss.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(view).popBackStack();
+
+                //ask user's confirmation to exit without submitting report
+                showConfirmationDialog(view);
             }
         });
 
@@ -72,6 +80,42 @@ public class ReportMake extends Fragment {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         SpinnerReportLocalAuthority.setAdapter(adapter);
+    }
+
+    //show confirmation dialog when user wants to back
+    private void showConfirmationDialog(View view){
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext() );
+
+        builder.setTitle("Discard Report");
+
+        builder.setMessage("Are you sure you want to discard report? Any unsubmitted report will be lost.");
+
+        //yes btn
+        String positiveText= "Yes";
+        SpannableString spannableString = new SpannableString(positiveText);
+
+        //yes btn to become red
+        spannableString.setSpan(new ForegroundColorSpan(Color.RED), 0, positiveText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        builder.setPositiveButton(spannableString, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                //go back to report main page
+                Navigation.findNavController(view).popBackStack();
+            }
+        });
+
+        //no btn
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
 
