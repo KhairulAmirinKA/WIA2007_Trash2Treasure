@@ -27,6 +27,8 @@ public class Volunteer extends Fragment {
     private VolunteerAdapter volunteerAdapter;
     private Spinner categories;
     TextView TVNoProjects;
+    RadioGroup radioGroup;
+    Filter currentFilter = Filter.TRENDING;
 
     public Volunteer() {}
 
@@ -57,36 +59,36 @@ public class Volunteer extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(volunteerAdapter);
 
-        RadioGroup radioGroup = view.findViewById(R.id.RGVolunteer);
+        radioGroup = view.findViewById(R.id.RGVolunteer);
+        updateAdapterData();
 
         categories.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                updateAdapterData();
-
-                updateRadioButtonListener(radioGroup);
+                filterVolunteerList(currentFilter);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                updateAdapterData();
 
-                updateRadioButtonListener(radioGroup);
             }
         });
+
+        updateRadioButtonListener();
 
         return view;
     }
 
-    private void updateRadioButtonListener(RadioGroup radioGroup) {
+    private void updateRadioButtonListener() {
         radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
             if (checkedId == R.id.RBVTrending) {
-                filterVolunteerList(Filter.TRENDING);
+                currentFilter = Filter.TRENDING;
             } else if (checkedId == R.id.RBVUpcoming) {
-                filterVolunteerList(Filter.UPCOMING);
+                currentFilter = Filter.UPCOMING;
             } else if (checkedId == R.id.RBVOngoing) {
-                filterVolunteerList(Filter.ONGOING);
+                currentFilter = Filter.ONGOING;
             }
+            filterVolunteerList(currentFilter);
         });
 
         ((RadioButton) radioGroup.getChildAt(0)).setChecked(true);
@@ -208,7 +210,7 @@ public class Volunteer extends Fragment {
             }
         }
 
-        if (filteredList.isEmpty() || volunteerItems.isEmpty()) {
+        if (filteredList.isEmpty()) {
             String selectedCategory = categories.getSelectedItem().toString();
             String filterText = getFilterText(filter);
             String message = "No projects available in " + selectedCategory + ": " + filterText;
