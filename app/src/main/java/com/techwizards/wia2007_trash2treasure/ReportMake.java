@@ -3,12 +3,16 @@ package com.techwizards.wia2007_trash2treasure;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+
+import net.steamcrafted.materialiconlib.MaterialIconView;
 
 public class ReportMake extends Fragment {
     public ReportMake() {
@@ -32,6 +36,23 @@ public class ReportMake extends Fragment {
 
         //users can choose the local authority from drop down list
         handleLocalAuthoritySpinner(view);
+
+        //back button
+        MaterialIconView btnDismiss= view.findViewById(R.id.BtnDismiss);
+        btnDismiss.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).popBackStack();
+            }
+        });
+
+        //map
+        FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
+
+        Maps maps = new Maps();
+        fragmentTransaction.replace(R.id.FCVComplaintLocation, maps);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
 
         return view;
     }
