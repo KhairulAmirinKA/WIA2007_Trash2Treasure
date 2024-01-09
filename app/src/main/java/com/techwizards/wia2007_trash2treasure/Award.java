@@ -3,11 +3,14 @@ package com.techwizards.wia2007_trash2treasure;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import net.steamcrafted.materialiconlib.MaterialIconView;
 
 public class Award extends Fragment {
 
@@ -24,6 +27,14 @@ public class Award extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_award, container, false);
+
+        MaterialIconView btnDismiss = view.findViewById(R.id.BtnDismiss);
+        btnDismiss.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(view).popBackStack();
+            }
+        });
 
         TextView TVAwardPoints = view.findViewById(R.id.TVAwardUserPoints);
         String pointText = dataManager.currentUser.getCurrentUser().getPoints() + " ⭐";
