@@ -43,6 +43,7 @@ public class Profile extends Fragment {
         userProfile = dataManager.currentUser.getCurrentUser();
         profileAdapter.populateViews(userProfile);
 
+        //click reward icon besides the Profile TextView
         MaterialIconView reward = view.findViewById(R.id.BtnProfileReward);
         reward.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,6 +52,7 @@ public class Profile extends Fragment {
             }
         });
 
+        //click the logout
         Button logOut = view.findViewById(R.id.BtnProfileLogOut);
         logOut.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,8 +64,23 @@ public class Profile extends Fragment {
             }
         });
 
+
+
+        //edit profile
+        Button BtnProfileEdit= view.findViewById(R.id.BtnProfileEdit);
+        BtnProfileEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //it will go to edit profile fragment
+                Navigation.findNavController(view).navigate(R.id.DestEditProfile);
+            }
+        });
+
+
+
         return view;
-    }
+    } //oncreate view
 
     private void changeLogState() {
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);

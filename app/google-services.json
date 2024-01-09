@@ -12,7 +12,20 @@
           "package_name": "com.techwizards.wia2007_trash2treasure"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "615997997593-i1op10mhjqtpt1ifrh02oroneh80gug7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.techwizards.wia2007_trash2treasure",
+            "certificate_hash": "fdbff92d4b11b12b5d7e976f59b9e2f12188f636"
+          }
+        },
+        {
+          "client_id": "615997997593-ul9ibn2r5u1b3seqvme2qhgvcqoold75.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyB_p4dynburis7Yzs7FDYVXKMs2_9WiUw0"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "615997997593-ul9ibn2r5u1b3seqvme2qhgvcqoold75.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

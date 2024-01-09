@@ -1,8 +1,11 @@
 package com.techwizards.wia2007_trash2treasure;
 
+import android.app.Activity;
+import android.content.Context;
+import android.widget.Toast;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 

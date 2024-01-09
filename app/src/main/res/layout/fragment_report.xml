@@ -11,12 +11,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:gravity="center"
+        android:gravity="top"
         android:layout_gravity="center"
-        android:padding="40dp">
+        android:padding="30dp">
 
         <Button
-            android:id="@+id/new_report_button"
+            android:id="@+id/BtnNewReport"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginBottom="20dp"

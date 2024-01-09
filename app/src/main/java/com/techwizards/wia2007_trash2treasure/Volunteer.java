@@ -44,8 +44,8 @@ public class Volunteer extends Fragment {
         TVNoProjects = view.findViewById(R.id.TVVolunteerNoProjects);
 
         categories = view.findViewById(R.id.SVolunteerCategories);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(), R.array.volunteer_categories, R.layout.volunteer_categories_item_row_view);
-        adapter.setDropDownViewResource(R.layout.volunteer_categories_item_row_view);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(), R.array.volunteer_categories, R.layout.text_only_item_view);
+        adapter.setDropDownViewResource(R.layout.text_only_item_view);
         categories.setAdapter(adapter);
 
         categories.setSelection(0);

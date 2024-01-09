@@ -6,7 +6,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.widget.SwitchCompat;
-import androidx.cardview.widget.CardView;
 
 import com.squareup.picasso.Picasso;
 
@@ -35,13 +34,14 @@ public class ProfileAdapter {
         toggleNotification = rootView.findViewById(R.id.ToggleProfileNotification);
         editProfileButton = rootView.findViewById(R.id.BtnProfileEdit);
         logOutButton = rootView.findViewById(R.id.BtnProfileLogOut);
+
     }
 
     public void populateViews(ProfileItem userProfile) {
         Picasso.get().load(userProfile.getImagePath()).error(R.drawable.ic_launcher_foreground).into(profileImage);
         profileName.setText(userProfile.getName());
         profileEmail.setText(userProfile.getEmail());
-        profilePassword.setText(userProfile.getUnhashPassword());
+        profilePassword.setText(userProfile.maskedPassword());
         profilePhone.setText(userProfile.getPhone());
         profileAddress.setText(userProfile.getAddress());
         profileGender.setText(userProfile.getGender());

@@ -5,19 +5,24 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+
+import net.steamcrafted.materialiconlib.MaterialIconView;
 
 import java.io.IOException;
 import java.util.List;
@@ -58,6 +63,14 @@ public class Home extends Fragment {
             }
             TVUserName.setText(textName);
 
+            CardView btnNotification = view.findViewById(R.id.BtnHomeNotification);
+            btnNotification.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Navigation.findNavController(view).navigate(R.id.DestNotifications);
+                }
+            });
+
             mapFragment = new Maps();
             FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
             transaction.replace(R.id.MapHomeTruckTracker, mapFragment);
@@ -68,6 +81,33 @@ public class Home extends Fragment {
             fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity());
 
             getLocation();
+
+            //click the hwps
+            Button btnHWPS = view.findViewById(R.id.BtnHomeWasteSchedule);
+            btnHWPS.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Navigation.findNavController(view).navigate(R.id.DestHWPS);
+                }
+            });
+
+            //click the recycled
+            Button btnRecycled = view.findViewById(R.id.BtnHomeRecycledItem);
+            btnRecycled.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Navigation.findNavController(view).navigate(R.id.DestRecycled);
+                }
+            });
+
+            //click the nearby bin
+            Button btnHomeNearbyBin = view.findViewById(R.id.BtnHomeNearbyBin);
+            btnHomeNearbyBin.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Navigation.findNavController(view).navigate(R.id.DestNearbyRecyclingBin);
+                }
+            });
 
             return view;
         } catch (Exception e) {

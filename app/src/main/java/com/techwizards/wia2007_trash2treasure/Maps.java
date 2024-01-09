@@ -55,6 +55,7 @@ public class Maps extends Fragment {
 
         mapView = (MapView) view.findViewById(R.id.MVTruckTracker);
         mapView.setTileSource(TileSourceFactory.MAPNIK);
+        mapView.getController().setCenter(new GeoPoint(3.105506, 101.6617209));
         mapView.getController().setZoom(12.0);
 
         return view;
@@ -62,6 +63,7 @@ public class Maps extends Fragment {
 
     public void updateMapLocation(double latitude, double longitude) {
         if (mapView != null) {
+            System.out.println("Location ->" + latitude + " : " + longitude);
             mapView.getController().setCenter(new GeoPoint(latitude, longitude));
             mapView.getController().setZoom(12.0);
 
