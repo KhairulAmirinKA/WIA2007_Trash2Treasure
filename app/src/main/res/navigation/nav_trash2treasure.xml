@@ -27,7 +27,11 @@
         android:id="@+id/DestCommunity"
         android:name="com.techwizards.wia2007_trash2treasure.Community"
         android:label="fragment_community"
-        tools:layout="@layout/fragment_community" />
+        tools:layout="@layout/fragment_community" >
+        <action
+            android:id="@+id/DestJoinCommunity"
+            app:destination="@id/DestJoinCommunity" />
+    </fragment>
     <fragment
         android:id="@+id/DestVolunteer"
         android:name="com.techwizards.wia2007_trash2treasure.Volunteer"
@@ -89,4 +93,9 @@
         android:name="com.techwizards.wia2007_trash2treasure.RecycledItemPickup"
         android:label="fragment_recycled_item_pickup"
         tools:layout="@layout/fragment_recycled_item_pickup" />
+    <fragment
+        android:id="@+id/DestJoinCommunity"
+        android:name="com.techwizards.wia2007_trash2treasure.CommunityForum"
+        android:label="fragment_community_forum"
+        tools:layout="@layout/fragment_community_forum" />
 </navigation>

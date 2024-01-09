@@ -8,11 +8,12 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
-public class Community extends Fragment {
+import net.steamcrafted.materialiconlib.MaterialIconView;
 
-    public Community() {}
+public class CommunityForum extends Fragment {
+
+    public CommunityForum() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -23,13 +24,13 @@ public class Community extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_community, container, false);
+        View view = inflater.inflate(R.layout.fragment_community_forum, container, false);
 
-        Button btnJoinCommunity = view.findViewById(R.id.BtnCommunityJoinCommunity);
-        btnJoinCommunity.setOnClickListener(new View.OnClickListener() {
+        MaterialIconView btnDismiss = view.findViewById(R.id.BtnDismiss);
+        btnDismiss.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(view).navigate(R.id.DestJoinCommunity);
+                Navigation.findNavController(view).popBackStack();
             }
         });
 
