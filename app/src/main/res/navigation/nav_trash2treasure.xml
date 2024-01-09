@@ -12,13 +12,16 @@
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/DestNotifications"
-            app:destination="@id/notifications" />
+            app:destination="@id/DestNotifications" />
         <action
-            android:id="@+id/action_DestHome_to_fragmentNearbyRecyclingBin"
+            android:id="@+id/DestNearbyRecyclingBin"
             app:destination="@id/DestNearbyRecyclingBin" />
         <action
             android:id="@+id/DestHWPS"
-            app:destination="@id/householdWastePickupSchedule" />
+            app:destination="@id/DestHWPS" />
+        <action
+            android:id="@+id/DestRecycled"
+            app:destination="@id/DestRecycled" />
     </fragment>
     <fragment
         android:id="@+id/DestCommunity"
@@ -36,7 +39,7 @@
         android:label="fragment_report"
         tools:layout="@layout/fragment_report" >
         <action
-            android:id="@+id/NewReport"
+            android:id="@+id/DestReportMake"
             app:destination="@id/DestReportMake" />
     </fragment>
     <fragment
@@ -67,7 +70,7 @@
         android:label="fragment_edit_profile"
         tools:layout="@layout/fragment_edit_profile" />
     <fragment
-        android:id="@+id/notifications"
+        android:id="@+id/DestNotifications"
         android:name="com.techwizards.wia2007_trash2treasure.Notifications"
         android:label="fragment_notifications"
         tools:layout="@layout/fragment_notifications" />
@@ -77,8 +80,13 @@
         android:label="fragment_nearby_recycling_bin"
         tools:layout="@layout/fragment_nearby_recycling_bin" />
     <fragment
-        android:id="@+id/householdWastePickupSchedule"
+        android:id="@+id/DestHWPS"
         android:name="com.techwizards.wia2007_trash2treasure.HouseholdWastePickupSchedule"
         android:label="fragment_household_waste_pickup_schedule"
         tools:layout="@layout/fragment_household_waste_pickup_schedule" />
+    <fragment
+        android:id="@+id/DestRecycled"
+        android:name="com.techwizards.wia2007_trash2treasure.RecycledItemPickup"
+        android:label="fragment_recycled_item_pickup"
+        tools:layout="@layout/fragment_recycled_item_pickup" />
 </navigation>

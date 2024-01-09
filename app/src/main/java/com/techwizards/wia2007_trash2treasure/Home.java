@@ -91,6 +91,15 @@ public class Home extends Fragment {
                 }
             });
 
+            //click the recycled
+            Button btnRecycled = view.findViewById(R.id.BtnHomeRecycledItem);
+            btnRecycled.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Navigation.findNavController(view).navigate(R.id.DestRecycled);
+                }
+            });
+
             //click the nearby bin
             Button btnHomeNearbyBin = view.findViewById(R.id.BtnHomeNearbyBin);
             btnHomeNearbyBin.setOnClickListener(new View.OnClickListener() {

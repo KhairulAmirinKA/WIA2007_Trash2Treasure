@@ -18,4 +18,5 @@
     <string name="house_type">House Type</string>
     <string name="view_full_schedule">View Full Schedule</string>
     <string name="set_reminder">Set Reminder</string>
+    <string name="recycled_item_pickup">Recycled Item Pickup</string>
 </resources>

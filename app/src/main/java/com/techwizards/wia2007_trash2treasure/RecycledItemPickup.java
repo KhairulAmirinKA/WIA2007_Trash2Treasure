@@ -16,12 +16,12 @@ import net.steamcrafted.materialiconlib.MaterialIconView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HouseholdWastePickupSchedule extends Fragment {
+public class RecycledItemPickup extends Fragment {
 
     RecyclerView recyclerView;
-    HWPSHouseTypeAdapter adapter;
+    RecycledItemPickupAdapter adapter;
 
-    public HouseholdWastePickupSchedule() {}
+    public RecycledItemPickup() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -32,7 +32,7 @@ public class HouseholdWastePickupSchedule extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_household_waste_pickup_schedule, container, false);
+        View view = inflater.inflate(R.layout.fragment_recycled_item_pickup, container, false);
 
         MaterialIconView btnDismiss = view.findViewById(R.id.BtnDismiss);
         btnDismiss.setOnClickListener(new View.OnClickListener() {
@@ -42,24 +42,25 @@ public class HouseholdWastePickupSchedule extends Fragment {
             }
         });
 
-        recyclerView = view.findViewById(R.id.RVHWPSCollection);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView = view.findViewById(R.id.RVRIPSchedule);
+        adapter = new RecycledItemPickupAdapter(getScheduleList());
 
-        adapter = new HWPSHouseTypeAdapter(getCollection());
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
 
         return view;
     }
 
-    private List<HWPSItem> getCollection() {
-        List<HWPSItem> items = new ArrayList<>();
+    private List<RecyIPItem> getScheduleList() {
+        List<RecyIPItem> items = new ArrayList<>();
 
-        List<HWPSItem.CollectionType> collectionTypes = new ArrayList<>();
-        collectionTypes.add(new HWPSItem.CollectionType("Domestic Waste", "Ecery Thursday", "27 May", "bin"));
-        collectionTypes.add(new HWPSItem.CollectionType("Bulk Garbage", "Every Friday", "28 May", "eco"));
+        List<String> types = new ArrayList<>();
+        types.add("Plastic and Metal");
+        types.add("Paper");
 
-        items.add(new HWPSItem("Landed Residential House", collectionTypes));
-        items.add(new HWPSItem("Multi-Storey Residential House", collectionTypes));
+        items.add(new RecyIPItem("17 January", types));
+        items.add(new RecyIPItem("20 January", types));
+        items.add(new RecyIPItem("24 January", types));
 
         return items;
     }
