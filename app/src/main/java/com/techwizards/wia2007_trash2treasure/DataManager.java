@@ -22,6 +22,7 @@ public class DataManager {
     //objects to manage data
     public CurrentUser currentUser;
     public List<ProfileItem> profileItems = new ArrayList<>(); //list of profile items
+    public List<ReportItem> reportItems = new ArrayList<>(); //list of report items
 
     //fetch from firebase
     public void fetchProfile() {
@@ -47,7 +48,6 @@ public class DataManager {
 
     //add new profile
     public void addProfile(ProfileItem newProfile) {
-
         //add profile item to local list
         profileItems.add(newProfile);
         firebaseService.saveUserProfile(newProfile, task -> {
@@ -88,6 +88,39 @@ public class DataManager {
         }
     }
 
+    public void fetchReport() {
+        firebaseService.fetchReports(task -> {
+            if (task.isSuccessful()) {
+                for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                    ReportItem reportItem = documentSnapshot.toObject(ReportItem.class);
+                    reportItems.add(reportItem);
+                }
+                System.out.println("FirebaseService: Fetch Reports Success!");
+            } else {
+                Exception exception = task.getException();
+                if (exception != null) {
+                    exception.printStackTrace();
+                }
+            }
+        });
+    }
+
+    public void addNewReport(ReportItem reportItem) {
+
+        //add report item to local list
+        reportItems.add(reportItem);
+        firebaseService.addNewReport(reportItem, task -> {
+            if (task.isSuccessful()) {
+                System.out.println("FirebaseService: Add New Report Success!");
+            } else {
+                Exception exception = task.getException();
+                if (exception != null) {
+                    exception.printStackTrace();
+                }
+            }
+        });
+    }
+
     public static synchronized DataManager getInstance() {
         if (instance == null) {
             instance = new DataManager();
@@ -97,6 +130,7 @@ public class DataManager {
 
     public DataManager() { //fetch profile when instance of DataManager is created
         fetchProfile();
+        fetchReport();
     }
 
     //load data from SharedPreferences

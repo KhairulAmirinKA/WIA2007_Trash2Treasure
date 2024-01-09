@@ -11,9 +11,11 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 public class FirebaseService {
     private static final String PROFILES_COLLECTION = "user_profiles";
+    private static final String REPORT_COLLECTION = "reports";
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private final CollectionReference profileCollection = db.collection((PROFILES_COLLECTION));
+    private final CollectionReference profileCollection = db.collection(PROFILES_COLLECTION);
+    private final CollectionReference reportCollection = db.collection(REPORT_COLLECTION);
 
     private static FirebaseService instance;
 
@@ -37,5 +39,18 @@ public class FirebaseService {
 
     public void fetchUserProfiles(OnCompleteListener<QuerySnapshot> onCompleteListener) {
         profileCollection.get().addOnCompleteListener(onCompleteListener);
+    }
+
+    public void addNewReport(ReportItem reportItem, OnCompleteListener<Void> onCompleteListener) {
+        String id = reportItem.id.toString();
+        if (!id.isEmpty()) {
+            reportCollection.document(id)
+                    .set(reportItem.toMap())
+                    .addOnCompleteListener(onCompleteListener);
+        }
+    }
+
+    public void fetchReports(OnCompleteListener<QuerySnapshot> onCompleteListener) {
+        reportCollection.get().addOnCompleteListener(onCompleteListener);
     }
 }

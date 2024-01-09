@@ -23,6 +23,8 @@ public class Report extends Fragment {
     private ReportAdapter reportAdapter;
     private RadioGroup radioGroup;
 
+    DataManager dataManager = DataManager.getInstance();
+
     public Report() {
         // Required empty public constructor
     }
@@ -73,35 +75,9 @@ public class Report extends Fragment {
     private List<ReportItem> generateReportItems() {
         List<ReportItem> reportItemList = new ArrayList<>();
 
-        reportItemList.add(new ReportItem(
-                "Improper Disposal at Public Park",
-                "Littering",
-                "Taman Negara Park, Kuala Lumpur",
-                "John Doe",
-                "Pending",
-                "19-11-2023",
-                "10:45 AM"
-        ));
-
-        reportItemList.add(new ReportItem(
-                "Illegal Dumping in Residential Area",
-                "Illegal Dumping",
-                "Jalan Residential, Penang",
-                "Jane Smith",
-                "In Progress",
-                "19-11-2023",
-                "02:15 PM"
-        ));
-
-        reportItemList.add(new ReportItem(
-                "Overflowing Bin at Food Court",
-                "Overflowing Bin",
-                "Petaling Jaya Food Court, Selangor",
-                "Ahmad Ibrahim",
-                "Completed",
-                "19-11-2023",
-                "03:30 PM"
-        ));
+        for (ReportItem item : dataManager.reportItems) {
+            reportItemList.add(item);
+        }
 
         return reportItemList;
     }

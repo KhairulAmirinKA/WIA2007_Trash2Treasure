@@ -16,18 +16,31 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 
 import net.steamcrafted.materialiconlib.MaterialIconView;
 
+import java.sql.Time;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class ReportMake extends Fragment {
+
+    String[] options;
+    Spinner SpinnerReportLocalAuthority;
+    RadioGroup RGReportType;
+    EditText ETReportDescription;
+    EditText ETReportAddress;
+
+    DataManager dataManager = DataManager.getInstance();
     public ReportMake() {
         // Required empty public constructor
-    }
-
-    public static ReportMake newInstance() {
-        ReportMake fragment = new ReportMake();
-        return fragment;
     }
 
     @Override
@@ -54,6 +67,10 @@ public class ReportMake extends Fragment {
             }
         });
 
+        RGReportType = view.findViewById(R.id.RGReportMakeType);
+        ETReportDescription = view.findViewById(R.id.ETReportDescription);
+        ETReportAddress = view.findViewById(R.id.ETReportAddress);
+
         //map
         FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
 
@@ -62,16 +79,50 @@ public class ReportMake extends Fragment {
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
 
+        Button btnSubmit = view.findViewById(R.id.BtnReportSubmit);
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createReport();
+                Navigation.findNavController(view).popBackStack();
+            }
+        });
+
         return view;
     }
 
+    private void createReport() {
+        SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat time = new SimpleDateFormat("HH:mm");
+
+        int indexSpinner = SpinnerReportLocalAuthority.getSelectedItemPosition();
+        String localAuth = options[indexSpinner];
+
+        Pattern pattern = Pattern.compile("[a-z]");
+        Matcher matcher = pattern.matcher(localAuth.replace(" ", ""));
+        String title = date.format(new Date()).split("/")[2] + "/MBSA/10/13/0015-" + matcher.replaceAll("") + "-" + (dataManager.reportItems.size() + 1);
+
+        int indexType = RGReportType.getCheckedRadioButtonId();
+        String reportType = "";
+
+        if (indexType == R.id.RBReportComplaint) {
+            reportType = "Complaint";
+        } else if (indexType == R.id.RBReportSuggestion) {
+            reportType = "Suggestion";
+        }
+        String description = ETReportDescription.getText().toString();
+        String address = ETReportAddress.getText().toString();
+
+        ReportItem newReport = new ReportItem(title, reportType, description, address, dataManager.currentUser.getCurrentUser().getName(), "Pending", date.format(new Date()), time.format(new Date()));
+        dataManager.addNewReport(newReport);
+    }
 
     //handle the name local authority in dropdown spinner
     private void handleLocalAuthoritySpinner(View view) {
         //get spinner
-        Spinner SpinnerReportLocalAuthority= view.findViewById(R.id.SpinnerReportLocalAuthority);
+        SpinnerReportLocalAuthority = view.findViewById(R.id.SpinnerReportLocalAuthority);
 
-        String[] options= {"Majlis Bandaraya Shah Alam", "Majlis Bandaraya Petaling Jaya", "Majlis Bandaraya Kuala Selangor"};
+        options = new String[]{"Majlis Bandaraya Shah Alam", "Majlis Bandaraya Petaling Jaya", "Majlis Bandaraya Kuala Selangor"};
 
         ArrayAdapter<String> adapter= new ArrayAdapter<>(getActivity(),
                 android.R.layout.simple_spinner_dropdown_item
@@ -117,7 +168,4 @@ public class ReportMake extends Fragment {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
-
-
-
 }
