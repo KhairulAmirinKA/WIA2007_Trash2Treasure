@@ -13,4 +13,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="notifications">Notifications</string>
+    <string name="nearby_recycling_bin">Nearby Recycling Bin</string>
+    <string name="household_waste_pickup_schedule">Household Waste Pickup Schedule</string>
+    <string name="house_type">House Type</string>
+    <string name="view_full_schedule">View Full Schedule</string>
+    <string name="set_reminder">Set Reminder</string>
 </resources>

@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_DestHome_to_fragmentNearbyRecyclingBin"
             app:destination="@id/DestNearbyRecyclingBin" />
+        <action
+            android:id="@+id/DestHWPS"
+            app:destination="@id/householdWastePickupSchedule" />
     </fragment>
     <fragment
         android:id="@+id/DestCommunity"
@@ -70,7 +73,12 @@
         tools:layout="@layout/fragment_notifications" />
     <fragment
         android:id="@+id/DestNearbyRecyclingBin"
-        android:name="com.techwizards.wia2007_trash2treasure.FragmentNearbyRecyclingBin"
+        android:name="com.techwizards.wia2007_trash2treasure.NearbyRecyclingBin"
         android:label="fragment_nearby_recycling_bin"
         tools:layout="@layout/fragment_nearby_recycling_bin" />
+    <fragment
+        android:id="@+id/householdWastePickupSchedule"
+        android:name="com.techwizards.wia2007_trash2treasure.HouseholdWastePickupSchedule"
+        android:label="fragment_household_waste_pickup_schedule"
+        tools:layout="@layout/fragment_household_waste_pickup_schedule" />
 </navigation>

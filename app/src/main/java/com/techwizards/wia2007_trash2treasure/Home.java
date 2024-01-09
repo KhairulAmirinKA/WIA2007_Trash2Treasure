@@ -54,9 +54,6 @@ public class Home extends Fragment {
         try {
             View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-            //click the nearby bin
-            handleNearbyRecyclingBin(view);
-
             TVUserName = view.findViewById(R.id.TVHomeHi);
             String textName = "";
             if (dataManager != null){
@@ -85,27 +82,29 @@ public class Home extends Fragment {
 
             getLocation();
 
+            //click the hwps
+            Button btnHWPS = view.findViewById(R.id.BtnHomeWasteSchedule);
+            btnHWPS.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Navigation.findNavController(view).navigate(R.id.DestHWPS);
+                }
+            });
 
+            //click the nearby bin
+            Button btnHomeNearbyBin = view.findViewById(R.id.BtnHomeNearbyBin);
+            btnHomeNearbyBin.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Navigation.findNavController(view).navigate(R.id.DestNearbyRecyclingBin);
+                }
+            });
 
             return view;
         } catch (Exception e) {
             Log.e(getTag(), "onCreateView", e);
             throw e;
         }
-
-
-    }
-
-    //click the nearby bin
-    private static void handleNearbyRecyclingBin(View view) {
-        Button BtnHomeNearbyBin = view.findViewById(R.id.BtnHomeNearbyBin);
-
-        BtnHomeNearbyBin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.DestNearbyRecyclingBin);
-            }
-        });
     }
 
     private void getLocation() {
