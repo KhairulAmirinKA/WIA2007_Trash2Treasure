@@ -20,6 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:gravity="center"
+            android:layout_gravity="center"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="0dp"
@@ -42,7 +43,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="40dp"
+            android:layout_marginBottom="20dp"
             app:cardCornerRadius="15dp">
             <RadioGroup
                 android:id="@+id/RGVolunteer"
@@ -99,7 +100,7 @@
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textAlignment="center"
-            android:visibility="visible" />
+            android:visibility="gone" />
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
