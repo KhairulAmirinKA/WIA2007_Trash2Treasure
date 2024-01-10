@@ -64,7 +64,7 @@ public class Notifications extends Fragment {
         list.add(new NotificationsItem(
                 "Reminder",
                 "10:09 AM",
-                new Date().toString(),
+                "11/01/2024",
                 "Today's truck is expected to arrive around 14 minutes.")
         );
 

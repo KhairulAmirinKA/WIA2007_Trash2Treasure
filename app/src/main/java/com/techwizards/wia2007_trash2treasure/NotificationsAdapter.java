@@ -43,7 +43,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
             holder.isRead.setColorResource(R.color.red);
         }
         holder.textNotificationTitle.setText(item.getType());
-        holder.textNotificationTime.setText(item.getDate().compareTo(new Date().toString()) < 0 ? "Yesterday" : item.getTime());
+        holder.textNotificationTime.setText(item.getDate());
         holder.textNotificationBody.setText(item.getBody());
 
         holder.itemView.setOnClickListener(view -> {
