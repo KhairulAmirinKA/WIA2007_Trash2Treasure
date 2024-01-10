@@ -88,6 +88,7 @@ public class DataManager {
         }
     }
 
+    //fetch the report from Firebase
     public void fetchReport() {
         firebaseService.fetchReports(task -> {
             if (task.isSuccessful()) {
@@ -105,6 +106,7 @@ public class DataManager {
         });
     }
 
+    //add new report to the firebase
     public void addNewReport(ReportItem reportItem) {
 
         //add report item to local list
@@ -112,6 +114,7 @@ public class DataManager {
         firebaseService.addNewReport(reportItem, task -> {
             if (task.isSuccessful()) {
                 System.out.println("FirebaseService: Add New Report Success!");
+
             } else {
                 Exception exception = task.getException();
                 if (exception != null) {
@@ -128,9 +131,10 @@ public class DataManager {
         return instance;
     }
 
-    public DataManager() { //fetch profile when instance of DataManager is created
-        fetchProfile();
-        fetchReport();
+    public DataManager() { //methods to call when instance of DataManager is created
+        
+        fetchProfile(); //user profile
+        fetchReport(); //user report
     }
 
     //load data from SharedPreferences

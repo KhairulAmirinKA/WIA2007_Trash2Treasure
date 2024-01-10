@@ -11,6 +11,7 @@ import androidx.navigation.Navigation;
 
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import net.steamcrafted.materialiconlib.MaterialIconView;
 
@@ -79,22 +81,31 @@ public class ReportMake extends Fragment {
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
 
+        //clicks the submit btn
         Button btnSubmit = view.findViewById(R.id.BtnReportSubmit);
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createReport();
-                Navigation.findNavController(view).popBackStack();
+
+                //createReport will returns true if the report form is complete
+                if (createReport()){
+
+                    //once the reports are submitted to the db, user will go back to Report page
+                    //otherwise, they will stay in New Report section
+                    Navigation.findNavController(view).popBackStack();
+                }
+
             }
         });
 
         return view;
     }
 
-    private void createReport() {
+    private boolean createReport() {
         SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat time = new SimpleDateFormat("HH:mm");
 
+        //get the index of the authority
         int indexSpinner = SpinnerReportLocalAuthority.getSelectedItemPosition();
         String localAuth = options[indexSpinner];
 
@@ -102,6 +113,7 @@ public class ReportMake extends Fragment {
         Matcher matcher = pattern.matcher(localAuth.replace(" ", ""));
         String title = date.format(new Date()).split("/")[2] + "/MBSA/10/13/0015-" + matcher.replaceAll("") + "-" + (dataManager.reportItems.size() + 1);
 
+        //get id of the checked RadioButton
         int indexType = RGReportType.getCheckedRadioButtonId();
         String reportType = "";
 
@@ -110,11 +122,34 @@ public class ReportMake extends Fragment {
         } else if (indexType == R.id.RBReportSuggestion) {
             reportType = "Suggestion";
         }
+
+
+        //checks if the EditText is empty
+        //checks if reportType (value from RadioButton) is empty
+        if (!TextUtils.isEmpty(ETReportDescription.getText()) &&
+                !TextUtils.isEmpty(ETReportAddress.getText()) &&
+                !reportType.equals("")){
+
+        //extract the String from editText
         String description = ETReportDescription.getText().toString();
         String address = ETReportAddress.getText().toString();
 
         ReportItem newReport = new ReportItem(title, reportType, description, address, dataManager.currentUser.getCurrentUser().getName(), "Pending", date.format(new Date()), time.format(new Date()));
-        dataManager.addNewReport(newReport);
+
+        //add to the firebase
+            dataManager.addNewReport(newReport);
+
+            Toast.makeText(getContext(), "Report is successfully submitted", Toast.LENGTH_SHORT).show();
+
+            return true;
+        }
+
+        else {
+            //this means the report form is not complete. will not send to the database
+            Toast.makeText(getContext(), "Please provide the details", Toast.LENGTH_SHORT).show();
+        }
+
+return false; //false means the report will not submitted to the db
     }
 
     //handle the name local authority in dropdown spinner
