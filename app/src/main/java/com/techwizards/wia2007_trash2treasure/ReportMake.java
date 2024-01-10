@@ -111,7 +111,7 @@ public class ReportMake extends Fragment {
 
         Pattern pattern = Pattern.compile("[a-z]");
         Matcher matcher = pattern.matcher(localAuth.replace(" ", ""));
-        String title = date.format(new Date()).split("/")[2] + "/MBSA/10/13/0015-" + matcher.replaceAll("") + "-" + (dataManager.reportItems.size() + 1);
+        String title = date.format(new Date()).split("/")[2] + "/" + matcher.replaceAll("") + "/10/13/0015-KDSA-" + getIndexForLocalAuth(localAuth);
 
         //get id of the checked RadioButton
         int indexType = RGReportType.getCheckedRadioButtonId();
@@ -123,20 +123,16 @@ public class ReportMake extends Fragment {
             reportType = "Suggestion";
         }
 
-
         //checks if the EditText is empty
         //checks if reportType (value from RadioButton) is empty
-        if (!TextUtils.isEmpty(ETReportDescription.getText()) &&
-                !TextUtils.isEmpty(ETReportAddress.getText()) &&
-                !reportType.equals("")){
+        if (!TextUtils.isEmpty(ETReportDescription.getText()) && !TextUtils.isEmpty(ETReportAddress.getText()) && !reportType.equals("")) {
+            //extract the String from editText
+            String description = ETReportDescription.getText().toString();
+            String address = ETReportAddress.getText().toString();
 
-        //extract the String from editText
-        String description = ETReportDescription.getText().toString();
-        String address = ETReportAddress.getText().toString();
+            ReportItem newReport = new ReportItem(localAuth, title, reportType, description, address, dataManager.currentUser.getCurrentUser().getName(), "Pending", date.format(new Date()), time.format(new Date()));
 
-        ReportItem newReport = new ReportItem(title, reportType, description, address, dataManager.currentUser.getCurrentUser().getName(), "Pending", date.format(new Date()), time.format(new Date()));
-
-        //add to the firebase
+            //add to the firebase
             dataManager.addNewReport(newReport);
 
             Toast.makeText(getContext(), "Report is successfully submitted", Toast.LENGTH_SHORT).show();
@@ -149,7 +145,17 @@ public class ReportMake extends Fragment {
             Toast.makeText(getContext(), "Please provide the details", Toast.LENGTH_SHORT).show();
         }
 
-return false; //false means the report will not submitted to the db
+        return false; //false means the report will not submitted to the db
+    }
+
+    private int getIndexForLocalAuth(String localAuth) {
+        int count = 0;
+        for (ReportItem item : dataManager.reportItems) {
+            if (item.getLocalAuth().contains(localAuth)) {
+                count++;
+            }
+        }
+        return count + 1;
     }
 
     //handle the name local authority in dropdown spinner

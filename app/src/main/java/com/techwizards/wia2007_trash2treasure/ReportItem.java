@@ -11,6 +11,7 @@ import java.util.UUID;
 public class ReportItem {
     UUID id = UUID.randomUUID();
     private String reportTitle;
+    private String localAuth;
     private String reportType;
     private String reportDescription;
     private String address;
@@ -21,7 +22,8 @@ public class ReportItem {
 
     public ReportItem() {}
 
-    public ReportItem(String reportTitle, String reportType, String reportDescription, String address, String reporterName, String status, String reportDate, String reportTime) {
+    public ReportItem(String localAuth, String reportTitle, String reportType, String reportDescription, String address, String reporterName, String status, String reportDate, String reportTime) {
+        this.localAuth = localAuth;
         this.reportTitle = reportTitle;
         this.reportType = reportType;
         this.reportDescription = reportDescription;
@@ -38,6 +40,10 @@ public class ReportItem {
         System.out.println(json);
         Type type = new TypeToken<HashMap<String, Object>>() {}.getType();
         return gson.fromJson(json, type);
+    }
+
+    public String getLocalAuth() {
+        return localAuth;
     }
 
     public String getReportTitle() {
