@@ -11,16 +11,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#FFFFFF"
             android:gravity="center"
             android:orientation="horizontal"
-            android:paddingHorizontal="20dp"
-            android:paddingTop="20dp">
-
+            android:padding="20dp">
             <net.steamcrafted.materialiconlib.MaterialIconView
                 android:id="@+id/BtnDismiss"
                 android:layout_width="40dp"
@@ -30,7 +26,6 @@
                 android:focusable="true"
                 app:materialIcon="chevron_left"
                 app:materialIconColor="@color/black" />
-
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -43,80 +38,77 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:padding="20dp"
+            android:background="@drawable/box_with_shadow"
+            android:backgroundTint="@color/white"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:orientation="vertical">
-
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:gravity="center"
                 android:text="Need Assistance?"
-                android:textColor="#000000"
+                android:textColor="@color/black"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textView"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:gravity="center"
-                android:text="Any concerns or issue can be\ndirected at the hotline below: "
+                android:layout_marginTop="10dp"
+                android:text="Any concerns or issue can be directed at the hotline below:"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                android:textAlignment="center"/>
 
             <Button
                 android:id="@+id/BtnHotlineCall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:backgroundTint="#F44336"
-                android:gravity="center"
+                android:layout_marginVertical="20dp"
+                android:background="@drawable/box_with_shadow"
+                android:backgroundTint="@color/red"
                 android:padding="20dp"
                 android:text="1-800-88-2824"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/white"
                 android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/textView3"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:gravity="center"
                 android:text="Or contact us on Whatsapp at"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/TVHotlineWhatsApp"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:gravity="center"
+                android:layout_marginTop="10dp"
                 android:text="019-2742824"
-                android:textColor="#01564D"
-                android:textSize="24sp" />
-
+                android:textColor="@color/darkGreen"
+                android:textSize="24sp"
+                android:textStyle="bold"/>
 
             <ImageView
-                android:id="@+id/imageView3"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="60dp"
+                android:layout_marginTop="50dp"
                 android:src="@drawable/ic_baseline_access_time_24" />
 
             <TextView
-                android:id="@+id/textView6"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:gravity="center"
+                android:layout_marginTop="10dp"
                 android:text="Monday to Friday :\n  8 a.m - 8 p.m\n Saturday to Sunday :\n  8 a.m - 4 p.m"
                 android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textAlignment="center"/>
         </LinearLayout>
     </LinearLayout>
 </FrameLayout>
