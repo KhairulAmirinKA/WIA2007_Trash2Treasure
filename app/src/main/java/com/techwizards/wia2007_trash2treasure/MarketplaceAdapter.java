@@ -24,7 +24,7 @@ public class MarketplaceAdapter extends RecyclerView.Adapter<MarketplaceAdapter.
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.marketplace_item_row_view, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.community_product_item_row_view, parent, false);
         return new ViewHolder(view);
     }
 
@@ -50,9 +50,9 @@ public class MarketplaceAdapter extends RecyclerView.Adapter<MarketplaceAdapter.
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            productImage = itemView.findViewById(R.id.IVMarketplaceImage);
-            productName = itemView.findViewById(R.id.TVMarketplaceName);
-            productDescription = itemView.findViewById(R.id.TVMarketplaceDescription);
+            productImage = itemView.findViewById(R.id.IVCommunityProductImage);
+            productName = itemView.findViewById(R.id.TVCommunityProductName);
+            productDescription = itemView.findViewById(R.id.TVCommunityProductDesc);
         }
     }
 }
