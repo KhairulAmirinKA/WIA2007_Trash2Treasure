@@ -69,6 +69,18 @@ public class Report extends Fragment {
                 Navigation.findNavController(view).navigate(R.id.DestReportMake);
             }
         });
+
+
+        //hotline
+        Button BtnReportHotline = view.findViewById(R.id.BtnReportHotline);
+        BtnReportHotline.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.DestReportHotline);
+            }
+        });
+
+
         return view;
     }
 

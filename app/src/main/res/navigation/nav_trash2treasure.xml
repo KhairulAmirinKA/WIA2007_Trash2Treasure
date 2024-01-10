@@ -45,6 +45,9 @@
         <action
             android:id="@+id/DestReportMake"
             app:destination="@id/DestReportMake" />
+        <action
+            android:id="@+id/action_DestReport_to_reportHotline"
+            app:destination="@id/DestReportHotline" />
     </fragment>
     <fragment
         android:id="@+id/DestProfile"
@@ -67,7 +70,11 @@
         android:id="@+id/DestAward"
         android:name="com.techwizards.wia2007_trash2treasure.Award"
         android:label="fragment_award"
-        tools:layout="@layout/fragment_award" />
+        tools:layout="@layout/fragment_award" >
+        <action
+            android:id="@+id/action_DestAward_to_DestReport"
+            app:destination="@id/DestReport" />
+    </fragment>
     <fragment
         android:id="@+id/DestEditProfile"
         android:name="com.techwizards.wia2007_trash2treasure.EditProfileFragment"
@@ -98,4 +105,9 @@
         android:name="com.techwizards.wia2007_trash2treasure.CommunityForum"
         android:label="fragment_community_forum"
         tools:layout="@layout/fragment_community_forum" />
+    <fragment
+        android:id="@+id/DestReportHotline"
+        android:name="com.techwizards.wia2007_trash2treasure.ReportHotline"
+        android:label="fragment_report_hotline"
+        tools:layout="@layout/fragment_report_hotline" />
 </navigation>

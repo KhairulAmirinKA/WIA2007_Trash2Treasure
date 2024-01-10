@@ -8,6 +8,7 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import net.steamcrafted.materialiconlib.MaterialIconView;
@@ -39,6 +40,15 @@ public class Award extends Fragment {
         TextView TVAwardPoints = view.findViewById(R.id.TVAwardUserPoints);
         String pointText = dataManager.currentUser.getCurrentUser().getPoints() + " ⭐";
         TVAwardPoints.setText(pointText);
+
+        //complaint btn
+        Button BtnAwardComplaint = view.findViewById(R.id.BtnAwardComplaint);
+        BtnAwardComplaint.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.DestReport);
+            }
+        });
 
         return view;
     }
