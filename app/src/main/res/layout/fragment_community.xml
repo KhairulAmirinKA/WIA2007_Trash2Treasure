@@ -60,7 +60,7 @@
             <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="5dp"
                 android:scrollbars="horizontal">
                 <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="wrap_content"
@@ -69,6 +69,17 @@
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:listitem="@layout/community_product_item_row_view"/>
             </androidx.core.widget.NestedScrollView>
+            <TextView
+                android:id="@+id/BtnMoreProducts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="More Products"
+                android:textColor="@color/com_facebook_blue"
+                android:textSize="18sp"
+                android:textAlignment="textEnd"/>
 
             <TextView
                 android:layout_width="match_parent"

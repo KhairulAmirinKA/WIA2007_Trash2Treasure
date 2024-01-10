@@ -31,6 +31,9 @@
         <action
             android:id="@+id/DestJoinCommunity"
             app:destination="@id/DestJoinCommunity" />
+        <action
+            android:id="@+id/DestMarketplace"
+            app:destination="@id/DestMarketplace" />
     </fragment>
     <fragment
         android:id="@+id/DestVolunteer"
@@ -46,7 +49,7 @@
             android:id="@+id/DestReportMake"
             app:destination="@id/DestReportMake" />
         <action
-            android:id="@+id/action_DestReport_to_reportHotline"
+            android:id="@+id/DestReportHotline"
             app:destination="@id/DestReportHotline" />
     </fragment>
     <fragment
@@ -110,4 +113,9 @@
         android:name="com.techwizards.wia2007_trash2treasure.ReportHotline"
         android:label="fragment_report_hotline"
         tools:layout="@layout/fragment_report_hotline" />
+    <fragment
+        android:id="@+id/DestMarketplace"
+        android:name="com.techwizards.wia2007_trash2treasure.Marketplace"
+        android:label="frament_marketplace"
+        tools:layout="@layout/fragment_marketplace"/>
 </navigation>

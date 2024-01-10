@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class Community extends Fragment {
 
@@ -24,6 +25,14 @@ public class Community extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_community, container, false);
+
+        TextView btnMoreProducts = view.findViewById(R.id.BtnMoreProducts);
+        btnMoreProducts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(view).navigate(R.id.DestMarketplace);
+            }
+        });
 
         Button btnJoinCommunity = view.findViewById(R.id.BtnCommunityJoinCommunity);
         btnJoinCommunity.setOnClickListener(new View.OnClickListener() {
