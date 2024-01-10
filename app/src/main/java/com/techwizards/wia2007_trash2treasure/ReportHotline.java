@@ -73,24 +73,11 @@ public class ReportHotline extends Fragment {
         //remove non-digit
         String whatsAppNum= textView.getText().toString().replaceAll("\\D+","");
 
-        //Uri browserUri= Uri.parse("http://wa.me/6"+whatsAppNum);
-        Uri browserUri= Uri.parse("https://www.kosmo.com.my/");
+        Uri browserUri= Uri.parse("http://wa.me/6" + whatsAppNum);
 
         Intent browserIntent= new Intent(Intent.ACTION_VIEW);
         browserIntent.setData(browserUri);
-
-        if (getActivity()!=null &&
-                browserIntent.resolveActivity(getActivity().getPackageManager())!=null   ) {
-
-
-            startActivity(browserIntent);
-        }
-        else {
-            Toast.makeText(getContext(), "Cannot open WhatsApp", Toast.LENGTH_SHORT).show();
-        }
-
-
-
+        startActivity(browserIntent);
     }
 
     private void makeHotlineCall(Button button) {
