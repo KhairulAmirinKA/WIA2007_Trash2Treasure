@@ -71,11 +71,7 @@ public class Home extends Fragment {
                 }
             });
 
-            mapFragment = new Maps();
-            FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-            transaction.replace(R.id.MapHomeTruckTracker, mapFragment);
-            transaction.addToBackStack(null);
-            transaction.commit();
+            setupMapFragment();
 
             locationTextView = view.findViewById(R.id.TVHomeLocation);
             fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity());
@@ -114,6 +110,14 @@ public class Home extends Fragment {
             Log.e(getTag(), "onCreateView", e);
             throw e;
         }
+    }
+
+    private void setupMapFragment() {
+        mapFragment = new Maps();
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.replace(R.id.MapHomeTruckTracker, mapFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     private void getLocation() {

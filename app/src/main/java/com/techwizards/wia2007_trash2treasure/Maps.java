@@ -51,14 +51,20 @@ public class Maps extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_map, container, false);
 
-        Configuration.getInstance().setUserAgentValue("com.techwizards.wia2007_trash2treasure");
-
         mapView = (MapView) view.findViewById(R.id.MVTruckTracker);
-        mapView.setTileSource(TileSourceFactory.MAPNIK);
-        mapView.getController().setCenter(new GeoPoint(3.105506, 101.6617209));
-        mapView.getController().setZoom(12.0);
+        initializeMapView();
 
         return view;
+    }
+
+    private void initializeMapView() {
+        if (mapView != null) {
+            Configuration.getInstance().setUserAgentValue("com.techwizards.wia2007_trash2treasure");
+
+            mapView.setTileSource(TileSourceFactory.MAPNIK);
+            mapView.getController().setCenter(new GeoPoint(3.105506, 101.6617209));
+            mapView.getController().setZoom(12.0);
+        }
     }
 
     public void updateMapLocation(double latitude, double longitude) {
