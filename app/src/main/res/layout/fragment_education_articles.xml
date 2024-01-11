@@ -3,33 +3,122 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/gradient_background"
     tools:context=".EducationArticles">
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:gravity="top">
 
-        <TextView
-            android:id="@+id/TVEduArticleTitle"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:gravity="center"
+            android:paddingHorizontal="20dp"
+            android:paddingTop="20dp"
+            android:orientation="horizontal">
+            <net.steamcrafted.materialiconlib.MaterialIconView
+                android:id="@+id/BtnDismiss"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:materialIcon="chevron_left"
+                app:materialIconColor="@color/black"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Education Articles"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/textView6"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:layout_height="match_parent"
+            android:layout_margin="20dp"
+            android:scrollbars="vertical">
 
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Button" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="@drawable/box_with_shadow"
+                android:backgroundTint="@color/white"
+                android:gravity="top"
+                android:layout_gravity="center"
+                android:padding="20dp">
+
+                <TextView
+                    android:id="@+id/TVEduArticleTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Article Title"
+                    android:textSize="24sp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/IVEduArticle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/recycle_icon"
+                    android:layout_marginTop="10dp" />
+
+                <TextView
+                    android:id="@+id/TVEduArticleContents"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="This is the content"
+                    android:textColor="#000000"
+                    android:layout_marginTop="10dp"/>
+
+                <View
+                    android:id="@+id/divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/black" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:paddingTop="10dp">
+
+                    <TextView
+                        android:id="@+id/textView4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                        android:text="Is this article helpful? " />
+
+                    <ImageView
+                        android:id="@+id/IVLike"
+                        android:layout_width="30dp"
+                        android:layout_height="29dp"
+                        android:layout_weight="1"
+                        android:src="@drawable/ic_baseline_thumb_up_off_alt_24" />
+
+                    <ImageView
+                        android:id="@+id/IVDislike"
+                        android:layout_width="30dp"
+                        android:layout_height="29dp"
+                        android:layout_weight="1"
+                        android:src="@drawable/ic_baseline_thumb_down_off_alt_24" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </ScrollView>
+
     </LinearLayout>
 
 </FrameLayout>

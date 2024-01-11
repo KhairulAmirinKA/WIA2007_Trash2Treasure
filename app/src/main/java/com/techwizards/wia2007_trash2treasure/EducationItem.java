@@ -8,11 +8,15 @@ public class EducationItem {
 
     String eduDesc;
 
-    public EducationItem(String imagePath, String eduTitle, String eduDesc) {
+    String eduContents;
+
+    public EducationItem(String imagePath, String eduTitle, String eduDesc, String eduContents) {
         this.imagePath = imagePath;
         this.eduTitle = eduTitle;
         this.eduDesc = eduDesc;
+        this.eduContents = eduContents;
     }
+
 
     public String getImagePath() {
         return imagePath;
@@ -24,5 +28,9 @@ public class EducationItem {
 
     public String getEduDesc() {
         return eduDesc;
+    }
+
+    public String getEduContents() {
+        return eduContents;
     }
 }

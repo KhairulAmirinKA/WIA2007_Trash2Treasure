@@ -66,19 +66,22 @@ public class EducationResources extends Fragment {
         educationItems.add( new EducationItem(
                 "https://apicms.thestar.com.my/uploads/images/2023/02/25/1955922.jpg",
                 "Global Warming",
-                "bumi makin panas. huhu"
+                "bumi makin panas. huhu",
+                "contents"
         ));
 
         educationItems.add( new EducationItem(
                 "https://apicms.thestar.com.my/uploads/images/2023/02/25/1955922.jpg",
                 "Why Recycling?",
-                "sebab boleh dik"
+                "sebab boleh dik",
+                "content2"
         ));
 
         educationItems.add( new EducationItem(
                 "https://apicms.thestar.com.my/uploads/images/2023/02/25/1955922.jpg",
                 "Benefits of Reusing",
-                "selamatkan bumi"
+                "selamatkan bumi",
+                "contents3"
         ));
 
 

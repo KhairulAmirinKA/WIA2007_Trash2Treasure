@@ -21,6 +21,7 @@ import java.util.List;
 
 public class EducationAdapter extends RecyclerView.Adapter<EducationAdapter.ViewHolder> {
 
+    public static final String POSITION = "POSITION";
     private final List<EducationItem> educationItems ;
 
     public EducationAdapter(List<EducationItem> educationItems) {
@@ -56,9 +57,10 @@ public class EducationAdapter extends RecyclerView.Adapter<EducationAdapter.View
                 Bundle bundle = new Bundle();
 
                 //utk tahu position dlm List
-                bundle.putInt("POSITION", holder.getAdapterPosition() );
+                bundle.putInt(POSITION, holder.getAdapterPosition() );
 
                 //go to the fragment containing the articles of a topic.
+                //send data using Bundle to EducationArticles
                 Navigation.findNavController(view).navigate(R.id.DestEduArticles, bundle);
             }
         });
