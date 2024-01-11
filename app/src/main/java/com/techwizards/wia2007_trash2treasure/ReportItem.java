@@ -20,9 +20,12 @@ public class ReportItem {
     private String reportDate;
     private String reportTime;
 
+    private String imgPath;
+
     public ReportItem() {}
 
-    public ReportItem(String localAuth, String reportTitle, String reportType, String reportDescription, String address, String reporterName, String status, String reportDate, String reportTime) {
+    public ReportItem(String localAuth, String reportTitle, String reportType, String reportDescription, String address,
+                      String reporterName, String status, String reportDate, String reportTime, String imgPath) {
         this.localAuth = localAuth;
         this.reportTitle = reportTitle;
         this.reportType = reportType;
@@ -32,6 +35,7 @@ public class ReportItem {
         this.status = status;
         this.reportDate = reportDate;
         this.reportTime = reportTime;
+        this.imgPath= imgPath;
     }
 
     public Map<String, Object> toMap() {

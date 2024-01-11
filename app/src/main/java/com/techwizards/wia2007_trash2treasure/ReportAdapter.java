@@ -3,9 +3,11 @@ package com.techwizards.wia2007_trash2treasure;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -26,6 +28,15 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
+        //will go to the reportDetails fragment
+        holder.RLReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.DestReportDetails);
+            }
+        });
+
         ReportItem item = reportList.get(position);
 
         holder.textReportTitle.setText(item.getReportTitle());
@@ -51,9 +62,12 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ViewHolder
         TextView textReportDate;
         TextView textReportTime;
 
+        RelativeLayout RLReport; //layout for every report
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            RLReport = itemView.findViewById(R.id.RLReport);
             textReportTitle = itemView.findViewById(R.id.textReportTitle);
             textReportType = itemView.findViewById(R.id.textReportType);
             textAddress = itemView.findViewById(R.id.textAddress);

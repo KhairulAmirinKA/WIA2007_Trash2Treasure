@@ -42,7 +42,9 @@ import net.steamcrafted.materialiconlib.MaterialIconView;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -50,6 +52,7 @@ public class ReportMake extends Fragment {
 
     private static final int REQUEST_CODE_PICK_PHOTO = 101;
     private Uri selectedPhotoUri;
+    StorageReference imgRef;
 
     String[] options;
     Spinner SpinnerReportLocalAuthority;
@@ -151,7 +154,16 @@ public class ReportMake extends Fragment {
 
         StorageReference storageRef=storage.getReference();
 
-        StorageReference imgRef= storageRef.child("reportPhotos/"+ System.currentTimeMillis() );
+        //get current time
+        Calendar calendar = Calendar.getInstance();
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd_MM_HHmm", Locale.getDefault());
+        String timestamp= dateFormat.format(calendar.getTime());
+
+        //bina nama file
+        String fileName= dataManager.currentUser.getCurrentUser()+"_"+ timestamp;
+
+         imgRef= storageRef.child("reportPhotos/" + fileName);
 
         imgRef.putFile(selectedPhotoUri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -211,7 +223,15 @@ public class ReportMake extends Fragment {
                 uploadToFirebaseStorage();
             }
 
-            ReportItem newReport = new ReportItem(localAuth, title, reportType, description, address, dataManager.currentUser.getCurrentUser().getName(), "Pending", date.format(new Date()), time.format(new Date()));
+            String imgPath="NA";
+
+            if (imgRef!=null){
+                imgPath= imgRef.getDownloadUrl().toString();
+            }
+
+            ReportItem newReport = new ReportItem(localAuth, title, reportType, description,
+                    address, dataManager.currentUser.getCurrentUser().getName(), "Pending",
+                    date.format(new Date()), time.format(new Date()) , imgPath);
 
             //add to the firebase
             dataManager.addNewReport(newReport);
@@ -293,8 +313,7 @@ public class ReportMake extends Fragment {
 
     private void uploadPhoto(View view){
         ImagePicker.Companion.with(this)
-                .galleryOnly()
-                .cropSquare()
+                .crop()
                 .start(REQUEST_CODE_PICK_PHOTO);
     }
 }

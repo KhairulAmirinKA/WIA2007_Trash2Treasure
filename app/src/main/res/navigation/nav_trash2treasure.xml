@@ -54,6 +54,9 @@
         <action
             android:id="@+id/DestReportHotline"
             app:destination="@id/DestReportHotline" />
+        <action
+            android:id="@+id/action_DestReport_to_reportDetails"
+            app:destination="@id/DestReportDetails" />
     </fragment>
     <fragment
         android:id="@+id/DestProfile"
@@ -135,4 +138,9 @@
         android:name="com.techwizards.wia2007_trash2treasure.EducationArticles"
         android:label="fragment_education_articles"
         tools:layout="@layout/fragment_education_articles" />
+    <fragment
+        android:id="@+id/DestReportDetails"
+        android:name="com.techwizards.wia2007_trash2treasure.ReportDetails"
+        android:label="fragment_report_details"
+        tools:layout="@layout/fragment_report_details" />
 </navigation>
