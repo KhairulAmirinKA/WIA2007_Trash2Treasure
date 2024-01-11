@@ -1,10 +1,15 @@
 package com.techwizards.wia2007_trash2treasure;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.Navigation;
@@ -13,6 +18,7 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +27,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.github.dhaval2404.imagepicker.ImagePicker;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import net.steamcrafted.materialiconlib.MaterialIconView;
 
@@ -34,11 +48,17 @@ import java.util.regex.Pattern;
 
 public class ReportMake extends Fragment {
 
+    private static final int REQUEST_CODE_PICK_PHOTO = 101;
+    private Uri selectedPhotoUri;
+
     String[] options;
     Spinner SpinnerReportLocalAuthority;
     RadioGroup RGReportType;
     EditText ETReportDescription;
     EditText ETReportAddress;
+
+    Button BtnReportUploadImg;
+    TextView TVReportPhotoName;
 
     DataManager dataManager = DataManager.getInstance();
     public ReportMake() {
@@ -72,6 +92,8 @@ public class ReportMake extends Fragment {
         RGReportType = view.findViewById(R.id.RGReportMakeType);
         ETReportDescription = view.findViewById(R.id.ETReportDescription);
         ETReportAddress = view.findViewById(R.id.ETReportAddress);
+        BtnReportUploadImg= view.findViewById(R.id.BtnReportUploadImg);
+        TVReportPhotoName= view.findViewById(R.id.TVReportPhotoName);
 
         //map
         FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
@@ -80,6 +102,16 @@ public class ReportMake extends Fragment {
         fragmentTransaction.replace(R.id.FCVComplaintLocation, maps);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
+
+        //upload photo from local device
+        BtnReportUploadImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                uploadPhoto(view);
+            }
+        });
+
+
 
         //clicks the submit btn
         Button btnSubmit = view.findViewById(R.id.BtnReportSubmit);
@@ -99,6 +131,50 @@ public class ReportMake extends Fragment {
         });
 
         return view;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode==REQUEST_CODE_PICK_PHOTO && resultCode==Activity.RESULT_OK){
+
+            //handle selected photo
+            selectedPhotoUri= data.getData();
+
+            //uploadToFirebaseStorage();
+        }
+    }
+
+    private void uploadToFirebaseStorage() {
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+
+        StorageReference storageRef=storage.getReference();
+
+        StorageReference imgRef= storageRef.child("reportPhotos/"+ System.currentTimeMillis() );
+
+        imgRef.putFile(selectedPhotoUri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                        if (isAdded()) { //checks whether fragment is attached to the activity
+                            Toast.makeText(getContext(), "Upload successful", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                        if (isAdded()) {
+                            Toast.makeText(getContext(), "Upload failed", Toast.LENGTH_SHORT).show();
+                            Log.e("GAGAL", e.getMessage());
+                        }
+                    }
+                });
+
+
     }
 
     private boolean createReport() {
@@ -129,6 +205,11 @@ public class ReportMake extends Fragment {
             //extract the String from editText
             String description = ETReportDescription.getText().toString();
             String address = ETReportAddress.getText().toString();
+
+            //upload photo to firebase storage
+            if (selectedPhotoUri!= null){
+                uploadToFirebaseStorage();
+            }
 
             ReportItem newReport = new ReportItem(localAuth, title, reportType, description, address, dataManager.currentUser.getCurrentUser().getName(), "Pending", date.format(new Date()), time.format(new Date()));
 
@@ -208,5 +289,12 @@ public class ReportMake extends Fragment {
 
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    private void uploadPhoto(View view){
+        ImagePicker.Companion.with(this)
+                .galleryOnly()
+                .cropSquare()
+                .start(REQUEST_CODE_PICK_PHOTO);
     }
 }
