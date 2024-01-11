@@ -43,6 +43,14 @@ public class Marketplace extends Fragment {
             }
         });
 
+        MaterialIconView btnAddProduct = view.findViewById(R.id.BtnAddProduct);
+        btnDismiss.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(view).popBackStack();
+            }
+        });
+
         recyclerView = view.findViewById(R.id.RVMarketplace);
         adapter = new MarketplaceAdapter(getProducts());
 
