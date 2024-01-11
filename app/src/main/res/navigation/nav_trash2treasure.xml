@@ -125,5 +125,14 @@
         android:id="@+id/DestEduResources"
         android:name="com.techwizards.wia2007_trash2treasure.EducationResources"
         android:label="fragment_education_resources"
-        tools:layout="@layout/fragment_education_resources" />
+        tools:layout="@layout/fragment_education_resources" >
+        <action
+            android:id="@+id/action_DestEduResources_to_DestEduArticles"
+            app:destination="@id/DestEduArticles" />
+    </fragment>
+    <fragment
+        android:id="@+id/DestEduArticles"
+        android:name="com.techwizards.wia2007_trash2treasure.EducationArticles"
+        android:label="fragment_education_articles"
+        tools:layout="@layout/fragment_education_articles" />
 </navigation>

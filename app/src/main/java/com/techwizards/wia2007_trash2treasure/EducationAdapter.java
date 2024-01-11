@@ -1,13 +1,18 @@
 package com.techwizards.wia2007_trash2treasure;
 
 import android.annotation.SuppressLint;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
@@ -41,6 +46,22 @@ public class EducationAdapter extends RecyclerView.Adapter<EducationAdapter.View
 
         holder.EduTitle.setText( item.eduTitle);
         holder.EduDesc.setText(item.eduDesc);
+        
+        holder.BtnEduReadMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(view.getContext(), item.getEduTitle()+"clicked", Toast.LENGTH_SHORT).show();
+
+                //use Bundle tp send data across fragment
+                Bundle bundle = new Bundle();
+
+                //utk tahu position dlm List
+                bundle.putInt("POSITION", holder.getAdapterPosition() );
+
+                //go to the fragment containing the articles of a topic.
+                Navigation.findNavController(view).navigate(R.id.DestEduArticles, bundle);
+            }
+        });
 
     }
 
@@ -54,6 +75,8 @@ public class EducationAdapter extends RecyclerView.Adapter<EducationAdapter.View
         ImageView EduPostImage;
         TextView EduTitle;
         TextView EduDesc;
+        
+        Button BtnEduReadMore;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -61,6 +84,8 @@ public class EducationAdapter extends RecyclerView.Adapter<EducationAdapter.View
 
             EduTitle= itemView.findViewById(R.id.EduTitle);
             EduDesc= itemView.findViewById(R.id.EduDesc);
+
+            BtnEduReadMore= itemView.findViewById(R.id.BtnEduReadMore);
 
         }
     } //viewholder

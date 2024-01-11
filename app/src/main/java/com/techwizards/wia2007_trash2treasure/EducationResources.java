@@ -59,7 +59,7 @@ public class EducationResources extends Fragment {
         return view;
     }
 
-    private List<EducationItem> generateEduList() {
+    public List<EducationItem> generateEduList() {
 
         List<EducationItem> educationItems = new ArrayList<>();
 
