@@ -34,6 +34,9 @@
         <action
             android:id="@+id/DestMarketplace"
             app:destination="@id/DestMarketplace" />
+        <action
+            android:id="@+id/action_DestCommunity_to_DestEduResources"
+            app:destination="@id/DestEduResources" />
     </fragment>
     <fragment
         android:id="@+id/DestVolunteer"
@@ -118,4 +121,9 @@
         android:name="com.techwizards.wia2007_trash2treasure.Marketplace"
         android:label="frament_marketplace"
         tools:layout="@layout/fragment_marketplace"/>
+    <fragment
+        android:id="@+id/DestEduResources"
+        android:name="com.techwizards.wia2007_trash2treasure.EducationResources"
+        android:label="fragment_education_resources"
+        tools:layout="@layout/fragment_education_resources" />
 </navigation>

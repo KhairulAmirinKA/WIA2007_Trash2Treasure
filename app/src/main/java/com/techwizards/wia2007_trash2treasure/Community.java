@@ -60,6 +60,15 @@ public class Community extends Fragment {
             }
         });
 
+        //edu resources
+        Button BtnCommunityEduResources= view.findViewById(R.id.BtnCommunityEduResources);
+        BtnCommunityEduResources.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.DestEduResources);
+            }
+        });
+
         return view;
     }
 }

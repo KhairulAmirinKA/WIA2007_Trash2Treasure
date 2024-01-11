@@ -106,15 +106,16 @@
             android:layout_height="60dp"
             android:layout_marginHorizontal="20dp"
             android:orientation="horizontal">
+
             <Button
-                android:id="@+id/BtnCommunityContactSupport"
+                android:id="@+id/BtnCommunityEduResources"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:layout_marginEnd="5dp"
+                android:layout_weight="1"
                 android:background="@drawable/box_with_shadow"
                 android:backgroundTint="@color/darkGreen"
-                android:text="Contact Support"
+                android:text="Education Resources"
                 android:textAllCaps="false"
                 android:textColor="@color/white" />
             <Button
