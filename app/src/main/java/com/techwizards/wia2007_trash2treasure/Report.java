@@ -84,7 +84,7 @@ public class Report extends Fragment {
         return view;
     }
 
-    private List<ReportItem> generateReportItems() {
+    public List<ReportItem> generateReportItems() {
         List<ReportItem> reportItemList = new ArrayList<>();
 
         for (ReportItem item : dataManager.reportItems) {

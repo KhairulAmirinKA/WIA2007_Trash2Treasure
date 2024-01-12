@@ -44,7 +44,7 @@ public class Marketplace extends Fragment {
         });
 
         MaterialIconView btnAddProduct = view.findViewById(R.id.BtnAddProduct);
-        btnDismiss.setOnClickListener(new View.OnClickListener() {
+        btnAddProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Navigation.findNavController(view).navigate(R.id.DestAdvertiseProduct);

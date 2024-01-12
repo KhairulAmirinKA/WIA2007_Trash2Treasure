@@ -10,4 +10,6 @@
 
     <color name="red">#FF0000</color>
     <color name="gray">#C0C0C0</color>
+
+    <color name="dullBlack">#767676</color>
 </resources>

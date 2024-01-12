@@ -8,6 +8,7 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
@@ -55,7 +56,7 @@ public class AdvertiseProduct extends Fragment {
         EditText ETEmail = view.findViewById(R.id.ETEmail);
 
         // Initialize Button
-        MaterialIconView BtnUpload = view.findViewById(R.id.BtnUpload);
+        Button BtnUpload = view.findViewById(R.id.BtnProductUpload);
         BtnUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

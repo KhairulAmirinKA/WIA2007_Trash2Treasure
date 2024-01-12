@@ -201,7 +201,7 @@
 
     </LinearLayout>
         <Button
-            android:id="@+id/BtnUpload"
+            android:id="@+id/BtnProductUpload"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
