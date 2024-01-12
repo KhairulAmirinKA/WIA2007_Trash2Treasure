@@ -51,7 +51,7 @@ public class EducationAdapter extends RecyclerView.Adapter<EducationAdapter.View
         holder.BtnEduReadMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(), item.getEduTitle()+"clicked", Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), "Let's learn about "+item.getEduTitle(), Toast.LENGTH_SHORT).show();
 
                 //use Bundle tp send data across fragment
                 Bundle bundle = new Bundle();
