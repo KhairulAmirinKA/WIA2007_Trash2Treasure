@@ -8,7 +8,6 @@
     tools:context=".AdvertiseProduct">
 
     <LinearLayout
-        android:id="@+id/LLAvertiseProduct"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -42,170 +41,197 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/LLProductName"
+            android:id="@+id/LLAvertiseProduct"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:gravity="center"
-            android:paddingHorizontal="10dp"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Product Name: "
-                android:padding="10dp"
-                android:textSize="18sp" />
+            <LinearLayout
+                android:id="@+id/LLProductName"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingHorizontal="10dp">
 
-            <EditText
-                android:id="@+id/ETProductName"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="Product Name: "
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/ETProductName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint=""
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/LLPrice"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingHorizontal="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="Price                : "
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/ETProductPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint=""
+                    android:inputType="numberDecimal"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/LLProductDetails"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingHorizontal="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="Details             : "
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/ETProductDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint=""
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/LLQuantity"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingHorizontal="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="Quantity          : "
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/ETProductQuantity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint=""
+                    android:inputType="number"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/LLDescription"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingHorizontal="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="Short Description: "
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/ETProductDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint=""
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/LLEmail"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingHorizontal="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="Email              : "
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/ETEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint=""
+                    android:inputType="textEmailAddress"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/LLImagePicker"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingHorizontal="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="Picture: "
+                    android:textSize="18sp" />
+
+                <net.steamcrafted.materialiconlib.MaterialIconView
+                    android:id="@+id/BtnImagePicker"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="10dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:materialIcon="upload"
+                    app:materialIconColor="@color/black" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/BtnProductUpload"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textSize="18sp"
-                android:hint=""/>
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:backgroundTint="#02897B"
+                android:text="UPLOAD" />
         </LinearLayout>
-    <LinearLayout
-        android:id="@+id/LLPrice"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:gravity="center"
-        android:paddingHorizontal="10dp"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Price                : "
-            android:padding="10dp"
-            android:textSize="18sp"/>
-        <EditText
-            android:id="@+id/ETProductPrice"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint=""
-            android:inputType="numberDecimal"
-            android:layout_weight="1"
-            android:textSize="18sp" />
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/LLProductDetails"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:gravity="center"
-        android:paddingHorizontal="10dp"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Details             : "
-            android:padding="10dp"
-            android:textSize="18sp" />
-
-        <EditText
-            android:id="@+id/ETProductDetails"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint=""
-            android:layout_weight="1"
-            android:textSize="18sp" />
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/LLQuantity"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:gravity="center"
-        android:paddingHorizontal="10dp"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Quantity          : "
-            android:padding="10dp"
-            android:textSize="18sp" />
-
-        <EditText
-            android:id="@+id/ETProductQuantity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint=""
-            android:inputType="number"
-            android:layout_weight="1"
-            android:textSize="18sp"/>
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/LLDescription"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:gravity="center"
-        android:paddingHorizontal="10dp"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Short Description: "
-            android:padding="10dp"
-            android:textSize="18sp"  />
-
-        <EditText
-            android:id="@+id/ETProductDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint=""
-            android:textSize="18sp"/>
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/LLEmail"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:gravity="center"
-        android:paddingHorizontal="10dp"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Email              : "
-            android:padding="10dp"
-            android:textSize="18sp"  />
-
-        <EditText
-            android:id="@+id/ETEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint=""
-            android:inputType="textEmailAddress"
-            android:layout_weight="1"
-            android:textSize="18sp"/>
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/LLImagePicker"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:gravity="center"
-        android:paddingHorizontal="10dp"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Picture: "
-            android:padding="10dp"
-            android:textSize="18sp"  />
-
-        <net.steamcrafted.materialiconlib.MaterialIconView
-            android:id="@+id/BtnImagePicker"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginEnd="10dp"
-            android:clickable="true"
-            android:focusable="true"
-            app:materialIcon="upload"
-            app:materialIconColor="@color/black" />
-
-    </LinearLayout>
-        <Button
-            android:id="@+id/BtnProductUpload"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="UPLOAD" />
     </LinearLayout>
 
-+</FrameLayout>
+    +
+</FrameLayout>

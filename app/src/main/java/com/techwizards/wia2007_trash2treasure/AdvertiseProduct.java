@@ -107,6 +107,9 @@ public class AdvertiseProduct extends Fragment {
 
                     Toast.makeText(getContext(), "New product is successfully submitted", Toast.LENGTH_SHORT).show();
 
+                    //once upload successful go to marketplace page
+                    Navigation.findNavController(view).popBackStack();
+
                 }
 
                 else {
@@ -115,8 +118,7 @@ public class AdvertiseProduct extends Fragment {
                 }
 
 
-                //once upload successful go to marketplace page
-                Navigation.findNavController(view).popBackStack();
+
             }
         });
 
