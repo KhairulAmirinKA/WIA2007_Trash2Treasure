@@ -25,7 +25,6 @@
         <activity
             android:name="Latihan.UploadActivity"
             android:exported="true" />
-
         <activity
             android:name=".TruckTracker"
             android:exported="false" />
