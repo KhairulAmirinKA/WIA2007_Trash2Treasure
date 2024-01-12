@@ -5,6 +5,7 @@ public class CommunityForumItem {
     String forumName;
     String forumDescription;
     int forumParticipants;
+    private String id;
 
     public CommunityForumItem(String forumImage, String forumName, String forumDescription, int forumParticipants) {
         this.forumImage = forumImage;
@@ -27,5 +28,8 @@ public class CommunityForumItem {
 
     public int getForumParticipants() {
         return forumParticipants;
+    }
+    public String getId() {
+        return id;
     }
 }

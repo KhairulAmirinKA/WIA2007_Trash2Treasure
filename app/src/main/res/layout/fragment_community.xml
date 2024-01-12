@@ -2,6 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_community"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background"
@@ -11,20 +12,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
-        android:paddingTop="20dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingTop="20dp">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="15dp"
+            android:layout_marginBottom="10dp"
             android:orientation="horizontal">
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="40dp"
                 android:orientation="vertical">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -32,6 +36,7 @@
                     android:textColor="@color/black"
                     android:textSize="24sp"
                     android:textStyle="bold" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -44,43 +49,45 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:queryHint="Search Product"
                 android:background="@drawable/box_with_shadow"
-                android:backgroundTint="@color/white"/>
+                android:backgroundTint="@color/white"
+                android:queryHint="Search Product" />
         </LinearLayout>
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
-            android:translationX="20dp"
-            android:scrollbars="horizontal">
+            android:scrollbars="horizontal"
+            android:translationX="20dp">
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/RVCommunityProducts"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/community_product_item_row_view"/>
+                tools:listitem="@layout/community_product_item_row_view" />
         </androidx.core.widget.NestedScrollView>
+
         <TextView
             android:id="@+id/BtnMoreProducts"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
             android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="20dp"
             android:clickable="true"
             android:focusable="true"
             android:text="More Products"
+            android:textAlignment="textEnd"
             android:textColor="@color/com_facebook_blue"
-            android:textSize="18sp"
-            android:textAlignment="textEnd"/>
+            android:textSize="18sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
             android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="10dp"
             android:text="Community Forum"
             android:textColor="@color/black"
             android:textSize="24sp"
@@ -90,15 +97,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:translationX="20dp"
-            android:scrollbars="horizontal">
+            android:scrollbars="horizontal"
+            android:translationX="20dp">
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/RVCommunityForum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/community_forum_item_row_view"/>
+                tools:listitem="@layout/community_forum_item_row_view" />
         </androidx.core.widget.NestedScrollView>
 
         <LinearLayout
@@ -118,12 +126,13 @@
                 android:text="Education Resources"
                 android:textAllCaps="false"
                 android:textColor="@color/white" />
+
             <Button
                 android:id="@+id/BtnCommunityJoinCommunity"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:layout_marginStart="5dp"
+                android:layout_weight="1"
                 android:background="@drawable/box_with_shadow"
                 android:backgroundTint="@color/darkGreen"
                 android:text="Join Community"

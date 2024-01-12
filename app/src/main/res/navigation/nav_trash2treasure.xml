@@ -37,6 +37,9 @@
         <action
             android:id="@+id/action_DestCommunity_to_DestEduResources"
             app:destination="@id/DestEduResources" />
+        <action
+            android:id="@+id/action_DestCommunity_to_communityForumChatting"
+            app:destination="@id/communityForumChatting" />
     </fragment>
     <fragment
         android:id="@+id/DestVolunteer"
@@ -113,7 +116,14 @@
         android:id="@+id/DestJoinCommunity"
         android:name="com.techwizards.wia2007_trash2treasure.CommunityForum"
         android:label="fragment_community_forum"
-        tools:layout="@layout/fragment_community_forum" />
+        tools:layout="@layout/fragment_community_forum" >
+        <action
+            android:id="@+id/action_DestJoinCommunity_to_communityForumChatting"
+            app:destination="@id/communityForumChatting" />
+        <action
+            android:id="@+id/action_DestJoinCommunity_to_communityForumChatting2"
+            app:destination="@id/communityForumChatting" />
+    </fragment>
     <fragment
         android:id="@+id/DestReportHotline"
         android:name="com.techwizards.wia2007_trash2treasure.ReportHotline"
@@ -152,4 +162,13 @@
         android:name="com.techwizards.wia2007_trash2treasure.AdvertiseProduct"
         android:label="fragment_advertise_product"
         tools:layout="@layout/fragment_advertise_product" />
+    <fragment
+        android:id="@+id/communityForumChatting"
+        android:name="com.techwizards.wia2007_trash2treasure.CommunityForumChatting"
+        android:label="fragment_community_forum_chatting"
+        tools:layout="@layout/fragment_community_forum_chatting" >
+        <action
+            android:id="@+id/action_communityForumChatting_to_DestCommunity"
+            app:destination="@id/DestCommunity" />
+    </fragment>
 </navigation>

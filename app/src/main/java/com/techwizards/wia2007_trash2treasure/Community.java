@@ -3,6 +3,7 @@ package com.techwizards.wia2007_trash2treasure;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -51,6 +52,22 @@ public class Community extends Fragment {
         forumAdapter = new CommunityForumAdapterSmall(new CommunityForum().getList());
         forumRecycler.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         forumRecycler.setAdapter(forumAdapter);
+
+        forumAdapter.setOnItemClickListener(new CommunityForumAdapterSmall.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                // Handle item click, navigate to CommunityForumChatFragment
+                String forumItemId = forumAdapter.communityForumItems.get(position).getId();
+
+                // Use the static method to create a new instance of the fragment with arguments
+                CommunityForumChatting fragment = CommunityForumChatting.newInstance(forumItemId);
+
+                // Replace "fragment_container" with the actual container ID in your layout
+                Bundle args = new Bundle();
+                args.putString("forumItemId", forumItemId);
+                Navigation.findNavController(view).navigate(R.id.action_DestCommunity_to_communityForumChatting, args);
+            }
+        });
 
         Button btnJoinCommunity = view.findViewById(R.id.BtnCommunityJoinCommunity);
         btnJoinCommunity.setOnClickListener(new View.OnClickListener() {

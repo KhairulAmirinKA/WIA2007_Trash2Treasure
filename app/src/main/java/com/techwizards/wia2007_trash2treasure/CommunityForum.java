@@ -17,7 +17,7 @@ import net.steamcrafted.materialiconlib.MaterialIconView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CommunityForum extends Fragment {
+public class CommunityForum extends Fragment implements CommunityForumAdapter.OnJoinClickListener{
 
     RecyclerView recyclerView;
     CommunityForumAdapter adapter;
@@ -46,6 +46,9 @@ public class CommunityForum extends Fragment {
         recyclerView = view.findViewById(R.id.RVCommunityForum);
         adapter = new CommunityForumAdapter(getList());
 
+        // Set the join click listener in the CommunityForum fragment
+        adapter.setOnJoinClickListener(this);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
 
@@ -60,5 +63,13 @@ public class CommunityForum extends Fragment {
         list.add(new CommunityForumItem("https://waste4change.com/blog/wp-content/uploads/86d36-single-use-plastic-1.jpeg", "Plastic-Free Pioneers", "Discuss strategies to reduce single-use plastics.", 8));
 
         return list;
+    }
+
+    private void replaceFragment(Fragment fragment) {
+        Navigation.findNavController(requireView()).navigate(R.id.action_DestJoinCommunity_to_communityForumChatting /* pass any bundle if needed */);
+    }
+    @Override
+    public void onJoinClick(int position) {
+        replaceFragment(CommunityForumChatting.newInstance(String.valueOf(position)));
     }
 }

@@ -19,4 +19,7 @@
     <string name="view_full_schedule">View Full Schedule</string>
     <string name="set_reminder">Set Reminder</string>
     <string name="recycled_item_pickup">Recycled Item Pickup</string>
+    <string name="chat_input_hint">Share what\'s on your mind </string>
+    <string name="send_button">Post</string>
+
 </resources>

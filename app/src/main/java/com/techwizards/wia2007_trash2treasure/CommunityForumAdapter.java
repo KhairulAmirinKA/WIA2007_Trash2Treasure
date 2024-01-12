@@ -17,6 +17,15 @@ import java.util.List;
 
 public class CommunityForumAdapter extends RecyclerView.Adapter<CommunityForumAdapter.ViewHolder> {
     List<CommunityForumItem> communityForumItems;
+    private OnJoinClickListener joinClickListener;
+
+    public interface OnJoinClickListener {
+        void onJoinClick(int position);
+    }
+
+    public void setOnJoinClickListener(OnJoinClickListener listener) {
+        this.joinClickListener = listener;
+    }
 
     public CommunityForumAdapter(List<CommunityForumItem> communityForumItems) {
         this.communityForumItems = communityForumItems;
@@ -43,6 +52,22 @@ public class CommunityForumAdapter extends RecyclerView.Adapter<CommunityForumAd
                 Toast.makeText(v.getContext(), "Joined", Toast.LENGTH_SHORT).show();
             }
         });
+
+        holder.join.setOnClickListener(v -> {
+            if (joinClickListener != null) {
+                joinClickListener.onJoinClick(position);
+            }
+        });
+    }
+
+    static class ForumViewHolder extends RecyclerView.ViewHolder {
+        Button joinButton;
+
+        ForumViewHolder(@NonNull View itemView) {
+            super(itemView);
+            joinButton = itemView.findViewById(R.id.BtnCommunityJoin);
+            // ... other view bindings
+        }
     }
 
     @Override

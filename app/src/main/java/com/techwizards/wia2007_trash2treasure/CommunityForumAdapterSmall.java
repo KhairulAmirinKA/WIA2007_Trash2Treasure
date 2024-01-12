@@ -15,9 +15,18 @@ import java.util.List;
 
 public class CommunityForumAdapterSmall extends RecyclerView.Adapter<CommunityForumAdapterSmall.ViewHolder> {
     List<CommunityForumItem> communityForumItems;
+    private OnItemClickListener onItemClickListener;
 
     public CommunityForumAdapterSmall(List<CommunityForumItem> communityForumItems) {
         this.communityForumItems = communityForumItems;
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.onItemClickListener = listener;
     }
 
     @NonNull
@@ -39,6 +48,15 @@ public class CommunityForumAdapterSmall extends RecyclerView.Adapter<CommunityFo
 
         String users = item.getForumParticipants() + " Users";
         holder.users.setText(users);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onItemClickListener != null) {
+                    onItemClickListener.onItemClick(holder.getAdapterPosition());
+                }
+            }
+        });
     }
 
     @Override
