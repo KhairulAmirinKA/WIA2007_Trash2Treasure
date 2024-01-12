@@ -13,10 +13,13 @@ public class FirebaseService {
     private static final String PROFILES_COLLECTION = "user_profiles";
     private static final String REPORT_COLLECTION = "reports";
 
+    private static final String PRODUCT_COLLECTION = "products";
+
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final CollectionReference profileCollection = db.collection(PROFILES_COLLECTION);
     private final CollectionReference reportCollection = db.collection(REPORT_COLLECTION);
 
+    private final CollectionReference productCollection = db.collection(PRODUCT_COLLECTION);
     private static FirebaseService instance;
 
     public static synchronized FirebaseService getInstance() {
@@ -53,4 +56,18 @@ public class FirebaseService {
     public void fetchReports(OnCompleteListener<QuerySnapshot> onCompleteListener) {
         reportCollection.get().addOnCompleteListener(onCompleteListener);
     }
+
+    public void addNewProduct(Product productList, OnCompleteListener<Void> onCompleteListener) {
+        String name = productList.productName;
+        if (!name.isEmpty()) {
+            reportCollection.document(name)
+                    .set(productList.toMap())
+                    .addOnCompleteListener(onCompleteListener);
+        }
+    }
+
+    public void fetchProducts(OnCompleteListener<QuerySnapshot> onCompleteListener) {
+        reportCollection.get().addOnCompleteListener(onCompleteListener);
+    }
+
 }

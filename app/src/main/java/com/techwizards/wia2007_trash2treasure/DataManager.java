@@ -23,6 +23,7 @@ public class DataManager {
     public CurrentUser currentUser;
     public List<ProfileItem> profileItems = new ArrayList<>(); //list of profile items
     public List<ReportItem> reportItems = new ArrayList<>(); //list of report items
+    public List<Product> productList = new ArrayList<>(); //list of advertised product
 
     //fetch from firebase
     public void fetchProfile() {
@@ -123,6 +124,41 @@ public class DataManager {
             }
         });
     }
+
+    public void addNewProduct(Product product) {
+
+        //add product item to local list
+        productList.add(product);
+        firebaseService.addNewProduct(product, task -> {
+            if (task.isSuccessful()) {
+                System.out.println("FirebaseService: Add New Advertise Product Success!");
+
+            } else {
+                Exception exception = task.getException();
+                if (exception != null) {
+                    exception.printStackTrace();
+                }
+            }
+        });
+    }
+
+    public void fetchProduct() {
+        firebaseService.fetchProducts(task -> {
+            if (task.isSuccessful()) {
+                for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                    Product product = documentSnapshot.toObject(Product.class);
+                    productList.add(product);
+                }
+                System.out.println("FirebaseService: Fetch Reports Success!");
+            } else {
+                Exception exception = task.getException();
+                if (exception != null) {
+                    exception.printStackTrace();
+                }
+            }
+        });
+    }
+
 
     public static synchronized DataManager getInstance() {
         if (instance == null) {
