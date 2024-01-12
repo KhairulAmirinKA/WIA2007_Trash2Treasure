@@ -75,10 +75,15 @@ public class ReportDetails extends Fragment {
         TVReportDetailsStatus.setText( currentItem.getStatus() );
         TVReportDetailsTitle.setText(currentItem.getReportTitle() );
 
-        TVReportDetailsType.setText("Type:"+ currentItem.getReportType() );
-        TVReportDetailsAddress.setText("Address:"+ currentItem.getAddress() );
-        TVReportDetailsTime.setText("Time:"+currentItem.getReportTime() );
-        TVReportDetailsDate.setText("Date:"+ currentItem.getReportDate());
+        TVReportDetailsType.setText("Type: "+ currentItem.getReportType() );
+        TVReportDetailsAddress.setText("Address: "+ currentItem.getAddress() );
+        TVReportDetailsTime.setText("Time: "+currentItem.getReportTime() );
+        TVReportDetailsDate.setText("Date: "+ currentItem.getReportDate());
+
+        String[] names={"Mr Ali","Mr Ravindran", "Mr Yangding", "Miss Ameera", "Miss Illya", "Mr Khairul"};
+        int N = names.length;
+
+        TVReportDetailsPIC.setText("Person in charge: "+ names[position%N]);
         TVReportDetailsDesc.setText( currentItem.getReportDescription() );
 
         //get current time

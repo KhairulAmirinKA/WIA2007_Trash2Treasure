@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="10dp"
     android:background="@drawable/gradient_background"
     tools:context=".ReportDetails">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="top">
+        android:gravity="top"
+        android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:orientation="horizontal"
             android:paddingHorizontal="20dp"
-            android:paddingTop="20dp"
-            android:orientation="horizontal">
+            android:paddingTop="20dp">
+
             <net.steamcrafted.materialiconlib.MaterialIconView
                 android:id="@+id/BtnDismiss"
                 android:layout_width="40dp"
@@ -27,7 +30,8 @@
                 android:clickable="true"
                 android:focusable="true"
                 app:materialIcon="chevron_left"
-                app:materialIconColor="@color/black"/>
+                app:materialIconColor="@color/black" />
+
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -35,7 +39,7 @@
                 android:text="Report Details"
                 android:textColor="@color/black"
                 android:textSize="24sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
         </LinearLayout>
 
         <ScrollView
@@ -43,6 +47,7 @@
             android:layout_height="match_parent"
             android:layout_margin="20dp"
             android:scrollbars="vertical">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -54,25 +59,25 @@
                 android:padding="20dp">
 
                 <TextView
-                    android:layout_gravity="center"
-                    android:paddingRight="20dp"
-                    android:paddingLeft="20dp"
                     android:id="@+id/TVReportDetailsStatus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
                     android:background="@drawable/rounded_rectangle"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
                     android:text="Status"
-                    android:textSize="20sp"
-                    android:textAlignment="center"/>
+                    android:textAlignment="center"
+                    android:textSize="20sp" />
 
                 <View
                     android:id="@+id/divider2"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
+                    android:layout_marginTop="20dp"
                     android:layout_weight="1"
-                    android:background="@color/dullBlack"
-                    android:layout_marginTop="20dp"/>
+                    android:background="@color/dullBlack" />
 
                 <TextView
                     android:id="@+id/TVReportDetailsTitle"
@@ -99,9 +104,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="TextView"
+                    android:textColor="@color/black"
                     android:textSize="16sp"
-                    android:textStyle="normal"
-                    android:textColor="@color/black"/>
+                    android:textStyle="normal" />
 
                 <TextView
                     android:id="@+id/TVReportDetailsTime"
@@ -125,6 +130,7 @@
                     android:id="@+id/divider3"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
+                    android:layout_marginTop="20dp"
                     android:layout_weight="1"
                     android:background="@color/dullBlack" />
 
@@ -132,6 +138,7 @@
                     android:id="@+id/IVReportDetailsImg"
                     android:layout_width="200dp"
                     android:layout_height="200dp"
+                    android:layout_marginTop="10dp"
                     android:src="@drawable/recycle_icon" />
 
                 <TextView
@@ -142,12 +149,6 @@
                     android:textColor="#000000"
                     android:textSize="16sp"
                     android:textStyle="normal" />
-
-                <TextView
-                    android:id="@+id/textview"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="TextView" />
 
                 <TextView
                     android:id="@+id/TVReportDetailsLastUpdated"
@@ -163,6 +164,7 @@
                     android:id="@+id/divider4"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
+                    android:layout_marginTop="20dp"
                     android:layout_weight="1"
                     android:background="@color/dullBlack" />
 
@@ -170,6 +172,7 @@
                     android:id="@+id/textView7"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:text="You"
                     android:textColor="#01564D"
@@ -180,7 +183,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="TextView"
+                    android:text="Desc"
                     android:textColor="#000000" />
 
             </LinearLayout>
