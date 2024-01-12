@@ -94,6 +94,8 @@ public class AdvertiseProduct extends Fragment {
                     String price = productPrice.toString();
                     String quantity = productQuantity.toString();
 
+
+
                     //upload photo to firebase storage
                     if (selectedPhotoUri!= null){
                         uploadToFirebaseStorage();
@@ -126,11 +128,12 @@ public class AdvertiseProduct extends Fragment {
             }
         });
 
+        //handle image picker
         MaterialIconView btnImagePicker = view.findViewById(R.id.BtnImagePicker);
         btnImagePicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                uploadPhoto(view);
             }
         });
         return view;
