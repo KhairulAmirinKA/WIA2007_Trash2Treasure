@@ -31,8 +31,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.dhaval2404.imagepicker.ImagePicker;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -53,6 +55,8 @@ public class ReportMake extends Fragment {
     private static final int REQUEST_CODE_PICK_PHOTO = 101;
     private Uri selectedPhotoUri;
     StorageReference imgRef;
+    String fileName;
+    String imgPath="NA";
 
     String[] options;
     Spinner SpinnerReportLocalAuthority;
@@ -161,7 +165,7 @@ public class ReportMake extends Fragment {
         String timestamp= dateFormat.format(calendar.getTime());
 
         //bina nama file
-        String fileName= dataManager.currentUser.getCurrentUser()+"_"+ timestamp;
+        fileName= dataManager.currentUser.getCurrentUser()+"_"+ timestamp;
 
          imgRef= storageRef.child("reportPhotos/" + fileName);
 
@@ -169,6 +173,14 @@ public class ReportMake extends Fragment {
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                        storageRef.child("reportPhotos/"+fileName).getDownloadUrl()
+                                .addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                imgPath= uri.toString();
+                            }
+                        });
 
                         if (isAdded()) { //checks whether fragment is attached to the activity
                             Toast.makeText(getContext(), "Upload successful", Toast.LENGTH_SHORT).show();
@@ -185,6 +197,7 @@ public class ReportMake extends Fragment {
                         }
                     }
                 });
+
 
 
     }
@@ -223,11 +236,18 @@ public class ReportMake extends Fragment {
                 uploadToFirebaseStorage();
             }
 
-            String imgPath="NA";
-
-            if (imgRef!=null){
-                imgPath= imgRef.getDownloadUrl().toString();
-            }
+//            final String[] imgPath = {"NA"};
+//
+//            imgRef.child(imgRef.getPath()).getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+//                @Override
+//                public void onComplete(@NonNull Task<Uri> task) {
+//                    if (task.isSuccessful()){
+//                        Uri downloadUrl= task.getResult();
+//
+//                        imgPath[0] = downloadUrl.toString();
+//                    }
+//                }
+//            });
 
             ReportItem newReport = new ReportItem(localAuth, title, reportType, description,
                     address, dataManager.currentUser.getCurrentUser().getName(), "Pending",

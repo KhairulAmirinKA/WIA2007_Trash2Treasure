@@ -85,4 +85,12 @@ public class ReportItem {
     public String getReportTime() {
         return reportTime;
     }
+
+    public String getImgPath() {
+        return imgPath;
+    }
+
+    public void setImgPath(String imgPath) {
+        this.imgPath = imgPath;
+    }
 }

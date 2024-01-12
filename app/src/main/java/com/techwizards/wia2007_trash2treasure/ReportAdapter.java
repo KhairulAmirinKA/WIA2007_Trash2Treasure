@@ -1,5 +1,6 @@
 package com.techwizards.wia2007_trash2treasure;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +34,13 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ViewHolder
         holder.RLReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.DestReportDetails);
+
+                //use Bundle to transfer data to other fragment
+                Bundle bundle = new Bundle();
+                //send position
+                bundle.putInt("POSITION", holder.getAdapterPosition() );
+
+                Navigation.findNavController(view).navigate(R.id.DestReportDetails, bundle);
             }
         });
 
@@ -72,7 +79,7 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ViewHolder
             textReportType = itemView.findViewById(R.id.textReportType);
             textAddress = itemView.findViewById(R.id.textAddress);
             textReporterName = itemView.findViewById(R.id.textReporterName);
-            textStatus = itemView.findViewById(R.id.textStatus);
+            textStatus = itemView.findViewById(R.id.TVReportDetailsStatus);
             textReportDate = itemView.findViewById(R.id.textReportDate);
             textReportTime = itemView.findViewById(R.id.textReportTime);
         }
