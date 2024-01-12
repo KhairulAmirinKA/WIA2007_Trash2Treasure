@@ -47,7 +47,7 @@ public class Marketplace extends Fragment {
         btnDismiss.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(view).popBackStack();
+                Navigation.findNavController(view).navigate(R.id.DestAdvertiseProduct);
             }
         });
 

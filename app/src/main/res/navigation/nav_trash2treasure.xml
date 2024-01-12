@@ -123,7 +123,11 @@
         android:id="@+id/DestMarketplace"
         android:name="com.techwizards.wia2007_trash2treasure.Marketplace"
         android:label="frament_marketplace"
-        tools:layout="@layout/fragment_marketplace"/>
+        tools:layout="@layout/fragment_marketplace">
+        <action
+            android:id="@+id/action_DestMarketplace_to_advertiseProduct"
+            app:destination="@id/DestAdvertiseProduct" />
+    </fragment>
     <fragment
         android:id="@+id/DestEduResources"
         android:name="com.techwizards.wia2007_trash2treasure.EducationResources"
@@ -143,4 +147,9 @@
         android:name="com.techwizards.wia2007_trash2treasure.ReportDetails"
         android:label="fragment_report_details"
         tools:layout="@layout/fragment_report_details" />
+    <fragment
+        android:id="@+id/DestAdvertiseProduct"
+        android:name="com.techwizards.wia2007_trash2treasure.AdvertiseProduct"
+        android:label="fragment_advertise_product"
+        tools:layout="@layout/fragment_advertise_product" />
 </navigation>
