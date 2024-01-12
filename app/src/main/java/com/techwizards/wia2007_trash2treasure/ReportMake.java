@@ -335,5 +335,8 @@ public class ReportMake extends Fragment {
         ImagePicker.Companion.with(this)
                 .crop()
                 .start(REQUEST_CODE_PICK_PHOTO);
+
+        TVReportPhotoName.setText("Successfully chose photo");
+        TVReportPhotoName.setVisibility(View.VISIBLE);
     }
 }

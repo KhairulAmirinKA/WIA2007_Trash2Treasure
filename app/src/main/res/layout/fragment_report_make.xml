@@ -134,6 +134,7 @@
                     android:id="@+id/textView6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
                     android:text="Photo"
                     android:textColor="#000000"
                     android:textSize="24sp"
@@ -143,13 +144,16 @@
                     android:id="@+id/TVReportPhotoName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:text="Photo Name"
+                    android:textSize="16sp"
+                    android:visibility="invisible" />
 
                 <Button
                     android:id="@+id/BtnReportUploadImg"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="#F43B7A"
+                    android:backgroundTint="#FF5050"
+                    android:textColor="@color/white"
                     android:text="Upload Photo" />
 
                 <TextView
@@ -178,8 +182,9 @@
                     android:id="@+id/BtnReportSubmit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="24dp"
                     android:backgroundTint="#FF0000"
+                    android:padding="20dp"
                     android:text="Submit Report"
                     android:textColor="#FFFFFF" />
             </LinearLayout>
