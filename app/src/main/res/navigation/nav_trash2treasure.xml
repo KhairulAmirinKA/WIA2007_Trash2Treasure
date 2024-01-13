@@ -164,7 +164,7 @@
         tools:layout="@layout/fragment_advertise_product" />
     <fragment
         android:id="@+id/communityForumChatting"
-        android:name="com.techwizards.wia2007_trash2treasure.CommunityForumChatting"
+        android:name="com.techwizards.wia2007_trash2treasure.CommunityForumChat"
         android:label="fragment_community_forum_chatting"
         tools:layout="@layout/fragment_community_forum_chatting" >
         <action

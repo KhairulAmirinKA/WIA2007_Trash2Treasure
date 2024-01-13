@@ -25,7 +25,8 @@ public class DataManager {
     public CurrentUser currentUser;
     public List<ProfileItem> profileItems = new ArrayList<>(); //list of profile items
     public List<ReportItem> reportItems = new ArrayList<>(); //list of report items
-    public List<MarketItem> productItems = new ArrayList<>(); //list of advertised product
+    public List<MarketItem> productItems = new ArrayList<>(); //list of advertised products
+    public List<CommunityForumItem> communityForumItems = new ArrayList<>(); //list of community forums
 
     //fetch from firebase
     public void fetchProfile() {
@@ -171,6 +172,70 @@ public class DataManager {
         });
     }
 
+    //fetch forum from firebase
+    public void fetchForum() {
+        firebaseService.fetchForums(task -> {
+            if (task.isSuccessful()) {
+                for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+
+                    //convert fetched document to ProfileItem
+                    CommunityForumItem item = documentSnapshot.toObject(CommunityForumItem.class);
+
+                    //add to list
+                    communityForumItems.add(item);
+                }
+                System.out.println("FirebaseService: Fetch User Success!");
+            } else {
+                Exception exception = task.getException();
+                if (exception != null) {
+                    exception.printStackTrace();
+                }
+            }
+        });
+    }
+
+    //add new forum
+    public void addForum(CommunityForumItem forumItem) {
+        //add forum item to local list
+        communityForumItems.add(forumItem);
+        firebaseService.saveForum(forumItem, task -> {
+            if (task.isSuccessful()) {
+                System.out.println("FirebaseService: Save Forum Success!");
+            } else {
+                Exception exception = task.getException();
+                if (exception != null) {
+                    exception.printStackTrace();
+                }
+            }
+        });
+    }
+
+    //update forum
+    public void updateForum(CommunityForumItem forumItem) {
+        int index = -1;
+        for (int i = 0; i < communityForumItems.size(); i++) {
+            if (communityForumItems.get(i).getId().equals(forumItem.getId())) {
+                index = i;
+                break;
+            }
+        }
+
+        if (index != -1) {
+            communityForumItems.set(index, forumItem);
+
+            firebaseService.saveForum(forumItem, task -> {
+                if (task.isSuccessful()) {
+                    System.out.println("FirebaseService: Update Forum Success!");
+                } else {
+                    Exception exception = task.getException();
+                    if (exception != null) {
+                        exception.printStackTrace();
+                    }
+                }
+            });
+        }
+    }
+
     public static synchronized DataManager getInstance() {
         if (instance == null) {
             instance = new DataManager();
@@ -179,9 +244,10 @@ public class DataManager {
     }
 
     public DataManager() { //methods to call when instance of DataManager is created
-        fetchProfile(); //user profile
-        fetchReport(); //report
+        fetchProfile(); // user profile
+        fetchReport(); // report
         fetchProduct(); // product
+        fetchForum(); // forum
     }
 
     //load data from SharedPreferences

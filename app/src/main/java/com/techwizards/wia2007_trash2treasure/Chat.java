@@ -1,12 +1,12 @@
 package com.techwizards.wia2007_trash2treasure;
 
-public class ChatMessage {
+public class Chat {
 
     private String userName;
     private String messageContent;
     private String timestamp;
 
-    public ChatMessage(String userName, String messageContent) {
+    public Chat(String userName, String messageContent, String timestamp) {
         this.userName = userName;
         this.messageContent = messageContent;
         this.timestamp = timestamp;

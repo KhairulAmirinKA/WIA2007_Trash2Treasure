@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/DestCommunityForumChatting"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@drawable/gradient_background"
-    tools:context=".CommunityForumChatting">
+    tools:context=".CommunityForumChat">
 
-    <androidx.appcompat.widget.Toolbar
+    <LinearLayout
         android:id="@+id/toolbar"
-        android:layout_width="410dp"
-        android:layout_height="66dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
         <net.steamcrafted.materialiconlib.MaterialIconView
             android:id="@+id/BtnBack"
             android:layout_width="50dp"
@@ -24,57 +24,53 @@
             android:focusable="true"
             android:padding="10dp"
             app:materialIcon="chevron_left" />
-
         <TextView
-            android:id="@+id/community_forum_title"
+            android:id="@+id/TVCommunityForumChatName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Community Forum"
             android:textColor="@color/black"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/BtnBack"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.appcompat.widget.Toolbar>
+            android:textSize="24sp"
+            android:textStyle="bold"/>
+    </LinearLayout>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/chat_input_container"
-        app:layout_constraintTop_toBottomOf="@id/toolbar">
-
+        android:layout_weight="1"
+        android:padding="20dp">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/chat_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scrollbars="vertical"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
+            android:scrollbars="vertical" />
     </androidx.core.widget.NestedScrollView>
 
     <LinearLayout
-        android:id="@+id/chat_input_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="16dp"
+        android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <EditText
-            android:id="@+id/chat_input_field"
-            android:layout_width="332dp"
-            android:layout_height="57dp"
+            android:id="@+id/ETCommunityForumNewChat"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginHorizontal="10dp"
+            android:background="@drawable/box_with_shadow"
+            android:backgroundTint="@color/white"
+            android:padding="10dp"
             android:layout_weight="1"
             android:hint="@string/chat_input_hint" />
 
         <Button
-            android:id="@+id/send_button"
+            android:id="@+id/BtnCommunitySendChat"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
+            android:background="@drawable/box_with_shadow"
+            android:backgroundTint="@color/orange"
             android:text="@string/send_button" />
-
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

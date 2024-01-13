@@ -18,8 +18,8 @@ import java.util.UUID;
 public class FirebaseService {
     private static final String PROFILES_COLLECTION = "user_profiles";
     private static final String REPORT_COLLECTION = "reports";
-
     private static final String PRODUCT_COLLECTION = "products";
+    private static final String FORUM_COLLECTION = "forums";
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final StorageReference storageRef = FirebaseStorage.getInstance().getReference();
@@ -27,6 +27,8 @@ public class FirebaseService {
     private final CollectionReference profileCollection = db.collection(PROFILES_COLLECTION);
     private final CollectionReference reportCollection = db.collection(REPORT_COLLECTION);
     private final CollectionReference productCollection = db.collection(PRODUCT_COLLECTION);
+    private final CollectionReference forumCollection = db.collection(FORUM_COLLECTION);
+
     private static FirebaseService instance;
 
     public static synchronized FirebaseService getInstance() {
@@ -93,4 +95,16 @@ public class FirebaseService {
         productCollection.get().addOnCompleteListener(onCompleteListener);
     }
 
+    public void saveForum(CommunityForumItem item, OnCompleteListener<Void> onCompleteListener) {
+        String id = item.getId().toString();
+        if (!id.isEmpty()) {
+            forumCollection.document(id)
+                    .set(item.toMap())
+                    .addOnCompleteListener(onCompleteListener);
+        }
+    }
+
+    public void fetchForums(OnCompleteListener<QuerySnapshot> onCompleteListener) {
+        forumCollection.get().addOnCompleteListener(onCompleteListener);
+    }
 }

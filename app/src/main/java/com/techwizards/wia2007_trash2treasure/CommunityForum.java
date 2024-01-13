@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,9 +20,17 @@ public class CommunityForum extends Fragment implements CommunityForumAdapter.On
 
     RecyclerView recyclerView;
     CommunityForumAdapter adapter;
+    DataManager dataManager = DataManager.getInstance();
+    private static CommunityForum instance;
 
     public CommunityForum() {}
 
+    public static CommunityForum getInstance() {
+        if (instance == null) {
+            instance = new CommunityForum();
+        }
+        return instance;
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +69,8 @@ public class CommunityForum extends Fragment implements CommunityForumAdapter.On
         list.add(new CommunityForumItem("https://img.etimg.com/thumb/msid-101634906,width-480,height-360,imgsize-83338,resizemode-75/the-anthropocene.jpg", "GreenTech Enthusiasts", "Discuss about latest technologies in waste management.", 21));
         list.add(new CommunityForumItem("https://waste4change.com/blog/wp-content/uploads/86d36-single-use-plastic-1.jpeg", "Plastic-Free Pioneers", "Discuss strategies to reduce single-use plastics.", 8));
 
+        list.addAll(dataManager.communityForumItems);
+
         return list;
     }
 
@@ -70,6 +79,6 @@ public class CommunityForum extends Fragment implements CommunityForumAdapter.On
     }
     @Override
     public void onJoinClick(int position) {
-        replaceFragment(CommunityForumChatting.newInstance(String.valueOf(position)));
+        replaceFragment(CommunityForumChat.newInstance(String.valueOf(position)));
     }
 }
