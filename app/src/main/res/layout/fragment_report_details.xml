@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="10dp"
     android:background="@drawable/gradient_background"
     tools:context=".ReportDetails">
 
@@ -12,8 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="top"
+        android:padding="10dp"
         android:orientation="vertical">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -21,7 +20,6 @@
             android:orientation="horizontal"
             android:paddingHorizontal="20dp"
             android:paddingTop="20dp">
-
             <net.steamcrafted.materialiconlib.MaterialIconView
                 android:id="@+id/BtnDismiss"
                 android:layout_width="40dp"
@@ -31,7 +29,6 @@
                 android:focusable="true"
                 app:materialIcon="chevron_left"
                 app:materialIconColor="@color/black" />
-
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -47,17 +44,15 @@
             android:layout_height="match_parent"
             android:layout_margin="20dp"
             android:scrollbars="vertical">
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="@drawable/box_with_shadow"
                 android:backgroundTint="@color/white"
-                android:gravity="top"
+                android:gravity="center"
                 android:orientation="vertical"
                 android:padding="20dp">
-
                 <TextView
                     android:id="@+id/TVReportDetailsStatus"
                     android:layout_width="wrap_content"
@@ -65,127 +60,177 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:background="@drawable/rounded_rectangle"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="20dp"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="5dp"
                     android:text="Status"
                     android:textAlignment="center"
                     android:textSize="20sp" />
 
                 <View
-                    android:id="@+id/divider2"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginVertical="20dp"
                     android:layout_weight="1"
-                    android:background="@color/dullBlack" />
+                    android:background="@color/gray" />
 
                 <TextView
                     android:id="@+id/TVReportDetailsTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Report Title"
-                    android:textColor="#000000"
+                    android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
-
-                <TextView
-                    android:id="@+id/TVReportDetailsType"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="Type of Report"
-                    android:textColor="#000000"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/TVReportDetailsAddress"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:text="Type:"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/TVReportDetailsType"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+                </LinearLayout>
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="TextView"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:textStyle="normal" />
-
-                <TextView
-                    android:id="@+id/TVReportDetailsTime"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:text="Address:"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/TVReportDetailsAddress"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+                </LinearLayout>
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Time"
-                    android:textColor="#000000"
-                    android:textSize="16sp"
-                    android:textStyle="normal" />
-
-                <TextView
-                    android:id="@+id/TVReportDetailsDate"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:text="Time:"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/TVReportDetailsTime"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+                </LinearLayout>
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Date"
-                    android:textColor="#000000"
-                    android:textSize="16sp"
-                    android:textStyle="normal" />
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:text="Date:"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/TVReportDetailsDate"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+                </LinearLayout>
 
                 <View
-                    android:id="@+id/divider3"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_weight="1"
-                    android:background="@color/dullBlack" />
+                    android:layout_marginVertical="20dp"
+                    android:background="@color/gray" />
 
                 <ImageView
                     android:id="@+id/IVReportDetailsImg"
                     android:layout_width="200dp"
                     android:layout_height="200dp"
-                    android:layout_marginTop="10dp"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/recycle_icon" />
 
-                <TextView
-                    android:id="@+id/TVReportDetailsPIC"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Person In Charge"
-                    android:textColor="#000000"
-                    android:textSize="16sp"
-                    android:textStyle="normal" />
-
-                <TextView
-                    android:id="@+id/TVReportDetailsLastUpdated"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="140dp"
+                        android:layout_height="wrap_content"
+                        android:text="Person In Charge:"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/TVReportDetailsPIC"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+                </LinearLayout>
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:text="Last Updated"
-                    android:textColor="#000000"
-                    android:textSize="16sp"
-                    android:textStyle="normal" />
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="140dp"
+                        android:layout_height="wrap_content"
+                        android:text="Last Updated:"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/TVReportDetailsLastUpdated"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+                </LinearLayout>
 
                 <View
-                    android:id="@+id/divider4"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_weight="1"
-                    android:background="@color/dullBlack" />
+                    android:layout_marginVertical="20dp"
+                    android:background="@color/gray" />
 
                 <TextView
-                    android:id="@+id/textView7"
+                    android:id="@+id/TVReportDetailsName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:text="You"
-                    android:textColor="#01564D"
-                    android:textSize="16sp" />
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/TVReportDetailsDesc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Desc"
-                    android:textColor="#000000" />
-
+                    android:textColor="@color/black" />
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

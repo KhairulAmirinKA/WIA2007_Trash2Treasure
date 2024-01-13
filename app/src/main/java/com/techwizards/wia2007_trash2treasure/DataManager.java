@@ -2,11 +2,13 @@ package com.techwizards.wia2007_trash2treasure;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.Uri;
 
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class DataManager {
 
@@ -23,7 +25,7 @@ public class DataManager {
     public CurrentUser currentUser;
     public List<ProfileItem> profileItems = new ArrayList<>(); //list of profile items
     public List<ReportItem> reportItems = new ArrayList<>(); //list of report items
-    public List<Product> productList = new ArrayList<>(); //list of advertised product
+    public List<MarketItem> productItems = new ArrayList<>(); //list of advertised product
 
     //fetch from firebase
     public void fetchProfile() {
@@ -125,20 +127,9 @@ public class DataManager {
         });
     }
 
-    public void addNewProduct(Product product) {
-
-        //add product item to local list
-        productList.add(product);
-        firebaseService.addNewProduct(product, task -> {
-            if (task.isSuccessful()) {
-                System.out.println("FirebaseService: Add New Advertise Product Success!");
-
-            } else {
-                Exception exception = task.getException();
-                if (exception != null) {
-                    exception.printStackTrace();
-                }
-            }
+    public void addReportImage(Uri imageUri, ImageUploadCallback callback) {
+        firebaseService.addReportImage(imageUri, uri -> {
+            callback.onUploadSuccess(uri.toString());
         });
     }
 
@@ -146,8 +137,8 @@ public class DataManager {
         firebaseService.fetchProducts(task -> {
             if (task.isSuccessful()) {
                 for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
-                    Product product = documentSnapshot.toObject(Product.class);
-                    productList.add(product);
+                    MarketItem item = documentSnapshot.toObject(MarketItem.class);
+                    productItems.add(item);
                 }
                 System.out.println("FirebaseService: Fetch Reports Success!");
             } else {
@@ -159,6 +150,26 @@ public class DataManager {
         });
     }
 
+    public void addNewProduct(MarketItem item) {
+        //add product item to local list
+        productItems.add(item);
+        firebaseService.addNewProduct(item, task -> {
+            if (task.isSuccessful()) {
+                System.out.println("FirebaseService: Add New Advertise Product Success!");
+            } else {
+                Exception exception = task.getException();
+                if (exception != null) {
+                    exception.printStackTrace();
+                }
+            }
+        });
+    }
+
+    public void addProductImage(Uri imageUri, ImageUploadCallback callback) {
+        firebaseService.addProductImage(imageUri, uri -> {
+            callback.onUploadSuccess(uri.toString());
+        });
+    }
 
     public static synchronized DataManager getInstance() {
         if (instance == null) {
@@ -168,9 +179,9 @@ public class DataManager {
     }
 
     public DataManager() { //methods to call when instance of DataManager is created
-        
         fetchProfile(); //user profile
-        fetchReport(); //user report
+        fetchReport(); //report
+        fetchProduct(); // product
     }
 
     //load data from SharedPreferences
@@ -180,7 +191,6 @@ public class DataManager {
 
         String currentUserJson = preferences.getString(KEY_CURRENT_USER, "");
         if(!currentUserJson.isEmpty()) {
-
             //deserialize Gson to currentUser
             currentUser = gson.fromJson(currentUserJson, CurrentUser.class);
         }
@@ -213,6 +223,11 @@ public class DataManager {
         }
 
         editor.apply(); //apply changes to SharedPreferences
+    }
+
+    public interface ImageUploadCallback {
+        void onUploadSuccess(String imageUri);
+        void unUploadFailure(Exception e);
     }
 }
 

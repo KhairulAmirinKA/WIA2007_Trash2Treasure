@@ -32,7 +32,7 @@ public class MarketplaceAdapter extends RecyclerView.Adapter<MarketplaceAdapter.
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         MarketItem item = marketItemList.get(position);
 
-        Picasso.get().load(item.getImage()).into(holder.productImage);
+        Picasso.get().load(item.getImage()).error(R.drawable.ic_launcher_foreground).into(holder.productImage);
         holder.productName.setText(item.getName());
         holder.productDescription.setText(item.getDescription());
     }

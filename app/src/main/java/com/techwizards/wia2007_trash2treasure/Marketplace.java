@@ -61,12 +61,6 @@ public class Marketplace extends Fragment {
     }
 
     public List<MarketItem> getProducts() {
-        List<MarketItem> list = new ArrayList<>();
-
-        list.add(new MarketItem("https://i.pinimg.com/736x/dd/57/a2/dd57a2f0938eb9d2c0cdde23afd326e3.jpg", "Recycled Bag", "Good Condition", 2));
-        list.add(new MarketItem("https://i.pinimg.com/564x/eb/08/40/eb0840e71c831854dc7458c2f6f76f23.jpg", "DIY Lamp", "100% Handmade", 3));
-        list.add(new MarketItem("https://www.purlsoho.com/media/catalog/product/p/u/purlsoho_classicfriendshipbracelet_m-3_1.jpg?quality=85&bg-color=255,255,255&fit=bounds&height=712&width=544", "Bracelet", "100% Handmade", 6));
-
-        return list;
+        return DataManager.getInstance().productItems;
     }
 }

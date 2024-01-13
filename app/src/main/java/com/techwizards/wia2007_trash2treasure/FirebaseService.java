@@ -2,12 +2,18 @@ package com.techwizards.wia2007_trash2treasure;
 
 import android.app.Activity;
 import android.content.Context;
+import android.net.Uri;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.util.UUID;
 
 public class FirebaseService {
     private static final String PROFILES_COLLECTION = "user_profiles";
@@ -16,9 +22,10 @@ public class FirebaseService {
     private static final String PRODUCT_COLLECTION = "products";
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+
     private final CollectionReference profileCollection = db.collection(PROFILES_COLLECTION);
     private final CollectionReference reportCollection = db.collection(REPORT_COLLECTION);
-
     private final CollectionReference productCollection = db.collection(PRODUCT_COLLECTION);
     private static FirebaseService instance;
 
@@ -53,21 +60,37 @@ public class FirebaseService {
         }
     }
 
+    public void addReportImage(Uri imageUri, OnSuccessListener<Uri> onSuccessListener) {
+        StorageReference imageRef = storageRef.child("reports/" + UUID.randomUUID().toString());
+
+        imageRef.putFile(imageUri).addOnSuccessListener(taskSnapshot -> {
+            imageRef.getDownloadUrl().addOnSuccessListener(onSuccessListener);
+        });
+    }
+
     public void fetchReports(OnCompleteListener<QuerySnapshot> onCompleteListener) {
         reportCollection.get().addOnCompleteListener(onCompleteListener);
     }
 
-    public void addNewProduct(Product productList, OnCompleteListener<Void> onCompleteListener) {
-        String name = productList.productName;
-        if (!name.isEmpty()) {
-            reportCollection.document(name)
-                    .set(productList.toMap())
+    public void addNewProduct(MarketItem item, OnCompleteListener<Void> onCompleteListener) {
+        String id = item.uuid.toString();
+        if (!id.isEmpty()) {
+            productCollection.document(id)
+                    .set(item.toMap())
                     .addOnCompleteListener(onCompleteListener);
         }
     }
 
+    public void addProductImage(Uri imageUri, OnSuccessListener<Uri> onSuccessListener) {
+        StorageReference imageRef = storageRef.child("products/" + UUID.randomUUID().toString());
+
+        imageRef.putFile(imageUri).addOnSuccessListener(taskSnapshot -> {
+            imageRef.getDownloadUrl().addOnSuccessListener(onSuccessListener);
+        });
+    }
+
     public void fetchProducts(OnCompleteListener<QuerySnapshot> onCompleteListener) {
-        reportCollection.get().addOnCompleteListener(onCompleteListener);
+        productCollection.get().addOnCompleteListener(onCompleteListener);
     }
 
 }

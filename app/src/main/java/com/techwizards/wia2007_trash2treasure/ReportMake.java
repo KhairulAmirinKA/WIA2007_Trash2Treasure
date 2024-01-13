@@ -8,7 +8,10 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.PickVisualMediaRequest;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -18,7 +21,6 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,32 +33,33 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.dhaval2404.imagepicker.ImagePicker;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import net.steamcrafted.materialiconlib.MaterialIconView;
 
-import java.sql.Time;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ReportMake extends Fragment {
 
-    private static final int REQUEST_CODE_PICK_PHOTO = 101;
-    private Uri selectedPhotoUri;
-    StorageReference imgRef;
-    String fileName;
-    String imgPath="NA";
+    DataManager dataManager = DataManager.getInstance();
+    private Uri imageUri;
+    ActivityResultLauncher<PickVisualMediaRequest> launcher = registerForActivityResult(new ActivityResultContracts.PickVisualMedia(), new ActivityResultCallback<Uri>() {
+        @Override
+        public void onActivityResult(Uri o) {
+            if (o != null) {
+                imageUri = o;
+            } else {
+                Toast.makeText(getContext(), "No Image Selected", Toast.LENGTH_SHORT).show();
+            }
+        }
+    });
 
     String[] options;
     Spinner SpinnerReportLocalAuthority;
@@ -64,10 +67,6 @@ public class ReportMake extends Fragment {
     EditText ETReportDescription;
     EditText ETReportAddress;
 
-    Button BtnReportUploadImg;
-    TextView TVReportPhotoName;
-
-    DataManager dataManager = DataManager.getInstance();
     public ReportMake() {
         // Required empty public constructor
     }
@@ -90,7 +89,6 @@ public class ReportMake extends Fragment {
         btnDismiss.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 //ask user's confirmation to exit without submitting report
                 showConfirmationDialog(view);
             }
@@ -99,8 +97,6 @@ public class ReportMake extends Fragment {
         RGReportType = view.findViewById(R.id.RGReportMakeType);
         ETReportDescription = view.findViewById(R.id.ETReportDescription);
         ETReportAddress = view.findViewById(R.id.ETReportAddress);
-        BtnReportUploadImg= view.findViewById(R.id.BtnReportUploadImg);
-        TVReportPhotoName= view.findViewById(R.id.TVReportPhotoName);
 
         //map
         FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
@@ -110,25 +106,24 @@ public class ReportMake extends Fragment {
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
 
+        Button BtnReportUploadImg = view.findViewById(R.id.BtnReportUploadImg);
         //upload photo from local device
         BtnReportUploadImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                uploadPhoto(view);
+                launcher.launch(new PickVisualMediaRequest.Builder()
+                        .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE)
+                        .build());
             }
         });
-
-
 
         //clicks the submit btn
         Button btnSubmit = view.findViewById(R.id.BtnReportSubmit);
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 //createReport will returns true if the report form is complete
                 if (createReport()){
-
                     //once the reports are submitted to the db, user will go back to Report page
                     //otherwise, they will stay in New Report section
                     Navigation.findNavController(view).popBackStack();
@@ -140,69 +135,9 @@ public class ReportMake extends Fragment {
         return view;
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode==REQUEST_CODE_PICK_PHOTO && resultCode==Activity.RESULT_OK){
-
-            //handle selected photo
-            selectedPhotoUri= data.getData();
-
-            //uploadToFirebaseStorage();
-        }
-    }
-
-    private void uploadToFirebaseStorage() {
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-
-        StorageReference storageRef=storage.getReference();
-
-        //get current time
-        Calendar calendar = Calendar.getInstance();
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd_MM_HHmm", Locale.getDefault());
-        String timestamp= dateFormat.format(calendar.getTime());
-
-        //bina nama file
-        fileName= dataManager.currentUser.getCurrentUser()+"_"+ timestamp;
-
-         imgRef= storageRef.child("reportPhotos/" + fileName);
-
-        imgRef.putFile(selectedPhotoUri)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-
-                        storageRef.child("reportPhotos/"+fileName).getDownloadUrl()
-                                .addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-                                imgPath= uri.toString();
-                            }
-                        });
-
-                        if (isAdded()) { //checks whether fragment is attached to the activity
-                            Toast.makeText(getContext(), "Upload successful", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-
-                        if (isAdded()) {
-                            Toast.makeText(getContext(), "Upload failed", Toast.LENGTH_SHORT).show();
-                            Log.e("GAGAL", e.getMessage());
-                        }
-                    }
-                });
-
-
-
-    }
-
     private boolean createReport() {
+        String name = dataManager.currentUser.getCurrentUser().getName();
+
         SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat time = new SimpleDateFormat("HH:mm");
 
@@ -231,37 +166,27 @@ public class ReportMake extends Fragment {
             String description = ETReportDescription.getText().toString();
             String address = ETReportAddress.getText().toString();
 
-            //upload photo to firebase storage
-            if (selectedPhotoUri!= null){
-                uploadToFirebaseStorage();
+            if (imageUri != null) {
+                String finalReportType = reportType;
+                dataManager.addReportImage(imageUri, new DataManager.ImageUploadCallback() {
+                    @Override
+                    public void onUploadSuccess(String imageUri) {
+                        ReportItem newReport = new ReportItem(localAuth, title, finalReportType, description, address, name, "Pending", date.format(new Date()), time.format(new Date()), imageUri);
+
+                        //add to the firebase
+                        dataManager.addNewReport(newReport);
+                    }
+
+                    @Override
+                    public void unUploadFailure(Exception e) {
+                        e.printStackTrace();
+                    }
+                });
             }
-
-//            final String[] imgPath = {"NA"};
-//
-//            imgRef.child(imgRef.getPath()).getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
-//                @Override
-//                public void onComplete(@NonNull Task<Uri> task) {
-//                    if (task.isSuccessful()){
-//                        Uri downloadUrl= task.getResult();
-//
-//                        imgPath[0] = downloadUrl.toString();
-//                    }
-//                }
-//            });
-
-            ReportItem newReport = new ReportItem(localAuth, title, reportType, description,
-                    address, dataManager.currentUser.getCurrentUser().getName(), "Pending",
-                    date.format(new Date()), time.format(new Date()) , imgPath);
-
-            //add to the firebase
-            dataManager.addNewReport(newReport);
-
             Toast.makeText(getContext(), "Report is successfully submitted", Toast.LENGTH_SHORT).show();
 
             return true;
-        }
-
-        else {
+        } else {
             //this means the report form is not complete. will not send to the database
             Toast.makeText(getContext(), "Please provide the details", Toast.LENGTH_SHORT).show();
         }
@@ -297,12 +222,11 @@ public class ReportMake extends Fragment {
 
     //show confirmation dialog when user wants to back
     private void showConfirmationDialog(View view){
-
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext() );
 
         builder.setTitle("Discard Report");
 
-        builder.setMessage("Are you sure you want to discard report? Any unsubmitted report will be lost.");
+        builder.setMessage("Are you sure you want to discard report? Any un-submitted report will be lost.");
 
         //yes btn
         String positiveText= "Yes";
@@ -313,7 +237,6 @@ public class ReportMake extends Fragment {
         builder.setPositiveButton(spannableString, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-
                 //go back to report main page
                 Navigation.findNavController(view).popBackStack();
             }
@@ -329,14 +252,5 @@ public class ReportMake extends Fragment {
 
         AlertDialog dialog = builder.create();
         dialog.show();
-    }
-
-    private void uploadPhoto(View view){
-        ImagePicker.Companion.with(this)
-                .crop()
-                .start(REQUEST_CODE_PICK_PHOTO);
-
-        TVReportPhotoName.setText("Successfully chose photo");
-        TVReportPhotoName.setVisibility(View.VISIBLE);
     }
 }

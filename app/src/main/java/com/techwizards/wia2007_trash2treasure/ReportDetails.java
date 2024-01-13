@@ -5,14 +5,12 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
 import net.steamcrafted.materialiconlib.MaterialIconView;
@@ -20,25 +18,21 @@ import net.steamcrafted.materialiconlib.MaterialIconView;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
-import java.util.Objects;
 
 
 public class ReportDetails extends Fragment {
     public static final String POSITION = "POSITION";
 
     TextView TVReportDetailsStatus, TVReportDetailsTitle,TVReportDetailsType,TVReportDetailsTime,TVReportDetailsDate;
-    TextView TVReportDetailsAddress, TVReportDetailsPIC, TVReportDetailsDesc;
+    TextView TVReportDetailsAddress, TVReportDetailsPIC, TVReportDetailsDesc, TVReportDetailsName;
     TextView TVReportDetailsLastUpdated;
     ImageView IVReportDetailsImg;
 
-    public ReportDetails() {
-        // Required empty public constructor
-    }
+    public ReportDetails() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -57,11 +51,11 @@ public class ReportDetails extends Fragment {
         });
 
         //retrive data from ReportAdapter
-        int position=0;
+        int position = 0;
 
         Bundle bundle = getArguments();
 
-        if (bundle!= null && bundle.containsKey(POSITION)){
+        if (bundle != null && bundle.containsKey(POSITION)){
             //dah ada position, boleh guna data
             position = bundle.getInt(POSITION, 0);
         }
@@ -72,19 +66,20 @@ public class ReportDetails extends Fragment {
         initView(view);
 
         //set the text
-        TVReportDetailsStatus.setText( currentItem.getStatus() );
-        TVReportDetailsTitle.setText(currentItem.getReportTitle() );
+        TVReportDetailsStatus.setText(currentItem.getStatus());
+        TVReportDetailsTitle.setText(currentItem.getReportTitle());
 
-        TVReportDetailsType.setText("Type: "+ currentItem.getReportType() );
-        TVReportDetailsAddress.setText("Address: "+ currentItem.getAddress() );
-        TVReportDetailsTime.setText("Time: "+currentItem.getReportTime() );
-        TVReportDetailsDate.setText("Date: "+ currentItem.getReportDate());
+        TVReportDetailsType.setText(currentItem.getReportType());
+        TVReportDetailsAddress.setText(currentItem.getAddress());
+        TVReportDetailsTime.setText(currentItem.getReportTime());
+        TVReportDetailsDate.setText(currentItem.getReportDate());
 
-        String[] names={"Mr Ali","Mr Ravindran", "Mr Yangding", "Miss Ameera", "Miss Illya", "Mr Khairul"};
+        String[] names = {"Mr Ali","Mr Ravindran", "Mr Yangding", "Miss Ameera", "Miss Illya", "Mr Khairul"};
         int N = names.length;
 
-        TVReportDetailsPIC.setText("Person in charge: "+ names[position%N]);
-        TVReportDetailsDesc.setText( currentItem.getReportDescription() );
+        TVReportDetailsPIC.setText(names[position%N]);
+        TVReportDetailsName.setText(currentItem.getReporterName());
+        TVReportDetailsDesc.setText( currentItem.getReportDescription());
 
         //get current time
         Calendar calendar = Calendar.getInstance();
@@ -92,24 +87,12 @@ public class ReportDetails extends Fragment {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         String timestamp= dateFormat.format(calendar.getTime());
 
-        TVReportDetailsLastUpdated.setText("Last Updated:"+ timestamp );
+        TVReportDetailsLastUpdated.setText(timestamp);
 
         //setting the img
         String imgPath= currentItem.getImgPath();
         System.out.println(imgPath);
-
-        if (!imgPath.equals("NA")){
-            Log.d("DownloadURL", imgPath);
-
-        Glide.with(requireContext())
-                .load(imgPath)
-                .into(IVReportDetailsImg);
-
-        //Picasso.get().load(imgPath).into(IVReportDetailsImg);
-        }
-
-
-
+        Picasso.get().load(imgPath).error(R.drawable.ic_launcher_foreground).into(IVReportDetailsImg);
 
         return view;
     }
@@ -123,6 +106,7 @@ public class ReportDetails extends Fragment {
         TVReportDetailsTime = view.findViewById(R.id.TVReportDetailsTime);
         TVReportDetailsDate = view.findViewById(R.id.TVReportDetailsDate);
         TVReportDetailsPIC = view.findViewById(R.id.TVReportDetailsPIC);
+        TVReportDetailsName = view.findViewById(R.id.TVReportDetailsName);
         TVReportDetailsDesc = view.findViewById(R.id.TVReportDetailsDesc);
 
         IVReportDetailsImg = view.findViewById(R.id.IVReportDetailsImg);
