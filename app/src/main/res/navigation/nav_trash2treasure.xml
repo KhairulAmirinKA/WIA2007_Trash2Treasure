@@ -137,6 +137,9 @@
         <action
             android:id="@+id/action_DestMarketplace_to_advertiseProduct"
             app:destination="@id/DestAdvertiseProduct" />
+        <action
+            android:id="@+id/action_DestMarketplace_to_DestMarketItem"
+            app:destination="@id/DestMarketItem" />
     </fragment>
     <fragment
         android:id="@+id/DestEduResources"
@@ -171,4 +174,9 @@
             android:id="@+id/action_communityForumChatting_to_DestCommunity"
             app:destination="@id/DestCommunity" />
     </fragment>
+    <fragment
+        android:id="@+id/DestMarketItem"
+        android:name="com.techwizards.wia2007_trash2treasure.MarketItemPage"
+        android:label="fragment_market_item"
+        tools:layout="@layout/fragment_market_item" />
 </navigation>
