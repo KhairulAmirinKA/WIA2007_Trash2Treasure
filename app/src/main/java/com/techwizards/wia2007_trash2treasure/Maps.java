@@ -36,9 +36,7 @@ public class Maps extends Fragment {
     private Marker userMarker;
     private List<Marker> recyclingMarkers = new ArrayList<>();
 
-    public Maps() {
-        // Required empty public constructor
-    }
+    public Maps() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,7 +49,8 @@ public class Maps extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_map, container, false);
 
-        mapView = (MapView) view.findViewById(R.id.MVTruckTracker);
+        mapView = view.findViewById(R.id.MVTruckTracker);
+        mapView.requestFocus();
         initializeMapView();
 
         return view;
@@ -64,6 +63,7 @@ public class Maps extends Fragment {
             mapView.setTileSource(TileSourceFactory.MAPNIK);
             mapView.getController().setCenter(new GeoPoint(3.105506, 101.6617209));
             mapView.getController().setZoom(12.0);
+            mapView.requestFocus();
         }
     }
 
@@ -110,21 +110,23 @@ public class Maps extends Fragment {
     }
 
     private void addRecyclingPointMarker(double latitude, double longitude) {
-        Marker recyclingMarker = new Marker(mapView);
-        recyclingMarker.setPosition(new GeoPoint(latitude, longitude));
+        if (mapView != null) {
+            Marker recyclingMarker = new Marker(mapView);
+            recyclingMarker.setPosition(new GeoPoint(latitude, longitude));
 
-        Drawable icon = getResources().getDrawable(R.drawable.recycle_icon);
-        Bitmap iconBit = ((BitmapDrawable) icon).getBitmap();
-        int width = iconBit.getWidth() / 10;
-        int height = iconBit.getHeight() / 10;
-        recyclingMarker.setIcon(new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(iconBit, width, height, true)));
+            Drawable icon = getResources().getDrawable(R.drawable.recycle_icon);
+            Bitmap iconBit = ((BitmapDrawable) icon).getBitmap();
+            int width = iconBit.getWidth() / 10;
+            int height = iconBit.getHeight() / 10;
+            recyclingMarker.setIcon(new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(iconBit, width, height, true)));
 
-        recyclingMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER);
-        recyclingMarkers.add(recyclingMarker);
+            recyclingMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER);
+            recyclingMarkers.add(recyclingMarker);
 
-        mapView.getOverlays().add(recyclingMarker);
+            mapView.getOverlays().add(recyclingMarker);
+        }
 
-//        System.out.println("Recycling Point Marker Added: " + latitude + ", " + longitude);
+        System.out.println("Recycling Point Marker Added: " + latitude + ", " + longitude);
     }
 
     private static class PlaceSearchTask extends AsyncTask<String, Void, List<GeoPoint>> {
@@ -155,8 +157,10 @@ public class Maps extends Fragment {
         @Override
         protected void onPostExecute(List<GeoPoint> result) {
             Maps maps = mapsWeakReference.get();
-            for (GeoPoint geoPoint : result) {
-                maps.addRecyclingPointMarker(geoPoint.getLatitude(), geoPoint.getLongitude());
+            if (maps != null) {
+                for (GeoPoint geoPoint : result) {
+                    maps.addRecyclingPointMarker(geoPoint.getLatitude(), geoPoint.getLongitude());
+                }
             }
         }
 
