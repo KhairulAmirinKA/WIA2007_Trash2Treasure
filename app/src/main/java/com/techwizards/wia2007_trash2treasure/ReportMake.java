@@ -98,14 +98,6 @@ public class ReportMake extends Fragment {
         ETReportDescription = view.findViewById(R.id.ETReportDescription);
         ETReportAddress = view.findViewById(R.id.ETReportAddress);
 
-        //map
-        FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
-
-        Maps maps = new Maps();
-        fragmentTransaction.replace(R.id.FCVComplaintLocation, maps);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
-
         Button BtnReportUploadImg = view.findViewById(R.id.BtnReportUploadImg);
         //upload photo from local device
         BtnReportUploadImg.setOnClickListener(new View.OnClickListener() {

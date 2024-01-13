@@ -118,20 +118,6 @@
                     android:minHeight="48dp"
                     android:paddingLeft="5dp" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Complaint Location"
-                    android:textColor="@color/black"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
-
-                <androidx.fragment.app.FragmentContainerView
-                    android:id="@+id/FCVComplaintLocation"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_marginBottom="20dp"
-                    android:name="com.techwizards.wia2007_trash2treasure.Maps"/>
 
                 <TextView
                     android:id="@+id/textView6"
