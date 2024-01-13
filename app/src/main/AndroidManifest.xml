@@ -5,12 +5,15 @@
     <uses-feature
         android:name="android.hardware.telephony"
         android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -22,9 +25,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WIA2007_Trash2Treasure"
         tools:targetApi="31">
-        <activity
-            android:name="Latihan.UploadActivity"
-            android:exported="true" />
         <activity
             android:name=".TruckTracker"
             android:exported="false" />
@@ -47,6 +47,14 @@
         <activity
             android:name=".MainActivity"
             android:exported="false" />
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.techwizards.wia2007_trash2treasure.file-provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_path" />
+        </provider>
     </application>
-
 </manifest>
