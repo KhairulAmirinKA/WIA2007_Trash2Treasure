@@ -60,16 +60,6 @@ public class CommunityForumAdapter extends RecyclerView.Adapter<CommunityForumAd
         });
     }
 
-    static class ForumViewHolder extends RecyclerView.ViewHolder {
-        Button joinButton;
-
-        ForumViewHolder(@NonNull View itemView) {
-            super(itemView);
-            joinButton = itemView.findViewById(R.id.BtnCommunityJoin);
-            // ... other view bindings
-        }
-    }
-
     @Override
     public int getItemCount() {
         return communityForumItems.size();

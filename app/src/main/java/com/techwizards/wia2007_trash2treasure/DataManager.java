@@ -8,6 +8,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class DataManager {
@@ -177,9 +178,19 @@ public class DataManager {
         firebaseService.fetchForums(task -> {
             if (task.isSuccessful()) {
                 for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                    String dbID = documentSnapshot.getId();
+
+                    UUID uuid;
+                    try {
+                        uuid = UUID.fromString(dbID);
+                    } catch (IllegalArgumentException e) {
+                        uuid = null;
+                    }
 
                     //convert fetched document to ProfileItem
                     CommunityForumItem item = documentSnapshot.toObject(CommunityForumItem.class);
+                    item.id = uuid;
+                    System.out.println("UUID" + item.id.toString() + " : " + uuid.toString());
 
                     //add to list
                     communityForumItems.add(item);
@@ -214,7 +225,7 @@ public class DataManager {
     public void updateForum(CommunityForumItem forumItem) {
         int index = -1;
         for (int i = 0; i < communityForumItems.size(); i++) {
-            if (communityForumItems.get(i).getId().equals(forumItem.getId())) {
+            if (communityForumItems.get(i).id.equals(forumItem.id)) {
                 index = i;
                 break;
             }

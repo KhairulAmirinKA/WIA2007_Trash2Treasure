@@ -6,6 +6,8 @@ public class Chat {
     private String messageContent;
     private String timestamp;
 
+    public Chat() {}
+
     public Chat(String userName, String messageContent, String timestamp) {
         this.userName = userName;
         this.messageContent = messageContent;

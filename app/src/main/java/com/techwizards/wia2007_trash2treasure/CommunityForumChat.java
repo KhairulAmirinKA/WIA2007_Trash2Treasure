@@ -47,14 +47,14 @@ public class CommunityForumChat extends Fragment {
 
         Bundle bundle = getArguments();
         int position = bundle.getInt("position");
-        CommunityForumItem item = CommunityForum.getInstance().getList().get(position);
+        CommunityForumItem forumItem = CommunityForum.getInstance().getList().get(position);
 
         TextView TVName = view.findViewById(R.id.TVCommunityForumChatName);
-        TVName.setText(item.getForumName());
+        TVName.setText(forumItem.getForumName());
 
         // Initialize RecyclerView and adapter
         RecyclerView recyclerView = view.findViewById(R.id.chat_recycler_view);
-        chats = item.getChats(); // Initialize with your data
+        chats = forumItem.getChats(); // Initialize with your data
         chatAdapter = new CommunityForumChatAdapter(chats);
 
         // Set up RecyclerView
@@ -75,7 +75,7 @@ public class CommunityForumChat extends Fragment {
                     // Add the message to the chatMessages list
                     chats.add(new Chat(dataManager.currentUser.getCurrentUser().getName(), messageText, time.format(new Date())));
 
-                    dataManager.updateForum(item);
+                    dataManager.updateForum(forumItem);
                     // Notify the adapter that the dataset has changed
                     chatAdapter.notifyDataSetChanged();
 
@@ -88,17 +88,6 @@ public class CommunityForumChat extends Fragment {
         return view;
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        // Retrieve any passed data from arguments
-        Bundle args = getArguments();
-        if (args != null) {
-            int communityId = args.getInt("communityId", -1);
-
-        }
-    }
     public static CommunityForumChat newInstance(String forumItemId) {
         CommunityForumChat fragment = new CommunityForumChat();
         Bundle args = new Bundle();

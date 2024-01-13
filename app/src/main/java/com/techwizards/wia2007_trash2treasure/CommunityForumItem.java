@@ -8,13 +8,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 public class CommunityForumItem {
+    UUID id = UUID.randomUUID();
     String forumImage;
     String forumName;
     String forumDescription;
     int forumParticipants;
-    private String id;
     List<Chat> chats;
 
     public CommunityForumItem() {}
@@ -49,9 +50,6 @@ public class CommunityForumItem {
 
     public int getForumParticipants() {
         return forumParticipants;
-    }
-    public String getId() {
-        return id;
     }
 
     public List<Chat> getChats() {

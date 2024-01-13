@@ -96,7 +96,7 @@ public class FirebaseService {
     }
 
     public void saveForum(CommunityForumItem item, OnCompleteListener<Void> onCompleteListener) {
-        String id = item.getId().toString();
+        String id = item.id.toString();
         if (!id.isEmpty()) {
             forumCollection.document(id)
                     .set(item.toMap())
