@@ -182,6 +182,11 @@ public class ReportMake extends Fragment {
                         e.printStackTrace();
                     }
                 });
+            } else {
+                ReportItem newReport = new ReportItem(localAuth, title, reportType, description, address, name, "Pending", date.format(new Date()), time.format(new Date()), "");
+
+                //add to the firebase
+                dataManager.addNewReport(newReport);
             }
             Toast.makeText(getContext(), "Report is successfully submitted", Toast.LENGTH_SHORT).show();
 

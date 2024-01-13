@@ -92,7 +92,9 @@ public class ReportDetails extends Fragment {
         //setting the img
         String imgPath= currentItem.getImgPath();
         System.out.println(imgPath);
-        Picasso.get().load(imgPath).error(R.drawable.ic_launcher_foreground).into(IVReportDetailsImg);
+        if (imgPath != "") {
+            Picasso.get().load(imgPath).error(R.drawable.ic_launcher_foreground).into(IVReportDetailsImg);
+        }
 
         return view;
     }
