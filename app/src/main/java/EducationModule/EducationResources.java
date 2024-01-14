@@ -1,4 +1,4 @@
-package com.techwizards.wia2007_trash2treasure;
+package EducationModule;
 
 import android.os.Bundle;
 
@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.techwizards.wia2007_trash2treasure.R;
 
 import net.steamcrafted.materialiconlib.MaterialIconView;
 

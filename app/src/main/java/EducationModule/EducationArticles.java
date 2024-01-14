@@ -1,6 +1,5 @@
-package com.techwizards.wia2007_trash2treasure;
+package EducationModule;
 
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -14,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.techwizards.wia2007_trash2treasure.R;
 
 import net.steamcrafted.materialiconlib.MaterialIconView;
 

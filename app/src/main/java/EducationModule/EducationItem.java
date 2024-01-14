@@ -1,4 +1,4 @@
-package com.techwizards.wia2007_trash2treasure;
+package EducationModule;
 
 public class EducationItem {
 

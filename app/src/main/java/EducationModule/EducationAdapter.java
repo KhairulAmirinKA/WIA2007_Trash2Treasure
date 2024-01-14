@@ -1,4 +1,4 @@
-package com.techwizards.wia2007_trash2treasure;
+package EducationModule;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -11,11 +11,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
+import com.techwizards.wia2007_trash2treasure.R;
 
 import java.util.List;
 
