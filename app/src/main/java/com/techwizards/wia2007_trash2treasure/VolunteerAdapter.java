@@ -22,6 +22,7 @@ import java.util.List;
 public class VolunteerAdapter extends RecyclerView.Adapter<VolunteerAdapter.ViewHolder> {
 
     public static final String POSITION = "POSITION"; //bundle key name
+    public static final String VOLUNTEER_ITEM_KEY = "VOLUNTEER_ITEM_KEY";
     private final List<VolunteerItem> volunteerItems;
 
     public VolunteerAdapter(List<VolunteerItem> volunteerItems) {
@@ -39,8 +40,6 @@ public class VolunteerAdapter extends RecyclerView.Adapter<VolunteerAdapter.View
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-
-
         //current item
         VolunteerItem item = volunteerItems.get(position);
 
@@ -51,7 +50,7 @@ public class VolunteerAdapter extends RecyclerView.Adapter<VolunteerAdapter.View
 
         //want to send data to other fragment
         Bundle bundle = new Bundle();
-        bundle.putInt(POSITION, holder.getAdapterPosition() ); //send position as the value
+        bundle.putSerializable(VOLUNTEER_ITEM_KEY, item); //send objek terus
 
         //click read more
         holder.TVVolunteerReadMore.setOnClickListener(new View.OnClickListener() {
@@ -66,6 +65,14 @@ public class VolunteerAdapter extends RecyclerView.Adapter<VolunteerAdapter.View
         });
 
 
+        //click join btn
+        holder.BtnVolunteerJoin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Navigation.findNavController(view).navigate(R.id.DestVolunteerRegistration);
+            }
+        });
 
 
 

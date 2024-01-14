@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background"
-    tools:context=".VolunteerProgramDetails">
+    tools:context=".VolunteerRegistration">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -33,7 +33,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Program Details"
+                android:text="Registration Form"
                 android:textColor="@color/black"
                 android:textSize="24sp"
                 android:textStyle="bold" />
@@ -55,7 +55,7 @@
                 android:padding="20dp">
 
                 <TextView
-                    android:id="@+id/TV_VPDetailsTitle"
+                    android:id="@+id/TV_VRegVolunteerName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Volunteer Program Title"
@@ -66,74 +66,19 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="80dp"
-                        android:layout_height="wrap_content"
-                        android:text="Desc:"
-                        android:textSize="16sp"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"/>
-                    <TextView
-                        android:id="@+id/TV_VPDetailsDesc"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="80dp"
-                        android:layout_height="wrap_content"
-                        android:text="Venue:"
-                        android:textSize="16sp"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"/>
-                    <TextView
-                        android:id="@+id/TV_VPVenue"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="80dp"
-                        android:layout_height="wrap_content"
-                        android:text="Time:"
-                        android:textSize="16sp"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"/>
-                    <TextView
-                        android:id="@+id/TV_VPDetailsTime"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
                     android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="80dp"
                         android:layout_height="wrap_content"
-                        android:text="Start Date:"
+                        android:text="Full Name:"
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         android:textStyle="bold" />
-                    <TextView
-                        android:id="@+id/TV_VPDetailsStartDate"
+
+                    <EditText
+                        android:id="@+id/TV_VRegFullName"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -144,17 +89,19 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="80dp"
                         android:layout_height="wrap_content"
-                        android:text="End Date:"
+                        android:text="Age:"
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         android:textStyle="bold" />
-                    <TextView
-                        android:id="@+id/TV_VPDetailsEndDate"
+
+                    <EditText
+                        android:id="@+id/TV_VRegAge"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -162,35 +109,92 @@
                         android:textSize="16sp" />
                 </LinearLayout>
 
-                <View
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginVertical="20dp"
-                    android:background="@color/gray" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
 
-                <ImageView
-                    android:id="@+id/IV_VPDetailsImg"
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/recycle_icon" />
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:text="Gender:"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/TV_VRegGender"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:text="Phone Number:"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/ET_VRegPhoneNum"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:text="Address:"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/TV_VRegAddress"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/VolunteerText"
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginBottom="20dp"
                     app:cardCornerRadius="20dp"
                     android:layout_marginTop="20dp">
 
                     <Button
-                        android:id="@+id/BtnVolunteerJoin"
+                        android:id="@+id/BtnVRegEnroll"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_below="@id/VolunteerText"
                         android:background="@color/darkGreen"
-                        android:text="Join Volunteering"
+                        android:text="Enroll"
                         android:textAllCaps="false"
                         android:textColor="@color/white" />
                 </androidx.cardview.widget.CardView>

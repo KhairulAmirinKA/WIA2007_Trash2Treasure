@@ -49,6 +49,9 @@
         <action
             android:id="@+id/action_DestVolunteer_to_DestVolunteerProgramDetails"
             app:destination="@id/DestVolunteerProgramDetails" />
+        <action
+            android:id="@+id/action_DestVolunteer_to_DestVolunteerRegistration"
+            app:destination="@id/DestVolunteerRegistration" />
     </fragment>
     <fragment
         android:id="@+id/DestReport"
@@ -187,5 +190,18 @@
         android:id="@+id/DestVolunteerProgramDetails"
         android:name="com.techwizards.wia2007_trash2treasure.VolunteerProgramDetails"
         android:label="fragment_volunteerprogram_details"
-        tools:layout="@layout/fragment_volunteerprogram_details" />
+        tools:layout="@layout/fragment_volunteerprogram_details" >
+        <action
+            android:id="@+id/action_DestVolunteerProgramDetails_to_DestVolunteerRegistration"
+            app:destination="@id/DestVolunteerRegistration" />
+    </fragment>
+    <fragment
+        android:id="@+id/DestVolunteerRegistration"
+        android:name="com.techwizards.wia2007_trash2treasure.VolunteerRegistration"
+        android:label="fragment_volunteer_registration"
+        tools:layout="@layout/fragment_volunteer_registration" >
+        <action
+            android:id="@+id/action_DestVolunteerRegistration_to_DestVolunteer"
+            app:destination="@id/DestVolunteer" />
+    </fragment>
 </navigation>

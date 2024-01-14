@@ -24,6 +24,7 @@ import java.util.List;
 
 public class Volunteer extends Fragment {
 
+    public static final String IS_ENROLL_KEY = "IS_ENROLL_KEY";
     private VolunteerAdapter volunteerAdapter;
     private Spinner categories;
     TextView TVNoProjects;
@@ -183,6 +184,19 @@ public class Volunteer extends Fragment {
 
                 //TODO:add condition for enrolled
                 case ENROLLED:
+
+                    //retrieve data from VolunteerRegistration
+                    Bundle bundle = getArguments();
+
+                    boolean isEnroll= false;
+
+                    if (bundle!= null && bundle.containsKey(IS_ENROLL_KEY)){
+                        isEnroll= true;
+                    }
+
+                    if (isEnroll){
+                        filteredList.add(volunteerItem);
+                    }
                     break;
 
                 case TRENDING:

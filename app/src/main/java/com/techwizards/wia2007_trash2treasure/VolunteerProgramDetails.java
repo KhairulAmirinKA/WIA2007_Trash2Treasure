@@ -19,9 +19,9 @@ import net.steamcrafted.materialiconlib.MaterialIconView;
 
 public class VolunteerProgramDetails extends Fragment {
 
-    public static final String POSITION = "POSITION";
+    public static final String VOLUNTEER_ITEM_KEY = "VOLUNTEER_ITEM_KEY";
 
-    TextView TV_VPDetailsTitle,TV_VPDetailsDesc, TV_VPVenue, TV_VPDetailsTime,TV_VPDetailsDate;
+    TextView TV_VPDetailsTitle,TV_VPDetailsDesc, TV_VPVenue, TV_VPDetailsTime,TV_VPDetailsStartDate, TV_VPDetailsEndDate;
     ImageView IV_VPDetailsImg;
     Button BtnVolunteerJoin;
 
@@ -34,7 +34,7 @@ public class VolunteerProgramDetails extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view=  inflater.inflate(R.layout.fragment_volunteerprogram_details, container, false);
+        View view = inflater.inflate(R.layout.fragment_volunteerprogram_details, container, false);
 
         //init all UI
         initView(view);
@@ -50,24 +50,33 @@ public class VolunteerProgramDetails extends Fragment {
 
 
         //retrieve data from bundle sent from VolunteerAdapter
-        int position=0;
+        VolunteerItem currentItem;
 
         Bundle bundle = getArguments();
-        if (bundle!= null && bundle.containsKey(POSITION)){
-            position  = bundle.getInt(POSITION, 0);
-        }
-
-        Volunteer volunteer = new Volunteer(); //need to instantiate because it has generateVolunteerList()
-        VolunteerItem currentItem = volunteer.generateVolunteerList().get(position);
+        if (bundle != null && bundle.containsKey(VOLUNTEER_ITEM_KEY)) {
+            currentItem = (VolunteerItem) bundle.getSerializable(VOLUNTEER_ITEM_KEY);
 
 
         //get details
         TV_VPDetailsTitle.setText(currentItem.volunteerTitle);
         TV_VPDetailsDesc.setText(currentItem.volunteerDesc);
         //TODO: TV_VPVenue.setText(current);
-        TV_VPDetailsDate.setText(currentItem.volunteerStartDate);
+        TV_VPDetailsStartDate.setText(currentItem.volunteerStartDate);
+        TV_VPDetailsEndDate.setText(currentItem.volunteerEndDate);
+        TV_VPDetailsTime.setText(currentItem.volunteerTime);
 
         Picasso.get().load(currentItem.ImagePath).into(IV_VPDetailsImg);
+
+    } //if bundle
+
+        //join volunteer. will go to RegistrationForm
+        BtnVolunteerJoin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.DestVolunteerRegistration);
+            }
+        });
+
 
 
 
@@ -84,7 +93,8 @@ public class VolunteerProgramDetails extends Fragment {
         TV_VPDetailsDesc = view.findViewById(R.id.TV_VPDetailsDesc);
         TV_VPVenue = view.findViewById(R.id.TV_VPVenue);
         TV_VPDetailsTime = view.findViewById(R.id.TV_VPDetailsTime);
-        TV_VPDetailsDate = view.findViewById(R.id.TV_VPDetailsDate);
+        TV_VPDetailsStartDate = view.findViewById(R.id.TV_VPDetailsStartDate);
+        TV_VPDetailsEndDate= view.findViewById(R.id.TV_VPDetailsEndDate);
 
         // Find ImageView
         IV_VPDetailsImg = view.findViewById(R.id.IV_VPDetailsImg);

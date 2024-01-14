@@ -1,10 +1,14 @@
 package com.techwizards.wia2007_trash2treasure;
 
-public class VolunteerItem {
+import java.io.Serializable;
+
+public class VolunteerItem implements Serializable {
     String ImagePath;
     String volunteerTitle;
     String volunteerDesc;
     int volunteerPoints;
+
+    String volunteerVenue;
     String volunteerStartDate;
     String volunteerEndDate;
     String volunteerTime;
