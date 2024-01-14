@@ -45,12 +45,13 @@ public class Volunteer extends Fragment {
 
         TVNoProjects = view.findViewById(R.id.TVVolunteerNoProjects);
 
+        //spinner
         categories = view.findViewById(R.id.SVolunteerCategories);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(), R.array.volunteer_categories, R.layout.text_only_item_view);
         adapter.setDropDownViewResource(R.layout.text_only_item_view);
         categories.setAdapter(adapter);
 
-        categories.setSelection(0);
+        categories.setSelection(0); //default selection
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView_volunteer_item);
         volunteerAdapter = new VolunteerAdapter(generateVolunteerList());
@@ -81,6 +82,10 @@ public class Volunteer extends Fragment {
 
     private void updateRadioButtonListener() {
         radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
+
+            if (checkedId==R.id.RBVEnrolled){
+                currentFilter = Filter.ENROLLED;
+            }
             if (checkedId == R.id.RBVTrending) {
                 currentFilter = Filter.TRENDING;
             } else if (checkedId == R.id.RBVUpcoming) {
@@ -102,7 +107,7 @@ public class Volunteer extends Fragment {
                 "Community Recycling Drive",
                 "Help organize and participate in a community recycling drive to collect and process recyclable materials.",
                 20,
-                "2023-12-15",
+                "2024-01-15",
                 "2024-02-15",
                 "10:00 AM - 2:00 PM",
                 12,
@@ -126,7 +131,7 @@ public class Volunteer extends Fragment {
                 "River Cleanup Campaign",
                 "Join the efforts to clean up a local riverbank by collecting and properly disposing of waste materials to promote a cleaner environment.",
                 25,
-                "2023-11-22",
+                "2024-01-12",
                 "2024-04-22",
                 "9:00 AM - 1:00 PM",
                 40,
@@ -138,8 +143,8 @@ public class Volunteer extends Fragment {
                 "E-Waste Collection Event",
                 "Contribute to the proper disposal of electronic waste by assisting in collecting and organizing e-waste items for recycling.",
                 18,
-                "2023-11-20",
-                "2023-11-25",
+                "2024-01-20",
+                "2024-02-25",
                 "11:00 AM - 3:00 PM",
                 25,
                 "Local Area"
@@ -150,8 +155,8 @@ public class Volunteer extends Fragment {
                 "Composting Awareness Workshop",
                 "Promote sustainable practices by participating in a composting workshop. Learn and teach composting techniques to reduce organic waste.",
                 12,
-                "2023-11-15",
-                "2023-12-15",
+                "2024-01-10",
+                "2024-12-15",
                 "3:00 PM - 6:00 PM",
                 18,
                 "Educational"
@@ -175,6 +180,11 @@ public class Volunteer extends Fragment {
 
         for (VolunteerItem volunteerItem : volunteerItems) {
             switch (filter) {
+
+                //TODO:add condition for enrolled
+                case ENROLLED:
+                    break;
+
                 case TRENDING:
                     try {
                         Date startDate = sdf.parse(volunteerItem.getVolunteerStartDate());
@@ -224,11 +234,14 @@ public class Volunteer extends Fragment {
     }
 
     private enum Filter {
-        TRENDING, UPCOMING, ONGOING
+        ENROLLED, TRENDING, UPCOMING, ONGOING
     }
 
     private String getFilterText(Filter filter) {
         switch (filter) {
+
+            case ENROLLED:
+                return "Enrolled";
             case TRENDING:
                 return "Trending";
             case UPCOMING:
