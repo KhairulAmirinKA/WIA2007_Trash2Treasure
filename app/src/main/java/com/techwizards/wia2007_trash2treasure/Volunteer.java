@@ -99,7 +99,7 @@ public class Volunteer extends Fragment {
         ((RadioButton) radioGroup.getChildAt(0)).setChecked(true);
     }
 
-    private List<VolunteerItem> generateVolunteerList() {
+    public List<VolunteerItem> generateVolunteerList() {
         List<VolunteerItem> volunteerItems = new ArrayList<>();
 
         volunteerItems.add(new VolunteerItem(

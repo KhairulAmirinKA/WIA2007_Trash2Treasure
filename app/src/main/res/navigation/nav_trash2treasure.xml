@@ -45,7 +45,11 @@
         android:id="@+id/DestVolunteer"
         android:name="com.techwizards.wia2007_trash2treasure.Volunteer"
         android:label="fragment_volunteer"
-        tools:layout="@layout/fragment_volunteer" />
+        tools:layout="@layout/fragment_volunteer" >
+        <action
+            android:id="@+id/action_DestVolunteer_to_DestVolunteerProgramDetails"
+            app:destination="@id/DestVolunteerProgramDetails" />
+    </fragment>
     <fragment
         android:id="@+id/DestReport"
         android:name="com.techwizards.wia2007_trash2treasure.Report"
@@ -143,7 +147,7 @@
     </fragment>
     <fragment
         android:id="@+id/DestEduResources"
-        android:name="com.techwizards.wia2007_trash2treasure.EducationResources"
+        android:name="EducationModule.EducationResources"
         android:label="fragment_education_resources"
         tools:layout="@layout/fragment_education_resources" >
         <action
@@ -152,7 +156,7 @@
     </fragment>
     <fragment
         android:id="@+id/DestEduArticles"
-        android:name="com.techwizards.wia2007_trash2treasure.EducationArticles"
+        android:name="EducationModule.EducationArticles"
         android:label="fragment_education_articles"
         tools:layout="@layout/fragment_education_articles" />
     <fragment
@@ -179,4 +183,9 @@
         android:name="com.techwizards.wia2007_trash2treasure.MarketItemPage"
         android:label="fragment_market_item"
         tools:layout="@layout/fragment_market_item" />
+    <fragment
+        android:id="@+id/DestVolunteerProgramDetails"
+        android:name="com.techwizards.wia2007_trash2treasure.VolunteerProgramDetails"
+        android:label="fragment_volunteerprogram_details"
+        tools:layout="@layout/fragment_volunteerprogram_details" />
 </navigation>
