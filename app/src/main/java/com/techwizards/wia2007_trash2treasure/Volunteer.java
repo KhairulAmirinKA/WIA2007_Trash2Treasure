@@ -30,6 +30,8 @@ public class Volunteer extends Fragment {
     RadioGroup radioGroup;
     Filter currentFilter = Filter.TRENDING;
 
+    DataManager dataManager = DataManager.getInstance();
+
     public Volunteer() {}
 
     @Override
@@ -86,7 +88,7 @@ public class Volunteer extends Fragment {
             if (checkedId==R.id.RBVEnrolled){
                 currentFilter = Filter.ENROLLED;
             }
-            if (checkedId == R.id.RBVTrending) {
+            else if (checkedId == R.id.RBVTrending) {
                 currentFilter = Filter.TRENDING;
             } else if (checkedId == R.id.RBVUpcoming) {
                 currentFilter = Filter.UPCOMING;
@@ -176,7 +178,11 @@ public class Volunteer extends Fragment {
             throw new RuntimeException(e);
         }
 
+        //category filter- All, Marine, Wildlife
         List<VolunteerItem> volunteerItems = applyCategoryFilter(generateVolunteerList());
+
+        //retrieve enrolled volunteer programs from Firestore
+        List<VolunteerItem> enrolledVolunteer= dataManager.volunteerItems;
 
         for (VolunteerItem volunteerItem : volunteerItems) {
             switch (filter) {
@@ -184,9 +190,12 @@ public class Volunteer extends Fragment {
                 //TODO:add condition for enrolled
                 case ENROLLED:
 
-                    //retrieve data from VolunteerRegistration
-                    if (volunteerItem.isEnrolled){
-                        filteredList.add(volunteerItem);
+                    for (VolunteerItem enrolledItem: enrolledVolunteer){
+
+                        //check if the enrolled name is same
+                        if (volunteerItem.volunteerTitle.equals(enrolledItem.volunteerTitle)){
+                            filteredList.add(volunteerItem);
+                        }
                     }
                     break;
 

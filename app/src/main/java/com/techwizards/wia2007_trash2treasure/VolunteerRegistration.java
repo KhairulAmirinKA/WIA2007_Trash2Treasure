@@ -69,7 +69,12 @@ public class VolunteerRegistration extends Fragment {
             currentItem.setEnrolled(true);
             Toast.makeText(getContext(), currentItem.volunteerTitle+currentItem.isEnrolled, Toast.LENGTH_SHORT).show();
 
+            //add to the firebase
             dataManager.addNewVolunteer(currentItem);
+//
+//            Button BtnVolunteerJoin= requireActivity().findViewById(R.id.BtnVolunteerJoin);
+//            BtnVolunteerJoin.setVisibility(View.GONE);
+
             Navigation.findNavController(view).navigate(R.id.DestVolunteer, bundle2);
         });
 
