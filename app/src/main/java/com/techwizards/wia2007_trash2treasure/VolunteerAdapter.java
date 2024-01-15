@@ -53,15 +53,12 @@ public class VolunteerAdapter extends RecyclerView.Adapter<VolunteerAdapter.View
         bundle.putSerializable(VOLUNTEER_ITEM_KEY, item); //send objek terus
 
         //click read more
-        holder.TVVolunteerReadMore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(view.getContext(), item.volunteerTitle, Toast.LENGTH_SHORT).show();
+        holder.TVVolunteerReadMore.setOnClickListener(view -> {
+            Toast.makeText(view.getContext(), item.volunteerTitle, Toast.LENGTH_SHORT).show();
 
-                //go to volunteer program details
-                Navigation.findNavController(view).navigate(R.id.DestVolunteerProgramDetails, bundle);
+            //go to volunteer program details
+            Navigation.findNavController(view).navigate(R.id.DestVolunteerProgramDetails, bundle);
 
-            }
         });
 
 
@@ -70,7 +67,7 @@ public class VolunteerAdapter extends RecyclerView.Adapter<VolunteerAdapter.View
             @Override
             public void onClick(View view) {
 
-                Navigation.findNavController(view).navigate(R.id.DestVolunteerRegistration);
+                Navigation.findNavController(view).navigate(R.id.DestVolunteerRegistration, bundle);
             }
         });
 

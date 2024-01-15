@@ -24,7 +24,6 @@ import java.util.List;
 
 public class Volunteer extends Fragment {
 
-    public static final String IS_ENROLL_KEY = "IS_ENROLL_KEY";
     private VolunteerAdapter volunteerAdapter;
     private Spinner categories;
     TextView TVNoProjects;
@@ -46,7 +45,7 @@ public class Volunteer extends Fragment {
 
         TVNoProjects = view.findViewById(R.id.TVVolunteerNoProjects);
 
-        //spinner
+        //spinner for categories of volunteer
         categories = view.findViewById(R.id.SVolunteerCategories);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(), R.array.volunteer_categories, R.layout.text_only_item_view);
         adapter.setDropDownViewResource(R.layout.text_only_item_view);
@@ -186,15 +185,7 @@ public class Volunteer extends Fragment {
                 case ENROLLED:
 
                     //retrieve data from VolunteerRegistration
-                    Bundle bundle = getArguments();
-
-                    boolean isEnroll= false;
-
-                    if (bundle!= null && bundle.containsKey(IS_ENROLL_KEY)){
-                        isEnroll= true;
-                    }
-
-                    if (isEnroll){
+                    if (volunteerItem.isEnrolled){
                         filteredList.add(volunteerItem);
                     }
                     break;
@@ -224,7 +215,7 @@ public class Volunteer extends Fragment {
                     try {
                         Date startDate = sdf.parse(volunteerItem.getVolunteerStartDate());
                         Date endDate = sdf.parse(volunteerItem.getVolunteerEndDate());
-                        if (today.compareTo(endDate) < 0 && today.compareTo(startDate) > 0) {
+                        if (today.compareTo(endDate) <=0 && today.compareTo(startDate) >= 0) {
                             filteredList.add(volunteerItem);
                         }
                     } catch (ParseException e) {

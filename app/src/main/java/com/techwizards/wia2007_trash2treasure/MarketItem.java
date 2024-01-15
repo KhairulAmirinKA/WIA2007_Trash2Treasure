@@ -18,7 +18,7 @@ public class MarketItem {
     int stock;
     String email;
 
-    public MarketItem() {}
+    public MarketItem() {} //to prevent error fetching data from firebase
 
     public MarketItem(String image, String name, double price, String detail, String description, int stock, String email) {
         this.image = image;

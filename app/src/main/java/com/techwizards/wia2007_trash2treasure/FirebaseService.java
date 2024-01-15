@@ -20,6 +20,7 @@ public class FirebaseService {
     private static final String REPORT_COLLECTION = "reports";
     private static final String PRODUCT_COLLECTION = "products";
     private static final String FORUM_COLLECTION = "forums";
+    private static final String VOLUNTEER_COLLECTION="volunteer";
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final StorageReference storageRef = FirebaseStorage.getInstance().getReference();
@@ -28,6 +29,7 @@ public class FirebaseService {
     private final CollectionReference reportCollection = db.collection(REPORT_COLLECTION);
     private final CollectionReference productCollection = db.collection(PRODUCT_COLLECTION);
     private final CollectionReference forumCollection = db.collection(FORUM_COLLECTION);
+    private final CollectionReference volunteerCollection = db.collection(VOLUNTEER_COLLECTION);
 
     private static FirebaseService instance;
 
@@ -107,4 +109,20 @@ public class FirebaseService {
     public void fetchForums(OnCompleteListener<QuerySnapshot> onCompleteListener) {
         forumCollection.get().addOnCompleteListener(onCompleteListener);
     }
+
+
+    public void addNewVolunteerRegistration(VolunteerItem volunteerItem, OnCompleteListener<Void> onCompleteListener){
+        String id= volunteerItem.id.toString();
+
+        if(!id.isEmpty()){
+            volunteerCollection.document(id)
+                    .set(volunteerItem.toMap())
+                    .addOnCompleteListener(onCompleteListener);
+        }
+    }
+
+    public void fetchVolunteerRegistration(OnCompleteListener<QuerySnapshot> onCompleteListener){
+        volunteerCollection.get().addOnCompleteListener(onCompleteListener);
+    }
+
 }

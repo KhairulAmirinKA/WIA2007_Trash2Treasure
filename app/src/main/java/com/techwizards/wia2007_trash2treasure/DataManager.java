@@ -4,7 +4,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
 
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +33,7 @@ public class DataManager {
     public List<ReportItem> reportItems = new ArrayList<>(); //list of report items
     public List<MarketItem> productItems = new ArrayList<>(); //list of advertised products
     public List<CommunityForumItem> communityForumItems = new ArrayList<>(); //list of community forums
+    public List<VolunteerItem> volunteerItems = new ArrayList<>();
 
     //fetch from firebase
     public void fetchProfile() {
@@ -152,6 +158,39 @@ public class DataManager {
         });
     }
 
+    public void addNewVolunteer(VolunteerItem volunteerItem){
+        //add to local list
+        volunteerItems.add(volunteerItem);
+
+        firebaseService.addNewVolunteerRegistration(volunteerItem, task -> {
+            if (task.isSuccessful()){
+                System.out.println("Firebase service: add new volunteer successful");
+            }
+            else {
+                System.out.println("gagal");
+            }
+        });
+    }
+
+    public void fetchVolunteer(){
+        firebaseService.fetchVolunteerRegistration(task -> {
+            if (task.isSuccessful()){
+                for (QueryDocumentSnapshot documentSnapshot: task.getResult()){
+                    VolunteerItem item = documentSnapshot.toObject(VolunteerItem.class);
+                    volunteerItems.add(item);
+                }
+                System.out.println("Firebase service: fetch volunteer success");
+            }
+            else {
+                    Exception exception = task.getException();
+                    if (exception != null) {
+                        exception.printStackTrace();
+                    }
+                }
+
+
+        });
+    }
     public void addNewProduct(MarketItem item) {
         //add product item to local list
         productItems.add(item);
@@ -259,6 +298,7 @@ public class DataManager {
         fetchReport(); // report
         fetchProduct(); // product
         fetchForum(); // forum
+        fetchVolunteer(); //volunteer
     }
 
     //load data from SharedPreferences

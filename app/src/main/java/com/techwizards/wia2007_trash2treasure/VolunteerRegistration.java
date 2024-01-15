@@ -9,14 +9,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import net.steamcrafted.materialiconlib.MaterialIconView;
 
+import org.w3c.dom.Text;
+
 
 public class VolunteerRegistration extends Fragment {
 
+    public static final String VOLUNTEER_ITEM_KEY = "VOLUNTEER_ITEM_KEY";
+
+    TextView TV_VRegVolunteerName;
     Button BtnVRegEnroll;
+
+    VolunteerItem currentItem;
+
+    DataManager dataManager = DataManager.getInstance();
+
     public VolunteerRegistration() {
         // Required empty public constructor
     }
@@ -39,14 +50,27 @@ public class VolunteerRegistration extends Fragment {
             }
         });
 
+        Bundle bundle = getArguments();
+        if (bundle!= null && bundle.containsKey(VOLUNTEER_ITEM_KEY)){
+            currentItem = (VolunteerItem) bundle.getSerializable(VOLUNTEER_ITEM_KEY);
+        }
+
+        //set the title
+        if (currentItem!= null) {
+            TV_VRegVolunteerName.setText(currentItem.volunteerTitle);
+        }
+
+        Bundle bundle2 = new Bundle();
+        bundle2.putSerializable(VOLUNTEER_ITEM_KEY, currentItem);
+
         //click enroll
         BtnVRegEnroll.setOnClickListener( view1->{
-            Toast.makeText(getContext(), "hahahha", Toast.LENGTH_SHORT).show();
 
-            Bundle bundle = new Bundle();
-            bundle.putBoolean("IS_ENROLL_KEY", true);
+            currentItem.setEnrolled(true);
+            Toast.makeText(getContext(), currentItem.volunteerTitle+currentItem.isEnrolled, Toast.LENGTH_SHORT).show();
 
-            Navigation.findNavController(view).navigate(R.id.DestVolunteer, bundle);
+            dataManager.addNewVolunteer(currentItem);
+            Navigation.findNavController(view).navigate(R.id.DestVolunteer, bundle2);
         });
 
 
@@ -55,6 +79,7 @@ public class VolunteerRegistration extends Fragment {
 
     private void initView(View view) {
 
+        TV_VRegVolunteerName= view.findViewById(R.id.TV_VRegVolunteerName);
         BtnVRegEnroll =view.findViewById(R.id.BtnVRegEnroll);
     }
 }
