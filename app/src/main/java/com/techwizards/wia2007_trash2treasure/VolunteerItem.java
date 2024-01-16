@@ -29,7 +29,7 @@ public class VolunteerItem implements Serializable {
     public VolunteerItem() {} //to prevent error fetching data from firebase
 
     public VolunteerItem(String imagePath, String volunteerTitle, String volunteerDesc, int volunteerPoints, String volunteerStartDate, String volunteerEndDate, String volunteerTime, int volunteerParticipantCount, String volunterCategories) {
-        ImagePath = imagePath;
+        this.ImagePath = imagePath;
         this.volunteerTitle = volunteerTitle;
         this.volunteerDesc = volunteerDesc;
         this.volunteerPoints = volunteerPoints;

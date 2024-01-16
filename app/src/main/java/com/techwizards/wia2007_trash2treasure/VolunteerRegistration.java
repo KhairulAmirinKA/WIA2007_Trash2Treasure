@@ -75,7 +75,7 @@ public class VolunteerRegistration extends Fragment {
 //            Button BtnVolunteerJoin= requireActivity().findViewById(R.id.BtnVolunteerJoin);
 //            BtnVolunteerJoin.setVisibility(View.GONE);
 
-            Navigation.findNavController(view).navigate(R.id.DestVolunteer, bundle2);
+            Navigation.findNavController(view).navigate(R.id.DestVolunteer);
         });
 
 
