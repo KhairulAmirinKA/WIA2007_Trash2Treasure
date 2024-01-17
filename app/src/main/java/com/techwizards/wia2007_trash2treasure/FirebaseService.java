@@ -119,4 +119,18 @@ public class FirebaseService {
     public void fetchVolunteer(OnCompleteListener<QuerySnapshot> onCompleteListener){
         volunteerCollection.get().addOnCompleteListener(onCompleteListener);
     }
+
+    public void updateUserPoints(ProfileItem profileItem, int additionalPoints, OnCompleteListener<Void> onCompleteListener) {
+        int currentPoints = profileItem.getPoints();
+        int updatedPoints = currentPoints + additionalPoints;
+
+        profileItem.setPoints(updatedPoints);
+
+        String email = profileItem.getEmail();
+        if (email != null && !email.isEmpty()) {
+            profileCollection.document(email)
+                    .set(profileItem.toMap())
+                    .addOnCompleteListener(onCompleteListener);
+        }
+    }
 }

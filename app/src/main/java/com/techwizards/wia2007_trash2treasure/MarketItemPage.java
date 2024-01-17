@@ -25,6 +25,7 @@ public class MarketItemPage extends Fragment {
     TextView TVProductPrice;
     TextView TVProductDescription;
     Button BtnContactSeller;
+    DataManager dataManager = DataManager.getInstance();
     public MarketItemPage() {
         // Required empty public constructor
     }
@@ -85,8 +86,32 @@ public class MarketItemPage extends Fragment {
 
         //click the like icon
         BtnContactSeller.setOnClickListener(view12 -> {
-            Toast.makeText(getContext(), "Purchased successful. 10 points obtained.", Toast.LENGTH_SHORT).show();
-            Navigation.findNavController(view12).popBackStack();
+            // Assuming you want to add 10 points when a user purchases an item
+            int additionalPoints = 10;
+
+            ProfileItem currentUser = dataManager.currentUser.getCurrentUser();
+
+            if (currentUser != null) {
+                FirebaseService firebaseService = FirebaseService.getInstance();
+
+                firebaseService.updateUserPoints(currentUser, additionalPoints, task -> {
+                    if (task.isSuccessful()) {
+                        // Update the local data manager
+                        dataManager.currentUser.getCurrentUser().setPoints(currentUser.getPoints());
+
+                        // Show a toast or any UI feedback for the successful purchase
+                        Toast.makeText(getContext(), "Purchase successful. " + additionalPoints + " points obtained.", Toast.LENGTH_SHORT).show();
+
+                        // Navigate back to the previous screen
+                        Navigation.findNavController(view12).popBackStack();
+                    } else {
+                        Exception exception = task.getException();
+                        if (exception != null) {
+                            exception.printStackTrace();
+                        }
+                    }
+                });
+            }
         });
 
         return view;

@@ -100,18 +100,6 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/BtnAwardDashboard"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/box_with_shadow"
-            android:backgroundTint="@color/white"
-            android:text="Dashboard"
-            android:textAllCaps="false"
-            android:textSize="20sp"
-            android:textColor="@color/darkGreen" />
-
-        <Button
             android:id="@+id/BtnAwardComplaint"
             android:layout_width="match_parent"
             android:layout_height="60dp"
@@ -237,31 +225,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            app:cardCornerRadius="10dp">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="10dp"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:text="Elevate Your Points by Investing"
-                    android:textColor="@color/darkGreen"
-                    android:textSize="16sp" />
-                <androidx.core.widget.NestedScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        tools:listitem="@layout/award_invest_item_row_view"/>
-                </androidx.core.widget.NestedScrollView>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+            app:cardCornerRadius="10dp"/>
     </LinearLayout>
 
 </LinearLayout>

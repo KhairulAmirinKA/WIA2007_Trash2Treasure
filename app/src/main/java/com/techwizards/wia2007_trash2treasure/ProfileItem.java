@@ -82,6 +82,9 @@ public class ProfileItem {
         return points;
     }
 
+    public void setPoints(int points) {
+        this.points = points;
+    }
     public List<UUID> getJoinedVolunteer() {
         return joinedVolunteer;
     }
