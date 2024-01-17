@@ -1,5 +1,6 @@
 package com.techwizards.wia2007_trash2treasure;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,6 +37,7 @@ public class MarketItemPage extends Fragment {
 
     }
 
+    @SuppressLint("DefaultLocale")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -47,12 +49,7 @@ public class MarketItemPage extends Fragment {
 
         //back btn
 
-        BtnDismiss.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Navigation.findNavController(view).popBackStack();
-            }
-        });
+        BtnDismiss.setOnClickListener(view1 -> Navigation.findNavController(view1).popBackStack());
 
 
         // Retrieve data from the arguments bundle. we have list of EducationResources. it has position
@@ -79,18 +76,17 @@ public class MarketItemPage extends Fragment {
         Glide.with(view).load( currentItem.getImage()).into(IVProductImage);
 
         //set the price
-        TVProductPrice.setText(String.valueOf(currentItem.getPrice()));
+        double price= currentItem.getPrice();
+
+        TVProductPrice.setText(String.format("RM%.2f", price)); //perpuluhan 2 digit
 
         //set the description
         TVProductDescription.setText(currentItem.getDescription());
 
         //click the like icon
-        BtnContactSeller.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getContext(), "Purchased successful. 10 points obtained.", Toast.LENGTH_SHORT).show();
-                Navigation.findNavController(view).popBackStack();
-            }
+        BtnContactSeller.setOnClickListener(view12 -> {
+            Toast.makeText(getContext(), "Purchased successful. 10 points obtained.", Toast.LENGTH_SHORT).show();
+            Navigation.findNavController(view12).popBackStack();
         });
 
         return view;
