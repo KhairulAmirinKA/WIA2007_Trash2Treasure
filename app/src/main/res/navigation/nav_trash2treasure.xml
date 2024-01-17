@@ -35,7 +35,7 @@
             android:id="@+id/DestMarketplace"
             app:destination="@id/DestMarketplace" />
         <action
-            android:id="@+id/action_DestCommunity_to_DestEduResources"
+            android:id="@+id/DestEduResources"
             app:destination="@id/DestEduResources" />
         <action
             android:id="@+id/action_DestCommunity_to_communityForumChatting"
@@ -47,10 +47,10 @@
         android:label="fragment_volunteer"
         tools:layout="@layout/fragment_volunteer" >
         <action
-            android:id="@+id/action_DestVolunteer_to_DestVolunteerProgramDetails"
+            android:id="@+id/DestVolunteerProgramDetails"
             app:destination="@id/DestVolunteerProgramDetails" />
         <action
-            android:id="@+id/action_DestVolunteer_to_DestVolunteerRegistration"
+            android:id="@+id/DestVolunteerRegistration"
             app:destination="@id/DestVolunteerRegistration" />
     </fragment>
     <fragment
@@ -65,8 +65,8 @@
             android:id="@+id/DestReportHotline"
             app:destination="@id/DestReportHotline" />
         <action
-            android:id="@+id/action_DestReport_to_reportDetails"
-            app:destination="@id/DestReportDetails" />
+            android:id="@+id/DestVolunteerProgramDetails"
+            app:destination="@id/DestVolunteerProgramDetails" />
     </fragment>
     <fragment
         android:id="@+id/DestProfile"
@@ -80,7 +80,7 @@
             android:id="@+id/DestEditProfile"
             app:destination="@id/DestEditProfile" />
         <action
-            android:id="@+id/action_DestProfile_to_DestAward"
+            android:id="@+id/DestAward"
             app:destination="@id/DestAward" />
     </fragment>
     <fragment
@@ -94,15 +94,15 @@
         android:label="fragment_award"
         tools:layout="@layout/fragment_award" >
         <action
-            android:id="@+id/action_DestAward_to_DestReport"
+            android:id="@+id/DestReport"
             app:destination="@id/DestReport" />
         <action
-            android:id="@+id/action_DestAward_to_DestRedeemAwardVoucher"
+            android:id="@+id/DestRedeemAwardVoucher"
             app:destination="@id/DestRedeemAwardVoucher" />
     </fragment>
     <fragment
         android:id="@+id/DestEditProfile"
-        android:name="com.techwizards.wia2007_trash2treasure.EditProfileFragment"
+        android:name="com.techwizards.wia2007_trash2treasure.EditProfile"
         android:label="fragment_edit_profile"
         tools:layout="@layout/fragment_edit_profile" />
     <fragment
@@ -131,11 +131,8 @@
         android:label="fragment_community_forum"
         tools:layout="@layout/fragment_community_forum" >
         <action
-            android:id="@+id/action_DestJoinCommunity_to_communityForumChatting"
-            app:destination="@id/communityForumChatting" />
-        <action
-            android:id="@+id/action_DestJoinCommunity_to_communityForumChatting2"
-            app:destination="@id/communityForumChatting" />
+            android:id="@+id/DestCommunityForumChatting"
+            app:destination="@id/DestCommunityForumChatting" />
     </fragment>
     <fragment
         android:id="@+id/DestReportHotline"
@@ -148,10 +145,10 @@
         android:label="frament_marketplace"
         tools:layout="@layout/fragment_marketplace">
         <action
-            android:id="@+id/action_DestMarketplace_to_advertiseProduct"
+            android:id="@+id/DestAdvertiseProduct"
             app:destination="@id/DestAdvertiseProduct" />
         <action
-            android:id="@+id/action_DestMarketplace_to_DestMarketItem"
+            android:id="@+id/DestMarketItem"
             app:destination="@id/DestMarketItem" />
     </fragment>
     <fragment
@@ -160,7 +157,7 @@
         android:label="fragment_education_resources"
         tools:layout="@layout/fragment_education_resources" >
         <action
-            android:id="@+id/action_DestEduResources_to_DestEduArticles"
+            android:id="@+id/DestEduArticles"
             app:destination="@id/DestEduArticles" />
     </fragment>
     <fragment
@@ -184,7 +181,7 @@
         android:label="fragment_community_forum_chatting"
         tools:layout="@layout/fragment_community_forum_chatting" >
         <action
-            android:id="@+id/action_communityForumChatting_to_DestCommunity"
+            android:id="@+id/DestCommunity"
             app:destination="@id/DestCommunity" />
     </fragment>
     <fragment
@@ -198,7 +195,7 @@
         android:label="fragment_volunteerprogram_details"
         tools:layout="@layout/fragment_volunteerprogram_details" >
         <action
-            android:id="@+id/action_DestVolunteerProgramDetails_to_DestVolunteerRegistration"
+            android:id="@+id/DestVolunteerRegistration"
             app:destination="@id/DestVolunteerRegistration" />
     </fragment>
     <fragment
@@ -207,7 +204,7 @@
         android:label="fragment_volunteer_registration"
         tools:layout="@layout/fragment_volunteer_registration" >
         <action
-            android:id="@+id/action_DestVolunteerRegistration_to_DestVolunteer"
+            android:id="@+id/DestVolunteer"
             app:destination="@id/DestVolunteer" />
     </fragment>
     <fragment

@@ -20,26 +20,12 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import java.util.concurrent.atomic.AtomicReference;
+import java.util.Objects;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link EditProfileFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class EditProfileFragment extends Fragment {
-
+public class EditProfile extends Fragment {
     DataManager dataManager = DataManager.getInstance();
 
-    private ProfileAdapter_ForEdit profileAdapterForEdit;
-    private ProfileItem userProfile;
-
-    public EditProfileFragment() {}
-
-    public static EditProfileFragment newInstance() {
-        EditProfileFragment fragment = new EditProfileFragment();
-        return fragment;
-    }
+    public EditProfile() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,16 +39,15 @@ public class EditProfileFragment extends Fragment {
         View view=  inflater.inflate(R.layout.fragment_edit_profile, container, false);
 
         //fetch data
-        profileAdapterForEdit = new ProfileAdapter_ForEdit(view);
-        userProfile = dataManager.currentUser.getCurrentUser();
-        profileAdapterForEdit.populateViews_ForEdit(userProfile);
+        EditProfileAdapter profileAdapterForEdit = new EditProfileAdapter(view);
+        ProfileItem userProfile = dataManager.currentUser.getCurrentUser();
+        profileAdapterForEdit.populateViews(userProfile);
 
         //cancel btn
         Button BtnCancelEditProfile = view.findViewById(R.id.BtnCancelEditProfile);
         BtnCancelEditProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 //yes or no to cancel the editing
                 showConfirmationDialog(view);
             }
@@ -119,56 +104,17 @@ public class EditProfileFragment extends Fragment {
         ProfileItem updatedProfile = new ProfileItem(newImagePath, newName, newEmail, newPassword.equals(currentProfile.getPasswords().get("plain")) ? currentProfile.getPasswords().get("plain") : newPassword, newPhone, newAddress, newGender, newDob, newAllowNoti, newPoint);
 
         dataManager.updateProfile(updatedProfile);
-        dataManager.save(getContext());
-        //testing
-        Toast.makeText(getContext(),
-                "Update Success", Toast.LENGTH_SHORT).show();
+        dataManager.save(requireContext());
+        dataManager.fetchProfile();
 
-//        FirebaseService firebaseService = FirebaseService.getInstance();
-
-        //save new profile
-//        firebaseService.saveUserProfile(updatedProfile, new OnCompleteListener<Void>() {
-//            @Override
-//            public void onComplete(@NonNull Task<Void> task) {
-//
-//                if (task.isSuccessful()){
-//                    Toast.makeText(getActivity().getApplicationContext(), "success", Toast.LENGTH_SHORT).show();
-//
-//                    //go to profile page
-//                    Navigation.findNavController(view).navigate(R.id.DestProfile);
-//
-//                }
-//                else {
-//                    Toast.makeText(getActivity().getApplicationContext(), "Gagal", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
-
-        //update profile
-//        FirebaseFirestore db = FirebaseFirestore.getInstance();
-//
-//        db.collection("user_profiles")
-//                .document( updatedProfile.getEmail() )
-//                .set(updatedProfile)
-//                .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                    @Override
-//                    public void onSuccess(Void unused) {
-//                        Toast.makeText(getActivity().getApplicationContext(), "success", Toast.LENGTH_SHORT).show();
-//
-//                    //go to profile page
-//                    Navigation.findNavController(view).navigate(R.id.DestProfile);
-//                    }
-//                });
+        Toast.makeText(getContext(), "Update Success", Toast.LENGTH_SHORT).show();
     } //save
-
 
     //when users click cancel editing, dialog box will appear
     private void showConfirmationDialog(View view){
-
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext() );
 
         builder.setTitle("Cancel Editing");
-
         builder.setMessage("Are you sure you want to cancel editing? Any unsaved changes will be lost.");
 
         //yes btn
@@ -180,7 +126,6 @@ public class EditProfileFragment extends Fragment {
         builder.setPositiveButton(spannableString, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-
                 //go back to profile page
                 Navigation.findNavController(view).navigate(R.id.DestProfile);
             }

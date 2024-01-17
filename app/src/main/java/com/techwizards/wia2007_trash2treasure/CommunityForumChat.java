@@ -1,5 +1,6 @@
 package com.techwizards.wia2007_trash2treasure;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -64,6 +65,7 @@ public class CommunityForumChat extends Fragment {
         chatInputField = view.findViewById(R.id.ETCommunityForumNewChat);
 
         view.findViewById(R.id.BtnCommunitySendChat).setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onClick(View v) {
                 SimpleDateFormat time = new SimpleDateFormat("HH:mm");

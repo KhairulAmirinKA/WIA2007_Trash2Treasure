@@ -67,7 +67,7 @@ public class CommunityForum extends Fragment implements CommunityForumAdapter.On
     }
 
     private void replaceFragment(Fragment fragment) {
-        Navigation.findNavController(requireView()).navigate(R.id.action_DestJoinCommunity_to_communityForumChatting /* pass any bundle if needed */);
+        Navigation.findNavController(requireView()).navigate(R.id.DestCommunityForumChatting /* pass any bundle if needed */);
     }
     @Override
     public void onJoinClick(int position) {

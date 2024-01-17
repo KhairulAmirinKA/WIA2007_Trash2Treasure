@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background"
-    tools:context=".EditProfileFragment">
+    tools:context=".EditProfile">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -104,6 +104,7 @@
                             android:id="@+id/ETEditProfileEmail"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:enabled="false"
                             android:text="User Email"
                             android:textSize="20sp"
                             android:textColor="@color/darkGreen"
@@ -138,6 +139,7 @@
                             android:textSize="20sp"
                             android:textColor="@color/darkGreen"
                             android:padding="5dp"
+                            android:inputType="textPassword"
                             android:layout_marginLeft="10dp"
                             android:background="@android:color/transparent"/>
                     </androidx.cardview.widget.CardView>

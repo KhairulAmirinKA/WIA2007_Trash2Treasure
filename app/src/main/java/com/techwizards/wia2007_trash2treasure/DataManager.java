@@ -4,17 +4,11 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
 
-import androidx.annotation.NonNull;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class DataManager {
 
@@ -57,6 +51,12 @@ public class DataManager {
         });
     }
 
+    public void saveUser() {
+        for (ProfileItem item : profileItems) {
+            updateProfile(item);
+        }
+    }
+
     //add new profile
     public void addProfile(ProfileItem newProfile) {
         //add profile item to local list
@@ -85,6 +85,8 @@ public class DataManager {
 
         if (index != -1) {
             profileItems.set(index, updatedProfile);
+            currentUser.clearCurrentUser();
+            currentUser.setCurrentUser(updatedProfile);
 
             firebaseService.saveUserProfile(updatedProfile, task -> {
                 if (task.isSuccessful()) {
@@ -158,39 +160,6 @@ public class DataManager {
         });
     }
 
-    public void addNewVolunteer(VolunteerItem volunteerItem){
-        //add to local list
-        volunteerItems.add(volunteerItem);
-
-        firebaseService.addNewVolunteerRegistration(volunteerItem, task -> {
-            if (task.isSuccessful()){
-                System.out.println("Firebase service: add new volunteer successful");
-            }
-            else {
-                System.out.println("gagal");
-            }
-        });
-    }
-
-    public void fetchVolunteer(){
-        firebaseService.fetchVolunteerRegistration(task -> {
-            if (task.isSuccessful()){
-                for (QueryDocumentSnapshot documentSnapshot: task.getResult()){
-                    VolunteerItem item = documentSnapshot.toObject(VolunteerItem.class);
-                    volunteerItems.add(item);
-                }
-                System.out.println("Firebase service: fetch volunteer success");
-            }
-            else {
-                    Exception exception = task.getException();
-                    if (exception != null) {
-                        exception.printStackTrace();
-                    }
-                }
-
-
-        });
-    }
     public void addNewProduct(MarketItem item) {
         //add product item to local list
         productItems.add(item);
@@ -209,6 +178,49 @@ public class DataManager {
     public void addProductImage(Uri imageUri, ImageUploadCallback callback) {
         firebaseService.addProductImage(imageUri, uri -> {
             callback.onUploadSuccess(uri.toString());
+        });
+    }
+
+    public void addNewVolunteer(VolunteerItem volunteerItem){
+        //add to local list
+        volunteerItems.add(volunteerItem);
+
+        firebaseService.addNewVolunteer(volunteerItem, task -> {
+            if (task.isSuccessful()){
+                System.out.println("Firebase service: add new volunteer successful");
+            }
+            else {
+                System.out.println("gagal");
+            }
+        });
+    }
+
+    public void fetchVolunteer(){
+        firebaseService.fetchVolunteer(task -> {
+            if (task.isSuccessful()){
+                for (QueryDocumentSnapshot documentSnapshot: task.getResult()){
+                    String dbID = documentSnapshot.getId();
+
+                    UUID uuid;
+                    try {
+                        uuid = UUID.fromString(dbID);
+                    } catch (IllegalArgumentException e) {
+                        e.printStackTrace();
+                        uuid = null;
+                    }
+
+                    VolunteerItem item = documentSnapshot.toObject(VolunteerItem.class);
+                    item.id = uuid;
+                    volunteerItems.add(item);
+                }
+                System.out.println("Firebase service: fetch volunteer success");
+            }
+            else {
+                Exception exception = task.getException();
+                if (exception != null) {
+                    exception.printStackTrace();
+                }
+            }
         });
     }
 
@@ -234,7 +246,7 @@ public class DataManager {
                     //add to list
                     communityForumItems.add(item);
                 }
-                System.out.println("FirebaseService: Fetch User Success!");
+                System.out.println("FirebaseService: Fetch Forum Success!");
             } else {
                 Exception exception = task.getException();
                 if (exception != null) {
@@ -298,7 +310,7 @@ public class DataManager {
         fetchReport(); // report
         fetchProduct(); // product
         fetchForum(); // forum
-        fetchVolunteer(); //volunteer
+        fetchVolunteer(); // volunteer
     }
 
     //load data from SharedPreferences

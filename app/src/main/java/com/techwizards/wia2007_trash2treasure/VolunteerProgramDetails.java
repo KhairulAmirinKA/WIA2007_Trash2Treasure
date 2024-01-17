@@ -25,10 +25,7 @@ public class VolunteerProgramDetails extends Fragment {
     ImageView IV_VPDetailsImg;
     Button BtnVolunteerJoin;
 
-    public VolunteerProgramDetails() {
-        // Required empty public constructor
-    }
-
+    public VolunteerProgramDetails() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -77,17 +74,10 @@ public class VolunteerProgramDetails extends Fragment {
             }
         });
 
-
-
-
-
-
         return view;
-
     }
 
     private void initView(View view) {
-
         // Find TextViews
         TV_VPDetailsTitle = view.findViewById(R.id.TV_VPDetailsTitle);
         TV_VPDetailsDesc = view.findViewById(R.id.TV_VPDetailsDesc);
@@ -101,6 +91,5 @@ public class VolunteerProgramDetails extends Fragment {
 
         // Find Button
         BtnVolunteerJoin = view.findViewById(R.id.BtnVolunteerJoin);
-
     }
 }

@@ -1,9 +1,6 @@
 package com.techwizards.wia2007_trash2treasure;
 
-import android.app.Activity;
-import android.content.Context;
 import android.net.Uri;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -20,7 +17,7 @@ public class FirebaseService {
     private static final String REPORT_COLLECTION = "reports";
     private static final String PRODUCT_COLLECTION = "products";
     private static final String FORUM_COLLECTION = "forums";
-    private static final String VOLUNTEER_COLLECTION="volunteer";
+    private static final String VOLUNTEER_COLLECTION = "volunteers";
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final StorageReference storageRef = FirebaseStorage.getInstance().getReference();
@@ -110,10 +107,8 @@ public class FirebaseService {
         forumCollection.get().addOnCompleteListener(onCompleteListener);
     }
 
-
-    public void addNewVolunteerRegistration(VolunteerItem volunteerItem, OnCompleteListener<Void> onCompleteListener){
+    public void addNewVolunteer(VolunteerItem volunteerItem, OnCompleteListener<Void> onCompleteListener){
         String id= volunteerItem.id.toString();
-
         if(!id.isEmpty()){
             volunteerCollection.document(id)
                     .set(volunteerItem.toMap())
@@ -121,8 +116,7 @@ public class FirebaseService {
         }
     }
 
-    public void fetchVolunteerRegistration(OnCompleteListener<QuerySnapshot> onCompleteListener){
+    public void fetchVolunteer(OnCompleteListener<QuerySnapshot> onCompleteListener){
         volunteerCollection.get().addOnCompleteListener(onCompleteListener);
     }
-
 }

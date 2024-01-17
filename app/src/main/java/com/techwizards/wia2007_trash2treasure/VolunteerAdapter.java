@@ -20,10 +20,9 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 public class VolunteerAdapter extends RecyclerView.Adapter<VolunteerAdapter.ViewHolder> {
-
-    public static final String POSITION = "POSITION"; //bundle key name
     public static final String VOLUNTEER_ITEM_KEY = "VOLUNTEER_ITEM_KEY";
     private final List<VolunteerItem> volunteerItems;
+    ProfileItem currentUser = DataManager.getInstance().currentUser.getCurrentUser();
 
     public VolunteerAdapter(List<VolunteerItem> volunteerItems) {
         this.volunteerItems = volunteerItems;
@@ -61,20 +60,16 @@ public class VolunteerAdapter extends RecyclerView.Adapter<VolunteerAdapter.View
 
         });
 
-
+        if (currentUser.getJoinedVolunteer().contains(item.id)) {
+            holder.BtnVolunteerJoin.setText("Joined");
+        }
         //click join btn
         holder.BtnVolunteerJoin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Navigation.findNavController(view).navigate(R.id.DestVolunteerRegistration, bundle);
             }
         });
-
-
-
-
-
     }
 
     @Override

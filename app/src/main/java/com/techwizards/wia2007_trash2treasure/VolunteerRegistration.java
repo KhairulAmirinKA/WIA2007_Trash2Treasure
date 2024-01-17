@@ -24,7 +24,7 @@ public class VolunteerRegistration extends Fragment {
     TextView TV_VRegVolunteerName;
     Button BtnVRegEnroll;
 
-    VolunteerItem currentItem;
+    VolunteerItem volunteerItem;
 
     DataManager dataManager = DataManager.getInstance();
 
@@ -52,28 +52,19 @@ public class VolunteerRegistration extends Fragment {
 
         Bundle bundle = getArguments();
         if (bundle!= null && bundle.containsKey(VOLUNTEER_ITEM_KEY)){
-            currentItem = (VolunteerItem) bundle.getSerializable(VOLUNTEER_ITEM_KEY);
+            volunteerItem = (VolunteerItem) bundle.getSerializable(VOLUNTEER_ITEM_KEY);
         }
 
         //set the title
-        if (currentItem!= null) {
-            TV_VRegVolunteerName.setText(currentItem.volunteerTitle);
+        if (volunteerItem!= null) {
+            TV_VRegVolunteerName.setText(volunteerItem.volunteerTitle);
         }
 
-        Bundle bundle2 = new Bundle();
-        bundle2.putSerializable(VOLUNTEER_ITEM_KEY, currentItem);
-
         //click enroll
-        BtnVRegEnroll.setOnClickListener( view1->{
-
-            currentItem.setEnrolled(true);
-            Toast.makeText(getContext(), currentItem.volunteerTitle+currentItem.isEnrolled, Toast.LENGTH_SHORT).show();
-
-            //add to the firebase
-            dataManager.addNewVolunteer(currentItem);
-//
-//            Button BtnVolunteerJoin= requireActivity().findViewById(R.id.BtnVolunteerJoin);
-//            BtnVolunteerJoin.setVisibility(View.GONE);
+        BtnVRegEnroll.setOnClickListener(v -> {
+            dataManager.currentUser.getCurrentUser().joinVolunteeer(volunteerItem.id);
+            dataManager.saveUser();
+            Toast.makeText(getContext(), "Joined " + volunteerItem.volunteerTitle, Toast.LENGTH_SHORT).show();
 
             Navigation.findNavController(view).navigate(R.id.DestVolunteer);
         });
@@ -83,8 +74,7 @@ public class VolunteerRegistration extends Fragment {
     }
 
     private void initView(View view) {
-
-        TV_VRegVolunteerName= view.findViewById(R.id.TV_VRegVolunteerName);
-        BtnVRegEnroll =view.findViewById(R.id.BtnVRegEnroll);
+        TV_VRegVolunteerName = view.findViewById(R.id.TV_VRegVolunteerName);
+        BtnVRegEnroll = view.findViewById(R.id.BtnVRegEnroll);
     }
 }

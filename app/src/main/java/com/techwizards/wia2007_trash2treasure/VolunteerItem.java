@@ -10,7 +10,6 @@ import java.util.Map;
 import java.util.UUID;
 
 public class VolunteerItem implements Serializable {
-
     UUID id = UUID.randomUUID();
     String ImagePath;
     String volunteerTitle;
@@ -23,8 +22,6 @@ public class VolunteerItem implements Serializable {
     String volunteerTime;
     int volunteerParticipantCount;
     String volunterCategories;
-
-    boolean isEnrolled ;
 
     public VolunteerItem() {} //to prevent error fetching data from firebase
 
@@ -53,6 +50,22 @@ public class VolunteerItem implements Serializable {
         return ImagePath;
     }
 
+    public String getVolunteerTitle() {
+        return volunteerTitle;
+    }
+
+    public String getVolunteerDesc() {
+        return volunteerDesc;
+    }
+
+    public int getVolunteerPoints() {
+        return volunteerPoints;
+    }
+
+    public String getVolunteerVenue() {
+        return volunteerVenue;
+    }
+
     public String getVolunteerStartDate() {
         return volunteerStartDate;
     }
@@ -61,20 +74,16 @@ public class VolunteerItem implements Serializable {
         return volunteerEndDate;
     }
 
+    public String getVolunteerTime() {
+        return volunteerTime;
+    }
+
     public int getVolunteerParticipantCount() {
         return volunteerParticipantCount;
     }
 
     public String getVolunterCategories() {
         return volunterCategories;
-    }
-
-    public boolean isEnrolled() {
-        return isEnrolled;
-    }
-
-    public void setEnrolled(boolean enrolled) {
-        isEnrolled = enrolled;
     }
 }
 

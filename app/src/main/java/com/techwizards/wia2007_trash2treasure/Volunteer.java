@@ -21,6 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 public class Volunteer extends Fragment {
 
@@ -85,15 +86,14 @@ public class Volunteer extends Fragment {
     private void updateRadioButtonListener() {
         radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
 
-            if (checkedId==R.id.RBVEnrolled){
-                currentFilter = Filter.ENROLLED;
-            }
-            else if (checkedId == R.id.RBVTrending) {
+            if (checkedId == R.id.RBVTrending) {
                 currentFilter = Filter.TRENDING;
             } else if (checkedId == R.id.RBVUpcoming) {
                 currentFilter = Filter.UPCOMING;
             } else if (checkedId == R.id.RBVOngoing) {
                 currentFilter = Filter.ONGOING;
+            } else if (checkedId==R.id.RBVEnrolled){
+                currentFilter = Filter.ENROLLED;
             }
             filterVolunteerList(currentFilter);
         });
@@ -102,67 +102,71 @@ public class Volunteer extends Fragment {
     }
 
     public List<VolunteerItem> generateVolunteerList() {
-        List<VolunteerItem> volunteerItems = new ArrayList<>();
+        List<VolunteerItem> volunteerItems = dataManager.volunteerItems;
 
-        volunteerItems.add(new VolunteerItem(
-                "https://apicms.thestar.com.my/uploads/images/2023/02/25/1955922.jpg",
-                "Community Recycling Drive",
-                "Help organize and participate in a community recycling drive to collect and process recyclable materials.",
-                20,
-                "2024-01-15",
-                "2024-02-15",
-                "10:00 AM - 2:00 PM",
-                12,
-                "Local Area, Recreational Area"
-        ));
-
-        volunteerItems.add(new VolunteerItem(
-                "https://cdn.cseindia.org/large/2021-08-09/0.75503400_1628496890_solid-wastebanners.jpg",
-                "Waste Sorting Workshop",
-                "Educate the community on proper waste sorting techniques. Assist in organizing and conducting the workshop.",
-                15,
-                "2024-03-10",
-                "2024-03-12",
-                "2:00 PM - 5:00 PM",
-                31,
-                "Local Area, Educational"
-        ));
-
-        volunteerItems.add(new VolunteerItem(
-                "https://cleanmalaysia.com/wp-content/uploads/2016/02/p2_mprk_dz_0102_p2a_dz_6.jpg",
-                "River Cleanup Campaign",
-                "Join the efforts to clean up a local riverbank by collecting and properly disposing of waste materials to promote a cleaner environment.",
-                25,
-                "2024-01-12",
-                "2024-04-22",
-                "9:00 AM - 1:00 PM",
-                40,
-                "Marine"
-        ));
-
-        volunteerItems.add(new VolunteerItem(
-                "https://apicms.thestar.com.my/uploads/images/2021/02/07/1036152.jpg",
-                "E-Waste Collection Event",
-                "Contribute to the proper disposal of electronic waste by assisting in collecting and organizing e-waste items for recycling.",
-                18,
-                "2024-01-20",
-                "2024-02-25",
-                "11:00 AM - 3:00 PM",
-                25,
-                "Local Area"
-        ));
-
-        volunteerItems.add(new VolunteerItem(
-                "https://apicms.thestar.com.my/uploads/images/2022/10/04/1762165.jpg",
-                "Composting Awareness Workshop",
-                "Promote sustainable practices by participating in a composting workshop. Learn and teach composting techniques to reduce organic waste.",
-                12,
-                "2024-01-10",
-                "2024-12-15",
-                "3:00 PM - 6:00 PM",
-                18,
-                "Educational"
-        ));
+//        volunteerItems.add(new VolunteerItem(
+//                "https://apicms.thestar.com.my/uploads/images/2023/02/25/1955922.jpg",
+//                "Community Recycling Drive",
+//                "Help organize and participate in a community recycling drive to collect and process recyclable materials.",
+//                20,
+//                "2024-01-15",
+//                "2024-02-15",
+//                "10:00 AM - 2:00 PM",
+//                12,
+//                "Local Area, Recreational Area"
+//        ));
+//
+//        volunteerItems.add(new VolunteerItem(
+//                "https://cdn.cseindia.org/large/2021-08-09/0.75503400_1628496890_solid-wastebanners.jpg",
+//                "Waste Sorting Workshop",
+//                "Educate the community on proper waste sorting techniques. Assist in organizing and conducting the workshop.",
+//                15,
+//                "2024-03-10",
+//                "2024-03-12",
+//                "2:00 PM - 5:00 PM",
+//                31,
+//                "Local Area, Educational"
+//        ));
+//
+//        volunteerItems.add(new VolunteerItem(
+//                "https://cleanmalaysia.com/wp-content/uploads/2016/02/p2_mprk_dz_0102_p2a_dz_6.jpg",
+//                "River Cleanup Campaign",
+//                "Join the efforts to clean up a local riverbank by collecting and properly disposing of waste materials to promote a cleaner environment.",
+//                25,
+//                "2024-01-12",
+//                "2024-04-22",
+//                "9:00 AM - 1:00 PM",
+//                40,
+//                "Marine"
+//        ));
+//
+//        volunteerItems.add(new VolunteerItem(
+//                "https://apicms.thestar.com.my/uploads/images/2021/02/07/1036152.jpg",
+//                "E-Waste Collection Event",
+//                "Contribute to the proper disposal of electronic waste by assisting in collecting and organizing e-waste items for recycling.",
+//                18,
+//                "2024-01-20",
+//                "2024-02-25",
+//                "11:00 AM - 3:00 PM",
+//                25,
+//                "Local Area"
+//        ));
+//
+//        volunteerItems.add(new VolunteerItem(
+//                "https://apicms.thestar.com.my/uploads/images/2022/10/04/1762165.jpg",
+//                "Composting Awareness Workshop",
+//                "Promote sustainable practices by participating in a composting workshop. Learn and teach composting techniques to reduce organic waste.",
+//                12,
+//                "2024-01-10",
+//                "2024-12-15",
+//                "3:00 PM - 6:00 PM",
+//                18,
+//                "Educational"
+//        ));
+//
+//        for (VolunteerItem item : volunteerItems) {
+//            dataManager.addNewVolunteer(item);
+//        }
 
         return volunteerItems;
     }
@@ -179,21 +183,14 @@ public class Volunteer extends Fragment {
         }
 
         //category filter- All, Marine, Wildlife
-        List<VolunteerItem> volunteerItems = applyCategoryFilter(generateVolunteerList());
-
-        //retrieve enrolled volunteer programs from Firestore
-        List<VolunteerItem> enrolledVolunteer= dataManager.volunteerItems;
+        List<VolunteerItem> volunteerItems = applyCategoryFilter(dataManager.volunteerItems);
 
         for (VolunteerItem volunteerItem : volunteerItems) {
             switch (filter) {
-
-                //TODO:add condition for enrolled
                 case ENROLLED:
-
-                    for (VolunteerItem enrolledItem: enrolledVolunteer){
-
-                        //check if the enrolled name is same
-                        if (volunteerItem.volunteerTitle.equals(enrolledItem.volunteerTitle)){
+                    List<UUID> joinedVolunteer = dataManager.currentUser.getCurrentUser().getJoinedVolunteer();
+                    for (int i = 0; i < joinedVolunteer.size(); i++) {
+                        if (joinedVolunteer.get(i).equals(volunteerItem.id)) {
                             filteredList.add(volunteerItem);
                         }
                     }
@@ -268,7 +265,7 @@ public class Volunteer extends Fragment {
     }
 
     private void updateAdapterData() {
-        List<VolunteerItem> filteredData = applyCategoryFilter(generateVolunteerList());
+        List<VolunteerItem> filteredData = applyCategoryFilter(dataManager.volunteerItems);
         volunteerAdapter.updateList(filteredData);
     }
 
