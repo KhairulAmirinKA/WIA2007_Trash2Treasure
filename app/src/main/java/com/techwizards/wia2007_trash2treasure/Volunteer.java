@@ -189,10 +189,13 @@ public class Volunteer extends Fragment {
             switch (filter) {
                 case ENROLLED:
                     List<UUID> joinedVolunteer = dataManager.currentUser.getCurrentUser().getJoinedVolunteer();
+
+                    if (joinedVolunteer!= null){
                     for (int i = 0; i < joinedVolunteer.size(); i++) {
                         if (joinedVolunteer.get(i).equals(volunteerItem.id)) {
                             filteredList.add(volunteerItem);
                         }
+                    }
                     }
                     break;
 
