@@ -49,7 +49,7 @@ public class MarketplaceAdapter extends RecyclerView.Adapter<MarketplaceAdapter.
                 bundle.putInt(POSITION, holder.getAdapterPosition());
                 //go to the fragment containing the articles of a topic.
                 //send data using Bundle to EducationArticles
-                Navigation.findNavController(v).navigate(R.id.DestMarketItem);
+                Navigation.findNavController(v).navigate(R.id.DestMarketItem, bundle);
             }
         });
     }
