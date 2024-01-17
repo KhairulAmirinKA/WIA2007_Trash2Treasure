@@ -24,6 +24,8 @@ public class VolunteerAdapter extends RecyclerView.Adapter<VolunteerAdapter.View
     private final List<VolunteerItem> volunteerItems;
     ProfileItem currentUser = DataManager.getInstance().currentUser.getCurrentUser();
 
+    DataManager dataManager = DataManager.getInstance();
+
     public VolunteerAdapter(List<VolunteerItem> volunteerItems) {
         this.volunteerItems = volunteerItems;
     }
@@ -50,6 +52,7 @@ public class VolunteerAdapter extends RecyclerView.Adapter<VolunteerAdapter.View
         //want to send data to other fragment
         Bundle bundle = new Bundle();
         bundle.putSerializable(VOLUNTEER_ITEM_KEY, item); //send objek terus
+        bundle.putInt("VOL", holder.getAdapterPosition() );
 
         //click read more
         holder.TVVolunteerReadMore.setOnClickListener(view -> {
@@ -60,14 +63,18 @@ public class VolunteerAdapter extends RecyclerView.Adapter<VolunteerAdapter.View
 
         });
 
-        if (currentUser.getJoinedVolunteer().contains(item.id)) {
-            holder.BtnVolunteerJoin.setText("Joined");
-        }
+//        if (currentUser.getJoinedVolunteer().contains(item.id)) {
+//            holder.BtnVolunteerJoin.setText("Joined");
+//        }
         //click join btn
         holder.BtnVolunteerJoin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.DestVolunteerRegistration, bundle);
+           //    dataManager.currentUser.getCurrentUser().joinVolunteer(item.id);
+//                dataManager.saveUser();
+                System.out.println(item.id);
+                //Navigation.findNavController(view).navigate(R.id.DestVolunteerRegistration, bundle);
+                Navigation.findNavController(view).navigate(R.id.DestVolunteer);
             }
         });
     }

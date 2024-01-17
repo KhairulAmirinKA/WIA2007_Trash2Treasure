@@ -62,10 +62,13 @@ public class VolunteerRegistration extends Fragment {
 
         //click enroll
         BtnVRegEnroll.setOnClickListener(v -> {
-            dataManager.currentUser.getCurrentUser().joinVolunteeer(volunteerItem.id);
-            dataManager.saveUser();
-            Toast.makeText(getContext(), "Joined " + volunteerItem.volunteerTitle, Toast.LENGTH_SHORT).show();
 
+            if (volunteerItem!=null) {
+                dataManager.currentUser.getCurrentUser().joinVolunteer(volunteerItem.id);
+                dataManager.saveUser();
+
+                Toast.makeText(getContext(), "Joined " + volunteerItem.volunteerTitle, Toast.LENGTH_SHORT).show();
+            }
             Navigation.findNavController(view).navigate(R.id.DestVolunteer);
         });
 

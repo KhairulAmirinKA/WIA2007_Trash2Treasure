@@ -102,7 +102,17 @@ public class Volunteer extends Fragment {
     }
 
     public List<VolunteerItem> generateVolunteerList() {
-        List<VolunteerItem> volunteerItems = dataManager.volunteerItems;
+        //List<VolunteerItem> volunteerItems = dataManager.volunteerItems;
+        List<VolunteerItem> volunteerItems = new ArrayList<>();
+
+        System.out.println(volunteerItems); //ni berjaya
+        System.out.println(volunteerItems.size()); //ni berjaya
+
+        System.out.println("LINE 110");
+        for (VolunteerItem item: dataManager.volunteerItems){
+            System.out.println(item.volunteerTitle);
+            volunteerItems.add(item);
+        }
 
 //        volunteerItems.add(new VolunteerItem(
 //                "https://apicms.thestar.com.my/uploads/images/2023/02/25/1955922.jpg",
@@ -183,7 +193,11 @@ public class Volunteer extends Fragment {
         }
 
         //category filter- All, Marine, Wildlife
-        List<VolunteerItem> volunteerItems = applyCategoryFilter(dataManager.volunteerItems);
+        //List<VolunteerItem> volunteerItems = applyCategoryFilter(generateVolunteerList());
+        List<VolunteerItem> volunteerItems = generateVolunteerList();
+
+        System.out.println("apply filter"+ volunteerItems.size());
+        System.out.println("generate"+ generateVolunteerList().size());
 
         for (VolunteerItem volunteerItem : volunteerItems) {
             switch (filter) {
