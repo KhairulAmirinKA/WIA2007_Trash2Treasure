@@ -1,5 +1,6 @@
 package com.techwizards.wia2007_trash2treasure;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +49,7 @@ public class CommunityForumAdapter extends RecyclerView.Adapter<CommunityForumAd
         holder.description.setText(item.getForumDescription());
 
         holder.join.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View v) {
                 Toast.makeText(v.getContext(), "Joined", Toast.LENGTH_SHORT).show();
