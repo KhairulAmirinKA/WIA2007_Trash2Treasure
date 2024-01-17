@@ -8,12 +8,13 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import net.steamcrafted.materialiconlib.MaterialIconView;
 
 
 public class RedeemAwardVoucher extends Fragment {
-
+    DataManager dataManager = DataManager.getInstance();
     public RedeemAwardVoucher() {}
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -30,7 +31,9 @@ public class RedeemAwardVoucher extends Fragment {
             }
         });
 
-        // ... (other code for initializing UI components, if any)
+        TextView TVAvailablePoints =view.findViewById(R.id.TVAvailablePoints);
+        String pointText = dataManager.currentUser.getCurrentUser().getPoints() + " ⭐";
+        TVAvailablePoints.setText(pointText);
 
         return view;
     }

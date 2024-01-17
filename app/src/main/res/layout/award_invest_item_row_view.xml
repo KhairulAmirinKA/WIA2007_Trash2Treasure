@@ -10,7 +10,7 @@
         android:id="@+id/IVAwardInvestImage"
         android:layout_width="match_parent"
         android:layout_height="120dp"
-        android:src="@drawable/invest"
+        android:src="@drawable/ic_launcher_foreground"
         android:scaleType="centerCrop" />
 
     <TextView
