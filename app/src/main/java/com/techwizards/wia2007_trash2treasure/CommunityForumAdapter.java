@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
@@ -50,14 +51,21 @@ public class CommunityForumAdapter extends RecyclerView.Adapter<CommunityForumAd
             @Override
             public void onClick(View v) {
                 Toast.makeText(v.getContext(), "Joined", Toast.LENGTH_SHORT).show();
+
+                Navigation.findNavController(v).popBackStack();
+                holder.join.setBackgroundColor(R.color.gray);
+                holder.join.setEnabled(false);
+
+
+
             }
         });
 
-        holder.join.setOnClickListener(v -> {
-            if (joinClickListener != null) {
-                joinClickListener.onJoinClick(position);
-            }
-        });
+//        holder.join.setOnClickListener(v -> {
+//            if (joinClickListener != null) {
+//                joinClickListener.onJoinClick(position);
+//            }
+//        });
     }
 
     @Override
