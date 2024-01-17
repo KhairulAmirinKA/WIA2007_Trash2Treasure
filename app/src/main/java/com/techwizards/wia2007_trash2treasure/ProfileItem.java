@@ -89,7 +89,7 @@ public class ProfileItem {
         return joinedVolunteer;
     }
 
-    public void joinVolunteeer(UUID id) {
+    public void joinVolunteer(UUID id) {
         joinedVolunteer.add(id);
     }
 
