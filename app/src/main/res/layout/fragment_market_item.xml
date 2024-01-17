@@ -11,12 +11,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="horizontal"
             android:padding="20dp">
+
             <net.steamcrafted.materialiconlib.MaterialIconView
                 android:id="@+id/BtnDismiss"
                 android:layout_width="40dp"
@@ -26,6 +28,7 @@
                 android:focusable="true"
                 app:materialIcon="chevron_left"
                 app:materialIconColor="@color/black" />
+
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -35,52 +38,65 @@
                 android:textSize="24sp"
                 android:textStyle="bold" />
         </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_margin="8dp">
-        <ImageView
-            android:id="@+id/IVProductImage"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="8dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/jeans_bag" />
 
-        <TextView
-            android:id="@+id/TVProductName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Jeans bag"
-            android:textSize="24sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="8dp">
 
-        <TextView
-            android:id="@+id/TVProductPrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="RM40"
-            android:textSize="24sp" />
+            <ImageView
+                android:id="@+id/IVProductImage"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/jeans_bag" />
 
-        <TextView
-            android:id="@+id/TVProductDetails"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Details Handmade from repurposed jeans, each bag is a unique fashion statement."
-            android:textSize="18sp" />
+            <TextView
+                android:id="@+id/TVProductName"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Jeans bag"
+                android:textSize="24sp"
+                android:textStyle="normal" />
 
-        <Button
-            android:id="@+id/BtnContactSeller"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Buy" />
-        <TextView
-            android:id="@+id/TVPointsObtained"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="+10points"
-            android:textSize="18sp" />
-    </LinearLayout>
+            <TextView
+                android:id="@+id/TVProductPrice"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="RM40"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/TVProductDetails"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Details Handmade from repurposed jeans, each bag is a unique fashion statement."
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/BtnContactSeller"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:backgroundTint="#009688"
+                android:text="Buy"
+                android:textColor="#FFFFFF" />
+
+            <TextView
+                android:id="@+id/TVPointsObtained"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="+10 points"
+                android:textColor="#D95520"
+                android:textSize="18sp" />
+        </LinearLayout>
     </LinearLayout>
 </FrameLayout>
