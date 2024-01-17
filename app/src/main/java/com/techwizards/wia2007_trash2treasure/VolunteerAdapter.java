@@ -70,8 +70,10 @@ public class VolunteerAdapter extends RecyclerView.Adapter<VolunteerAdapter.View
         holder.BtnVolunteerJoin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-           //    dataManager.currentUser.getCurrentUser().joinVolunteer(item.id);
-//                dataManager.saveUser();
+
+               dataManager.currentUser.getCurrentUser().joinVolunteer(item.id);
+                dataManager.saveUser();
+
                 System.out.println(item.id);
                 //Navigation.findNavController(view).navigate(R.id.DestVolunteerRegistration, bundle);
                 Navigation.findNavController(view).navigate(R.id.DestVolunteer);

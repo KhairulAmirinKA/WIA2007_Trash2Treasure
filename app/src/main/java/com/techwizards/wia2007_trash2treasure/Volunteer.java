@@ -193,8 +193,7 @@ public class Volunteer extends Fragment {
         }
 
         //category filter- All, Marine, Wildlife
-        //List<VolunteerItem> volunteerItems = applyCategoryFilter(generateVolunteerList());
-        List<VolunteerItem> volunteerItems = generateVolunteerList();
+        List<VolunteerItem> volunteerItems = applyCategoryFilter(generateVolunteerList());
 
         System.out.println("apply filter"+ volunteerItems.size());
         System.out.println("generate"+ generateVolunteerList().size());
@@ -202,11 +201,14 @@ public class Volunteer extends Fragment {
         for (VolunteerItem volunteerItem : volunteerItems) {
             switch (filter) {
                 case ENROLLED:
-                    List<UUID> joinedVolunteer = dataManager.currentUser.getCurrentUser().getJoinedVolunteer();
+                    List<String> joinedVolunteer = dataManager.currentUser.getCurrentUser().getJoinedVolunteer();
 
                     if (joinedVolunteer!= null){
+
+
                     for (int i = 0; i < joinedVolunteer.size(); i++) {
-                        if (joinedVolunteer.get(i).equals(volunteerItem.id)) {
+
+                        if (joinedVolunteer.get(i).equals(volunteerItem.id.toString())) {
                             filteredList.add(volunteerItem);
                         }
                     }

@@ -22,10 +22,12 @@ public class ProfileItem {
     String gender;
     String dateOfBirth;
     boolean allowNoti;
-    List<UUID> joinedVolunteer;
+    List<String> joinedVolunteer;
     int points;
 
-    public ProfileItem() {}
+    public ProfileItem() {
+        joinedVolunteer = new ArrayList<>();
+    }
 
     public ProfileItem(String imagePath, String name, String email, String password, String phone, String address, String gender, String dateOfBirth, boolean allowNoti, int points) {
         this.imagePath = imagePath;
@@ -85,12 +87,12 @@ public class ProfileItem {
     public void setPoints(int points) {
         this.points = points;
     }
-    public List<UUID> getJoinedVolunteer() {
+    public List<String> getJoinedVolunteer() {
         return joinedVolunteer;
     }
 
     public void joinVolunteer(UUID id) {
-        joinedVolunteer.add(id);
+        joinedVolunteer.add(id.toString());
     }
 
     public String maskedPassword() {

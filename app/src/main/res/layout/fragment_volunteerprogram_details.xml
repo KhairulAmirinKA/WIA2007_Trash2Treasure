@@ -99,7 +99,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:textColor="@color/black"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:text="Selangor"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
