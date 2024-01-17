@@ -14,9 +14,5 @@ public class CurrentUser {
     public void clearCurrentUser() {
         currentUser = null;
     }
-
-    public boolean isLoggedIn() {
-        return currentUser != null;
-    }
 }
 

@@ -20,9 +20,7 @@ public class Profile extends Fragment {
     DataManager dataManager = DataManager.getInstance();
     private ProfileAdapter profileAdapter;
     private ProfileItem userProfile;
-    public Profile() {
-        // Required empty public constructor
-    }
+    public Profile() {}
 
     public static Profile newInstance() {
         return new Profile();
@@ -64,20 +62,15 @@ public class Profile extends Fragment {
             }
         });
 
-
-
         //edit profile
         Button BtnProfileEdit= view.findViewById(R.id.BtnProfileEdit);
         BtnProfileEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 //it will go to edit profile fragment
                 Navigation.findNavController(view).navigate(R.id.DestEditProfile);
             }
         });
-
-
 
         return view;
     } //oncreate view
@@ -87,6 +80,7 @@ public class Profile extends Fragment {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean("isLoggedIn", false);
         editor.apply();
+        dataManager.currentUser.clearCurrentUser();
         dataManager.save(getContext());
     }
 }

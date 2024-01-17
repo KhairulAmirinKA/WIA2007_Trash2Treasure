@@ -6,8 +6,11 @@ import com.google.gson.Gson;
 import java.lang.reflect.Type;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 public class ProfileItem {
     String imagePath;
@@ -19,7 +22,7 @@ public class ProfileItem {
     String gender;
     String dateOfBirth;
     boolean allowNoti;
-
+    List<UUID> joinedVolunteer;
     int points;
 
     public ProfileItem() {}
@@ -36,6 +39,7 @@ public class ProfileItem {
         this.dateOfBirth = dateOfBirth;
         this.allowNoti = allowNoti;
         this.points = points;
+        this.joinedVolunteer = new ArrayList<>();
     }
 
     public String getImagePath() {
@@ -76,6 +80,14 @@ public class ProfileItem {
 
     public int getPoints() {
         return points;
+    }
+
+    public List<UUID> getJoinedVolunteer() {
+        return joinedVolunteer;
+    }
+
+    public void joinVolunteeer(UUID id) {
+        joinedVolunteer.add(id);
     }
 
     public String maskedPassword() {

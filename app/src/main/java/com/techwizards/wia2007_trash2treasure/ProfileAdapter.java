@@ -34,7 +34,6 @@ public class ProfileAdapter {
         toggleNotification = rootView.findViewById(R.id.ToggleProfileNotification);
         editProfileButton = rootView.findViewById(R.id.BtnProfileEdit);
         logOutButton = rootView.findViewById(R.id.BtnProfileLogOut);
-
     }
 
     public void populateViews(ProfileItem userProfile) {

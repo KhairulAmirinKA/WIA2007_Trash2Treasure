@@ -9,8 +9,7 @@ import androidx.appcompat.widget.SwitchCompat;
 
 import com.squareup.picasso.Picasso;
 
-public class ProfileAdapter_ForEdit {
-
+public class EditProfileAdapter {
     ImageView IVEditProfileImage;
     EditText ETEditProfileName;
     EditText ETEditProfileEmail;
@@ -21,8 +20,7 @@ public class ProfileAdapter_ForEdit {
     EditText ETEditDob;
     SwitchCompat ToggleEditProfileNotification;
 
-
-    public ProfileAdapter_ForEdit(View rootView) {
+    public EditProfileAdapter(View rootView) {
 
         IVEditProfileImage= rootView.findViewById(R.id.IVEditProfileImage);
 
@@ -37,12 +35,11 @@ public class ProfileAdapter_ForEdit {
         ToggleEditProfileNotification = rootView.findViewById(R.id.ToggleEditProfileNotification);
     }
 
-    public void populateViews_ForEdit(ProfileItem userProfile) {
-
+    public void populateViews(ProfileItem userProfile) {
         Picasso.get().load(userProfile.getImagePath()).error(R.drawable.ic_launcher_foreground).into(IVEditProfileImage);
         ETEditProfileName.setText(userProfile.getName());
         ETEditProfileEmail.setText(userProfile.getEmail());
-        ETEditProfilePassword.setText(userProfile.maskedPassword());
+        ETEditProfilePassword.setText(userProfile.getPasswords().get("plain"));
         ETEditPhone.setText(userProfile.getPhone());
         ETEditAddress.setText(userProfile.getAddress());
 
