@@ -15,6 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -72,7 +74,22 @@ public class VolunteerAdapter extends RecyclerView.Adapter<VolunteerAdapter.View
             public void onClick(View view) {
 
                dataManager.currentUser.getCurrentUser().joinVolunteer(item.id);
-                dataManager.saveUser();
+
+//               //add points
+               int additionalPoints= item.volunteerPoints;
+
+                FirebaseService firebaseService = FirebaseService.getInstance();
+
+                firebaseService.updateUserPoints(dataManager.currentUser.getCurrentUser(), additionalPoints, new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()){
+                            dataManager.currentUser.getCurrentUser().setPoints(currentUser.getPoints());
+                        }
+                    }
+                });
+
+                //dataManager.saveUser();
 
                 System.out.println(item.id);
                 //Navigation.findNavController(view).navigate(R.id.DestVolunteerRegistration, bundle);
