@@ -1,5 +1,12 @@
 # Trash2Treasure
 
+# Team Members
+1. Nuraiman Danial (Lead Developer)
+2. Ameera (Project Manager)
+3. Nurul Aisyah (Designer)
+4. Illya Nabila (Application Developer)
+5. Khairul Amirin (Application Developer)
+
 ## Project Goals
 
 ### Goals:
